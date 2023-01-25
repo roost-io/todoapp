@@ -1,0 +1,21 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: todoapp
+spec:
+  selector:
+    matchLabels:
+      app: todoapp
+  template:
+    metadata:
+      labels:
+        app: todoapp
+    spec:
+      containers:
+        - name: todoapp
+          image: local-registry:5002/todoapp:latest
+          ports:
+            - containerPort: 3000
+          envFrom:
+            - secretRef:
+                name: mongo
