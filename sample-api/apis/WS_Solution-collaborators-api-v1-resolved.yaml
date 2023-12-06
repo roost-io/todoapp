@@ -1,0 +1,276 @@
+---
+openapi: 3.0.1
+info:
+  title: Integration Api
+  description: This Api will be represent the collaborator integration functions - it manages both third-party and own workers.
+  version: v1
+servers:
+- url: /
+security:
+- Bearer: []
+paths:
+  /api/v1/integration:
+    post:
+      tags:
+      - IntegrationCollaborator
+      requestBody:
+        content:
+          application/json-patch+json:
+            schema:
+              $ref: '#/components/schemas/IntegrationRequest'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/IntegrationRequest'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/IntegrationRequest'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/IntegrationRequest'
+      responses:
+        "200":
+          description: Success
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        "403":
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        "405":
+          description: Method Not Allowed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        "412":
+          description: Client Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        "500":
+          description: Server Error
+  /api/v1/integration/batch:
+    post:
+      tags:
+      - IntegrationCollaboratorBatch
+      requestBody:
+        content:
+          application/json-patch+json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/IntegrationRequest'
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/IntegrationRequest'
+          text/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/IntegrationRequest'
+          application/*+json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/IntegrationRequest'
+      responses:
+        "200":
+          description: Success
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        "403":
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        "405":
+          description: Method Not Allowed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        "412":
+          description: Client Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        "500":
+          description: Server Error
+components:
+  schemas:
+    Colaborador:
+      type: object
+      properties:
+        nome:
+          type: string
+          nullable: true
+        nacionalidade:
+          type: string
+          nullable: true
+        chaveValidadora:
+          type: string
+          nullable: true
+        rg:
+          type: string
+          nullable: true
+        matricula:
+          type: string
+          nullable: true
+        area:
+          type: string
+          nullable: true
+        setor:
+          type: string
+          nullable: true
+        funcao:
+          type: string
+          nullable: true
+        email:
+          type: string
+          nullable: true
+        telefone:
+          type: string
+          nullable: true
+        celular:
+          type: string
+          nullable: true
+        cep:
+          type: string
+          nullable: true
+        numero:
+          type: integer
+          format: int32
+          nullable: true
+        complemento:
+          type: string
+          nullable: true
+        endereco:
+          type: string
+          nullable: true
+        dataAdmissao:
+          type: string
+          format: date-time
+          nullable: true
+        funcionarioProprio:
+          type: string
+          nullable: true
+        plantaDeRegistro:
+          type: string
+          nullable: true
+        empresaExecutante:
+          type: string
+          nullable: true
+        dataIntegracao:
+          type: string
+          format: date-time
+          nullable: true
+        validadeIntegracao:
+          type: string
+          format: date-time
+          nullable: true
+        status:
+          type: string
+          nullable: true
+        documentos:
+          type: array
+          nullable: true
+          items:
+            $ref: '#/components/schemas/Documento'
+      additionalProperties: false
+    Documento:
+      type: object
+      properties:
+        id:
+          type: string
+          nullable: true
+        nome:
+          type: string
+          nullable: true
+        tipo:
+          type: string
+          nullable: true
+        dataEmissao:
+          type: string
+          format: date-time
+          nullable: true
+        dataValidade:
+          type: string
+          format: date-time
+          nullable: true
+        entidadeCertificadora:
+          type: string
+          nullable: true
+        aptidaoAltura:
+          type: string
+          nullable: true
+        aptidaoEspacoConfinado:
+          type: string
+          nullable: true
+        aptidaoEletrica:
+          type: string
+          nullable: true
+      additionalProperties: false
+    IntegrationRequest:
+      type: object
+      properties:
+        idUnidadeSuzano:
+          type: string
+          nullable: true
+        razaoSocial:
+          type: string
+          nullable: true
+        chaveValidadora:
+          type: string
+          nullable: true
+        nacionalidade:
+          type: string
+          nullable: true
+        condicao:
+          type: string
+          nullable: true
+        colaboradores:
+          type: array
+          nullable: true
+          items:
+            $ref: '#/components/schemas/Colaborador'
+      additionalProperties: false
+    ProblemDetails:
+      type: object
+      properties:
+        type:
+          type: string
+          nullable: true
+        title:
+          type: string
+          nullable: true
+        status:
+          type: integer
+          format: int32
+          nullable: true
+        detail:
+          type: string
+          nullable: true
+        instance:
+          type: string
+          nullable: true
+      additionalProperties: {}
+  securitySchemes:
+    Bearer:
+      type: http
+      description: JWT Authorization header using the Bearer scheme.
+      scheme: bearer

@@ -1,0 +1,5035 @@
+{
+  swagger: '2.0',
+  "info": {
+    "title": "SM.OtpManager.API",
+    "version": 1.0.0
+  },
+  "servers": [
+    {
+      "url": "https://api.smartmessage.com/otpmanager"
+    }
+  ],
+  "paths": {
+    "/blacklists/add": {
+      "post": {
+        "tags": [
+          "Blacklist"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/SM.OtpManager.Domain.Request.Blacklist.CreateBlacklistRequest"
+              },
+              "examples": {
+                "Example 1": {
+                  "value": {
+                    "phoneNumber": "905321111111",
+                    "customerNo": "10001",
+                    "sourceApp": "ATM",
+                    "comment": "Added to the blacklist by customer request."
+                  }
+                }
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SM.OtpManager.Domain.Request.Blacklist.CreateBlacklistRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SM.OtpManager.Domain.Request.Blacklist.CreateBlacklistRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/SM.OtpManager.Domain.Request.Blacklist.CreateBlacklistRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SM.OtpManager.Domain.Response.BlackList.AddBlacklistResponse"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Add Blacklist",
+        "description": "The blacklist is a list of numbers that are blocked from sending SMS. When a sim change or MTN is detected, the number is automatically added to the blacklist.  If necessary, it can also be added to the blacklist manually. These phone numbers will remain on the list until the [Blacklist/Remove](https://doc.smartmessage.com/docs/smartmessage/otpmanager/api/operations/delete-a-blacklist-remove \"Remove Method\") Method is called.",
+        "security": [
+          {
+            "auth": []
+          }
+        ]
+      }
+    },
+    "/blacklists/get/{id}": {
+      "get": {
+        "tags": [
+          "Blacklist"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "description": "It is the ID information concatenated from `phoneNumber` and `customerNo`",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "`0` Successfully processed.\n\n`-1` Not Found.\n\n`-99` Token expired or invalid token.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SM.OtpManager.Domain.Response.BlackList.GetBlacklistResponse"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Get Blacklist (Id)",
+        "description": "Shows the detail of the blacklisted number.",
+        "security": [
+          {
+            "auth": []
+          }
+        ]
+      }
+    },
+    "/blacklists/get": {
+      "get": {
+        "tags": [
+          "Blacklist"
+        ],
+        "parameters": [
+          {
+            "name": "SearchTerm",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "Search criteria (searchable phone number with all parameters defined on the blacklist item, description, etc.)"
+          },
+          {
+            "name": "Filter",
+            "in": "query",
+            "schema": {
+              "$ref": "#/components/schemas/SM.OtpManager.Domain.Enumerations.BlacklistUIFilter"
+            },
+            "description": "Filtering criteria: `0: All`, `1: Quarantine Only`, `2: Blacklist Only`"
+          },
+          {
+            "name": "StartDate",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "It is the start date information for the black list."
+          },
+          {
+            "name": "EndDate",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "It is the end date information for the black list."
+          },
+          {
+            "name": "OrderBy",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "It is the parameter used to sort the sent messages."
+          },
+          {
+            "name": "Index",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 0
+            },
+            "description": "Current page. "
+          },
+          {
+            "name": "Size",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 20
+            },
+            "description": "Indicates how many blacklist item will be listed. "
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "`0` Successfully processed.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SM.OtpManager.Domain.Response.BlackList.GetBlacklistResponse"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Get Blacklists",
+        "description": "Returns blacklist results based on selected parameters.",
+        "security": [
+          {
+            "auth": []
+          }
+        ]
+      }
+    },
+    "/blacklists/remove/{id}": {
+      "delete": {
+        "tags": [
+          "Blacklist"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "description": "Unique identifier to remove blacklist item (Consists of phone number + customer number).",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/SM.OtpManager.Domain.Request.Blacklist.UpdateBlacklistRequest"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SM.OtpManager.Domain.Request.Blacklist.UpdateBlacklistRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SM.OtpManager.Domain.Request.Blacklist.UpdateBlacklistRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/SM.OtpManager.Domain.Request.Blacklist.UpdateBlacklistRequest"
+              }
+            }
+          },
+          "description": ""
+        },
+        "responses": {
+          "200": {
+            "description": "`0` Successfully processed.\n\n`-1` Not Found.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SM.OtpManager.Domain.Response.ApiResponseBase"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Remove Blacklist (id)",
+        "description": "It's the service that is used for removing a item from the blacklist. After this process, the number removed from the blacklist becomes available for sending sms.",
+        "security": [
+          {
+            "auth": []
+          }
+        ]
+      }
+    },
+    "/blacklists/history/get": {
+      "get": {
+        "tags": [
+          "Blacklist"
+        ],
+        "parameters": [
+          {
+            "name": "PhoneNumber",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "The phone number of the blacklist item."
+          },
+          {
+            "name": "CustomerNo",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "The customer number of the blacklist item."
+          },
+          {
+            "name": "SourceApps",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "It is the information showing from which application the phone number to be removed from the blacklist was removed. (atm, internet banking etc.) ."
+          },
+          {
+            "name": "OperationType",
+            "in": "query",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/components/schemas/SMP.Framework.Library.Enumeration.BlacklistOperationType"
+              }
+            },
+            "description": "Indicates the operation type of the blacklist item. `0: Add to Blacklist`, `1: Remove from Blacklist`, `2: Apply Quarantine`, `3: Revert Quarantine`"
+          },
+          {
+            "name": "BlacklistReason",
+            "in": "query",
+            "schema": {
+              "$ref": "#/components/schemas/SMP.Framework.Library.Enumeration.BlacklistReason"
+            }
+          },
+          {
+            "name": "ModifiedBy",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "Indicates which user updated the blacklisted item."
+          },
+          {
+            "name": "StartDate",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "It is the start date information for the blacklist item."
+          },
+          {
+            "name": "EndDate",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "It is the end date information for the blacklist item."
+          },
+          {
+            "name": "OrderBy",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "It is the parameter used to sort the sent messages."
+          },
+          {
+            "name": "Index",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 0
+            },
+            "description": "Current page."
+          },
+          {
+            "name": "Size",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 20
+            },
+            "description": "Indicates how many blacklist item will be listed."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "`0` Successfully processed.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SM.OtpManager.Domain.Response.BlackList.GetBlacklistResponse"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Get Blacklist History",
+        "description": "Shows the latest status and detailed history information of blacklisted phone number.",
+        "security": [
+          {
+            "auth": []
+          }
+        ]
+      }
+    },
+    "/mobilePhones/get": {
+      "get": {
+        "tags": [
+          "MobilePhone"
+        ],
+        "parameters": [
+          {
+            "name": "phoneNumber",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "The customer's mobile phone number."
+          },
+          {
+            "name": "assumedOperator",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "Indicates the default operator information of the number."
+          },
+          {
+            "name": "startDate",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "Start date of the mobile phone."
+          },
+          {
+            "name": "endDate",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "End date of the mobile phone."
+          },
+          {
+            "name": "orderBy",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "default": "-createdDate"
+            },
+            "description": "Sorts mobile phone by the selected parameter."
+          },
+          {
+            "name": "index",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 0
+            },
+            "description": "Current page. Default current page value is 0."
+          },
+          {
+            "name": "size",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 20
+            },
+            "description": "Indicates how many mobile phone records will be listed. Default page size value is 20."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "`0` Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SM.OtpManager.Domain.Response.GetMobilePhoneResponse"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Get Mobile Phones",
+        "description": "The mobile phones that are received SMS via OTP Manager are listed.\n\n",
+        "security": [
+          {
+            "auth": []
+          }
+        ]
+      }
+    },
+    "/mobilePhones/get/{phoneNumber}": {
+      "get": {
+        "tags": [
+          "MobilePhone"
+        ],
+        "parameters": [
+          {
+            "name": "phoneNumber",
+            "description": "Customer's mobile phone number.",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "`0` Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SM.OtpManager.Domain.Response.GetMobilePhoneResponse"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Get Mobile Phone (phoneNumber)",
+        "description": "The mobile phones that are received SMS via OTP Manager are listed.\n\n",
+        "security": [
+          {
+            "auth": []
+          }
+        ]
+      }
+    },
+    "/msisdn/confirmtckn": {
+      "post": {
+        "tags": [
+          "Msisdn"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/SM.OtpManager.Domain.Request.Msisdn.ConfirmMsisdnTcknRequest"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SM.OtpManager.Domain.Request.Msisdn.ConfirmMsisdnTcknRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SM.OtpManager.Domain.Request.Msisdn.ConfirmMsisdnTcknRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/SM.OtpManager.Domain.Request.Msisdn.ConfirmMsisdnTcknRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "`0` Successfully processed.\n\n`-1` Tckn Msisdn is not matched: UNSPECIFIED.\n\n`-99` Msisdn is in wrong format.\n\n`-99` TCKN is in wrong format.\n\n`-99` Exception occurred in ConfirmMsisdnTckn. Ex: XXX",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SM.OtpManager.Domain.Response.ApiResponseBase"
+                }
+              }
+            }
+          }
+        },
+        "summary": "ConfirmTCKN",
+        "description": "This service inquires whether the customer's TC identification number and phone number match the information registered with the operator.",
+        "x-internal": true,
+        "security": [
+          {
+            "auth": []
+          }
+        ]
+      }
+    },
+    "/nodes/get": {
+      "get": {
+        "tags": [
+          "Node"
+        ],
+        "responses": {
+          "200": {
+            "description": "`0` Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SM.OtpManager.Domain.Response.Node.GetNodeResponse"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Get",
+        "description": "Returns all node information.",
+        "x-internal": true,
+        "security": [
+          {
+            "auth": []
+          }
+        ]
+      }
+    },
+    "/operators/config": {
+      "get": {
+        "tags": [
+          "Operator"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SM.OtpManager.Domain.Response.Utility.GetResponse`1[[SMP.Framework.Library.LicenseDetail.OtpManagerLicenseDetail, SMP.Framework.Library, Version=23.9.29.2045, Culture=neutral, PublicKeyToken=null]]"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/operators/config/update/{operatorId}": {
+      "put": {
+        "tags": [
+          "Operator"
+        ],
+        "parameters": [
+          {
+            "name": "operatorId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/SM.OtpManager.Domain.Dto.Module.OperatorSetting"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SM.OtpManager.Domain.Dto.Module.OperatorSetting"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SM.OtpManager.Domain.Dto.Module.OperatorSetting"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/SM.OtpManager.Domain.Dto.Module.OperatorSetting"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "`0` Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SM.OtpManager.Domain.Response.Utility.GetResponse`1[[SMP.Framework.Library.LicenseDetail.OtpManagerLicenseDetail, SMP.Framework.Library, Version=23.9.29.2045, Culture=neutral, PublicKeyToken=null]]"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Update/(operatorName)",
+        "description": "The operator's information about the operator name is updated.",
+        "x-internal": true,
+        "security": [
+          {
+            "auth": []
+          }
+        ]
+      }
+    },
+    "/operators/config/create": {
+      "put": {
+        "tags": [
+          "Operator"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/SM.OtpManager.Domain.Dto.Module.OperatorSetting"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SM.OtpManager.Domain.Dto.Module.OperatorSetting"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SM.OtpManager.Domain.Dto.Module.OperatorSetting"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/SM.OtpManager.Domain.Dto.Module.OperatorSetting"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "`0` Success\n\n`-322` OperatorName already created!\n\n`-99` OperatorName: XX is not valid",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SM.OtpManager.Domain.Response.Utility.GetResponse`1[[SMP.Framework.Library.LicenseDetail.OtpManagerLicenseDetail, SMP.Framework.Library, Version=23.9.29.2045, Culture=neutral, PublicKeyToken=null]]"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Create",
+        "description": "It is used to create operators and sub-operators.",
+        "x-internal": true,
+        "security": [
+          {
+            "auth": []
+          }
+        ]
+      }
+    },
+    "/passwords/generate": {
+      "get": {
+        "tags": [
+          "Password"
+        ],
+        "responses": {
+          "200": {
+            "description": "`0` Successfully processed.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SM.OtpManager.Domain.Response.OTP.GeneratePasswordResponse"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Generate Password",
+        "description": "It is used to generate OTP Password without sending sms to the phone number. Once Password is generated, it needs to be included `messageContent` ",
+        "security": [
+          {
+            "auth": []
+          }
+        ]
+      }
+    },
+    "/passwords/validate/{id}/{otpCode}": {
+      "get": {
+        "tags": [
+          "Password"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "description": "Unique identifier to validate OTP.",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "otpCode",
+            "description": "Code information used to validate OTP.",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "`0` Successfully processed.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SM.OtpManager.Domain.Response.OTP.GeneratePasswordResponse"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Validate Password (id + otpCode)",
+        "description": "It is used to verify the generated `otpCode` with the unique `id` information returned from [Password/Generate](https://doc.smartmessage.com/docs/smartmessage/otpmanager/api/operations/get-a-password-generate \"Generate\").",
+        "security": [
+          {
+            "auth": []
+          }
+        ]
+      }
+    },
+    "/quarantines/apply/{id}": {
+      "put": {
+        "tags": [
+          "Quarantine"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "description": "It's a unique id combined from the customer phone number and the customer number.",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/SM.OtpManager.Domain.Request.Blacklist.UpdateBlacklistRequest"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SM.OtpManager.Domain.Request.Blacklist.UpdateBlacklistRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SM.OtpManager.Domain.Request.Blacklist.UpdateBlacklistRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/SM.OtpManager.Domain.Request.Blacklist.UpdateBlacklistRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "`-1` Not Found.\n\n`0` Successfully processed.\n\n`-311` Blacklist Already Quarantined.\n\n`-320` SourceApp is invalid.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SMP.Framework.Library.API.Base.ApiResponse"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Apply Quarantine (Id)",
+        "description": "It's used to add records to the quarantine list by blacklist id. Quarantine can be used for the records that won't be removed for a long time from the blacklist.",
+        "security": [
+          {
+            "auth": []
+          }
+        ]
+      }
+    },
+    "/quarantines/revert/{id}": {
+      "put": {
+        "tags": [
+          "Quarantine"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "description": "It's a unique id combined from the customer phone number and the customer number.",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/SM.OtpManager.Domain.Request.Blacklist.UpdateBlacklistRequest"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SM.OtpManager.Domain.Request.Blacklist.UpdateBlacklistRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SM.OtpManager.Domain.Request.Blacklist.UpdateBlacklistRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/SM.OtpManager.Domain.Request.Blacklist.UpdateBlacklistRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "`0` Successfully processed.\n\n`-1` Not Found.\n\n`-312` Blacklist Already Not Quarantine.\n\n`-320` SourceApp is invalid.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SMP.Framework.Library.API.Base.ApiResponse"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Remove Quarantine (Id)",
+        "description": "It's used to remove the phone number from the quarantine list by id and put it back to the blacklist.",
+        "security": [
+          {
+            "auth": []
+          }
+        ]
+      }
+    },
+    "/quarantines/history/get": {
+      "get": {
+        "tags": [
+          "Quarantine"
+        ],
+        "parameters": [
+          {
+            "name": "PhoneNumber",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "It's the customer's phone number in quarantine."
+          },
+          {
+            "name": "CustomerNo",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "It is the customer number that given by company. This customer number is used along with the customer phone number to make unique Id."
+          },
+          {
+            "name": "SourceApps",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "It's the information of which source application (Atm, online banking etc.) the number is operating with. It needs to be defined on the user interface up front. The defined source app information can be accessed through get source app service."
+          },
+          {
+            "name": "OperationType",
+            "in": "query",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/components/schemas/SMP.Framework.Library.Enumeration.BlacklistOperationType"
+              }
+            },
+            "description": "Transaction Type. `0:AddToBlacklist`,`1:RemoveFromBlacklist`,`2:ApplyQuarantine`,`3:RevertQuarantine`"
+          },
+          {
+            "name": "BlacklistReason",
+            "in": "query",
+            "schema": {
+              "$ref": "#/components/schemas/SMP.Framework.Library.Enumeration.BlacklistReason"
+            },
+            "description": "It indicates why the number is added to the blacklist.     \n* `0`: None \n* `1`: Sim Change\n* `2`: Suspicion Rule\n* `3`: Manual Blacklisted\n* `4`: Operator Change\n* `5`: Blacklist Repeat"
+          },
+          {
+            "name": "ModifiedBy",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "It's the information of modification by which account."
+          },
+          {
+            "name": "StartDate",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "It shows the beginning date of the numbers that are moved to the quarantine. The numbers are move to the blacklist before this date will not be displayed."
+          },
+          {
+            "name": "EndDate",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "It shows the last date of the numbers that are removed from the quarantine. The numbers are removed from the quarantine after this date will not be displayed."
+          },
+          {
+            "name": "OrderBy",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "Sorts the blacklists by selected area."
+          },
+          {
+            "name": "Index",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "description": "Pagination parameter."
+          },
+          {
+            "name": "Size",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "description": "Size of messages that each page should include."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "`0` Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SMP.Framework.Library.API.Base.ApiResponse"
+                }
+              }
+            }
+          }
+        },
+        "description": "It's a service method that gives the history and status information of the related quarantine records.",
+        "summary": "Get Quarantine History",
+        "security": [
+          {
+            "auth": []
+          }
+        ]
+      }
+    },
+    "/reports/blacklistReport": {
+      "get": {
+        "tags": [
+          "Report"
+        ],
+        "parameters": [
+          {
+            "name": "startDate",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "It is the start date information for the blacklist report.",
+            "required": true
+          },
+          {
+            "name": "endDate",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "It is the end date information for the blacklist report.",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "`0` Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SM.OtpManager.Domain.Dto.Report.GetBlacklistReportResponse"
+                }
+              }
+            }
+          }
+        },
+        "summary": "BlacklistReport",
+        "description": "Report details of the blacklist are returning.\n\nBlacklist reports are obtained by going to https://app.smartmessage.com/otpmanager/reports/blacklistReport.",
+        "x-internal": false,
+        "security": [
+          {
+            "auth": []
+          }
+        ]
+      }
+    },
+    "/reports/deliveryReport": {
+      "get": {
+        "tags": [
+          "Report"
+        ],
+        "parameters": [
+          {
+            "name": "startDate",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "It's the start date of the records to be listed.",
+            "required": true
+          },
+          {
+            "name": "endDate",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "It's the end date of the records to be listed.",
+            "required": true
+          },
+          {
+            "name": "top",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": -1
+            },
+            "description": "Number of records to list."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "`0` Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SM.OtpManager.Domain.Dto.Report.GetDeliveryReportResponse"
+                }
+              }
+            }
+          }
+        },
+        "summary": "DeliveryReport",
+        "description": "Returns the transferring report details.",
+        "x-internal": true,
+        "security": [
+          {
+            "auth": []
+          }
+        ]
+      }
+    },
+    "/reports/transactionCodeReport": {
+      "get": {
+        "tags": [
+          "Report"
+        ],
+        "parameters": [
+          {
+            "name": "startDate",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "It's the start date of the records to be listed.",
+            "required": true
+          },
+          {
+            "name": "endDate",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "It's the end date of the records to be listed.",
+            "required": true
+          },
+          {
+            "name": "top",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": -1
+            },
+            "description": "Number of records to list."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "`0` Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SM.OtpManager.Domain.Dto.Report.GetDeliveryReportResponse"
+                }
+              }
+            }
+          }
+        },
+        "summary": "TransactionCodeReport",
+        "description": "It shows the status report of the message sending results of the codes added to the OTP Manager from the Transaction Code Management screen. Query can be made depending on the date range and transaction code.",
+        "x-internal": true,
+        "security": [
+          {
+            "auth": []
+          }
+        ]
+      }
+    },
+    "/reports/costCenterReport": {
+      "get": {
+        "tags": [
+          "Report"
+        ],
+        "parameters": [
+          {
+            "name": "startDate",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "It's the start date of the records to be listed.",
+            "required": true
+          },
+          {
+            "name": "endDate",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "It's the end date of the records to be listed.",
+            "required": true
+          },
+          {
+            "name": "top",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": -1
+            },
+            "description": "Number of records to list."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "`0` Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SM.OtpManager.Domain.Dto.Report.GetDeliveryReportResponse"
+                }
+              }
+            }
+          }
+        },
+        "summary": "CostCenterReport",
+        "description": "It is the report showing the unit information that bears the cost of sending the message. Query can be made according to the date range.",
+        "x-internal": true,
+        "security": [
+          {
+            "auth": []
+          }
+        ]
+      }
+    },
+    "/reports/sourceAppReport": {
+      "get": {
+        "tags": [
+          "Report"
+        ],
+        "parameters": [
+          {
+            "name": "startDate",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "It's the start date of the records to be listed.",
+            "required": true
+          },
+          {
+            "name": "endDate",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "It's the end date of the records to be listed.",
+            "required": true
+          },
+          {
+            "name": "top",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": -1
+            },
+            "description": "Number of records to list."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "`0` Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SM.OtpManager.Domain.Dto.Report.GetDeliveryReportResponse"
+                }
+              }
+            }
+          }
+        },
+        "summary": "SourceAppReport",
+        "description": "It shows the status report of the message sending results of the resources added to the system from the Resource Management screen. Those sent from sources in OTP Manager are displayed in the table. Query can be made depending on the date range and source.",
+        "x-internal": true,
+        "security": [
+          {
+            "auth": []
+          }
+        ]
+      }
+    },
+    "/reports/messageReport": {
+      "get": {
+        "tags": [
+          "Report"
+        ],
+        "parameters": [
+          {
+            "name": "startDate",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "It's the start date of the records to be listed."
+          },
+          {
+            "name": "endDate",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "It's the end date of the records to be listed."
+          },
+          {
+            "name": "phoneNumber",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "It's the mobile number that belongs to the customer."
+          },
+          {
+            "name": "customerNo",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "It is the customer number that given by company. This customer number is used along with the customer phone number to make unique Id."
+          },
+          {
+            "name": "messageId",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "It's the unique id of the message."
+          },
+          {
+            "name": "remoteId",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "It's generated by the operator side when the message has been sent."
+          },
+          {
+            "name": "externalId",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "It's generated by the operator side when the message has been sent."
+          },
+          {
+            "name": "transactionCodes",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "It's the information of which transaction code the number is operating with. It needs to be defined on the user interface up front. The defined transaction code information can be accessed through get transaction code service."
+          },
+          {
+            "name": "sourceApps",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "It's the information of which source application (Atm, online banking etc.) the number is operating with. It needs to be defined on the user interface up front. The defined source app information can be accessed through get source app service."
+          },
+          {
+            "name": "orderBy",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "default": "-createdDate"
+            },
+            "description": "Sorts the reports by selected area."
+          },
+          {
+            "name": "index",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 0
+            },
+            "description": "Pagination parameter."
+          },
+          {
+            "name": "size",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 20
+            },
+            "description": "Size of messages that each page should include."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "`0` Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SM.OtpManager.Domain.Dto.Report.GetMessageReportResponse"
+                }
+              }
+            }
+          }
+        },
+        "summary": "MessageReport",
+        "description": "It is the screen where the sent message information is listed. Filtering can be done based on customer number, phone number, external identification number, transaction code, cost center fields.",
+        "x-internal": false,
+        "security": [
+          {
+            "auth": []
+          }
+        ]
+      }
+    },
+    "/reports/operatorReport": {
+      "get": {
+        "tags": [
+          "Report"
+        ],
+        "responses": {
+          "200": {
+            "description": "`0` Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SM.OtpManager.Domain.Dto.Report.GetOperatorReportResponse"
+                }
+              }
+            }
+          }
+        },
+        "summary": "OperatorReport",
+        "description": "It is a report showing the distribution of the message sent numbers by operators. The values in the list represent the percentage distributions used by the operators. The total is calculated to be 100%. Query can be made depending on the date range.",
+        "x-internal": true,
+        "security": [
+          {
+            "auth": []
+          }
+        ]
+      }
+    },
+    "/reports/queryReport": {
+      "get": {
+        "tags": [
+          "Report"
+        ],
+        "parameters": [
+          {
+            "name": "startDate",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "It's the start date of the records to be listed.",
+            "required": true
+          },
+          {
+            "name": "endDate",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "It's the end date of the records to be listed.",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "`0` Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SM.OtpManager.Domain.Dto.Report.GetQueryReportResponse"
+                }
+              }
+            }
+          }
+        },
+        "summary": "QueryReport",
+        "x-internal": true,
+        "security": [
+          {
+            "auth": []
+          }
+        ]
+      }
+    },
+    "/reports/blacklistVariationReport": {
+      "get": {
+        "tags": [
+          "Report"
+        ],
+        "parameters": [
+          {
+            "name": "startDate",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "It's the start date of the records to be listed.",
+            "required": true
+          },
+          {
+            "name": "endDate",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "It's the end date of the records to be listed.",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "`0` Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SM.OtpManager.Domain.Dto.Report.GetBlacklistVariationReportResponse"
+                }
+              }
+            }
+          }
+        },
+        "summary": "BlacklistVariationReport",
+        "description": "The number of records getting in and out to the blacklist on a daily basis is listed.",
+        "x-internal": true,
+        "security": [
+          {
+            "auth": []
+          }
+        ]
+      }
+    },
+    "/reports/otpReport": {
+      "get": {
+        "tags": [
+          "Report"
+        ],
+        "parameters": [
+          {
+            "name": "startDate",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "It's the start date of the records to be listed.",
+            "required": true
+          },
+          {
+            "name": "endDate",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "It's the end date of the records to be listed.",
+            "required": true
+          },
+          {
+            "name": "top",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 5
+            },
+            "description": "Number of records to list."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "`0` Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SM.OtpManager.Domain.Dto.Report.GetPasswordReportResponse"
+                }
+              }
+            }
+          }
+        },
+        "summary": "OtpReport",
+        "description": "The reports of the OTP messages that have been sent are listed.",
+        "x-internal": true,
+        "security": [
+          {
+            "auth": []
+          }
+        ]
+      }
+    },
+    "/reports/update/smsReport": {
+      "put": {
+        "tags": [
+          "Report"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/SMP.Framework.Library.API.SMCampaign.Sms.SmsReportRequest"
+                }
+              }
+            },
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/SMP.Framework.Library.API.SMCampaign.Sms.SmsReportRequest"
+                }
+              }
+            },
+            "text/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/SMP.Framework.Library.API.SMCampaign.Sms.SmsReportRequest"
+                }
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/SMP.Framework.Library.API.SMCampaign.Sms.SmsReportRequest"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "`0` Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SM.OtpManager.Domain.Dto.Report.UpdateMessageStatusResponse"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Update/smsReport",
+        "x-internal": true,
+        "security": [
+          {
+            "auth": []
+          }
+        ]
+      }
+    },
+    "/transactional/sms/send": {
+      "post": {
+        "tags": [
+          "Transactional"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/SMP.Framework.Library.API.SMSecure.Sms.SendSmsRequest"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SMP.Framework.Library.API.SMSecure.Sms.SendSmsRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SMP.Framework.Library.API.SMSecure.Sms.SendSmsRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/SMP.Framework.Library.API.SMSecure.Sms.SendSmsRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SM.OtpManager.Domain.Response.Sms.SendSmsResponse"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Send OTP",
+        "description": "It is used to perform OTP SMS sending. It communicates with the operators and makes sure that the number it sends is secure and delivers the SMS.",
+        "security": [
+          {
+            "auth": []
+          }
+        ],
+        "operationId": ""
+      }
+    },
+    "/transactional/sms/create": {
+      "post": {
+        "tags": [
+          "Transactional"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/SM.OtpManager.Domain.Request.Sms.CreateSmsRequest"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SM.OtpManager.Domain.Request.Sms.CreateSmsRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SM.OtpManager.Domain.Request.Sms.CreateSmsRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/SM.OtpManager.Domain.Request.Sms.CreateSmsRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "`0` Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SM.OtpManager.Domain.Response.Sms.CreateSmsResponse"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Create",
+        "x-internal": true,
+        "security": [
+          {
+            "auth": []
+          }
+        ]
+      }
+    },
+    "/transactional/sms/update/{id}": {
+      "put": {
+        "tags": [
+          "Transactional"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/SM.OtpManager.Domain.Request.Sms.UpdateSmsRequest"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SM.OtpManager.Domain.Request.Sms.UpdateSmsRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SM.OtpManager.Domain.Request.Sms.UpdateSmsRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/SM.OtpManager.Domain.Request.Sms.UpdateSmsRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SM.OtpManager.Domain.Response.ApiResponseBase"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/transactional/sms/get/{id}": {
+      "get": {
+        "tags": [
+          "Transactional"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SMP.Framework.Library.API.Base.GetResponse`1[[SM.OtpManager.Domain.Response.Sms.GetSendingResponse, SM.OtpManager.Domain, Version=2.4.0.0, Culture=neutral, PublicKeyToken=null]]"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/transactional/sms/get": {
+      "get": {
+        "tags": [
+          "Transactional"
+        ],
+        "parameters": [
+          {
+            "name": "Name",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Channels",
+            "in": "query",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/components/schemas/SMP.Framework.Library.Enumeration.Campaign.ChannelTypes"
+              }
+            }
+          },
+          {
+            "name": "Status",
+            "in": "query",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/components/schemas/SMP.Framework.Library.Enumeration.Campaign.SendingStatusTypes"
+              }
+            }
+          },
+          {
+            "name": "StartDate",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "EndDate",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "OrderBy",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Index",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "Size",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SMP.Framework.Library.API.Base.GetResponse`1[[SM.OtpManager.Domain.Response.Sms.GetSmsResponse, SM.OtpManager.Domain, Version=2.4.0.0, Culture=neutral, PublicKeyToken=null]]"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/transactionCodes/create": {
+      "post": {
+        "tags": [
+          "TransactionCode"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/SM.OtpManager.Domain.Request.TransactionCode.CreateTransactionCodeRequest"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SM.OtpManager.Domain.Request.TransactionCode.CreateTransactionCodeRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SM.OtpManager.Domain.Request.TransactionCode.CreateTransactionCodeRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/SM.OtpManager.Domain.Request.TransactionCode.CreateTransactionCodeRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "`0` Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SM.OtpManager.Domain.Response.ApiResponseBase"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Create",
+        "description": "It is used to create a new transaction code.",
+        "x-internal": true,
+        "security": [
+          {
+            "auth": []
+          }
+        ]
+      }
+    },
+    "/transactionCodes/get": {
+      "get": {
+        "tags": [
+          "TransactionCode"
+        ],
+        "parameters": [
+          {
+            "name": "Codes",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "It's the name of the transaction code. Indicates for which operation the sent SMS was performed. (eft, etc.)"
+          },
+          {
+            "name": "Description",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "It's the description field for the transaction."
+          },
+          {
+            "name": "StartDate",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "It shows the beginning date of the transaction codes that are added into the OTP Manager."
+          },
+          {
+            "name": "EndDate",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "It shows the end date of the transaction codes that are added into the OTP Manager."
+          },
+          {
+            "name": "OrderBy",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "Sorts the transaction code by selected area."
+          },
+          {
+            "name": "Index",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "description": "Pagination parameter."
+          },
+          {
+            "name": "Size",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "description": "Size of messages that each page should include."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "`0` Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SM.OtpManager.Domain.Response.TransactionCode.GetTransactionCodeResponse"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Get transactionCodes",
+        "description": "It's used for listing the transaction codes that can be defined for each transaction on the interface according to the reporting request.",
+        "security": [
+          {
+            "auth": []
+          }
+        ]
+      }
+    },
+    "/transactionCodes/get/{code}": {
+      "get": {
+        "tags": [
+          "TransactionCode"
+        ],
+        "parameters": [
+          {
+            "name": "code",
+            "description": "It's the name of the transaction code. Indicates for which operation the sent SMS was performed. (eft, etc.)",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "`0` Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SM.OtpManager.Domain.Response.TransactionCode.GetTransactionCodeResponse"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Get transactionCode (code)",
+        "security": [
+          {
+            "auth": []
+          }
+        ]
+      }
+    },
+    "/transactionCodes/update/{code}": {
+      "put": {
+        "tags": [
+          "TransactionCode"
+        ],
+        "parameters": [
+          {
+            "name": "code",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/SM.OtpManager.Domain.Request.TransactionCode.UpdateTransactionCodeRequest"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SM.OtpManager.Domain.Request.TransactionCode.UpdateTransactionCodeRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SM.OtpManager.Domain.Request.TransactionCode.UpdateTransactionCodeRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/SM.OtpManager.Domain.Request.TransactionCode.UpdateTransactionCodeRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "`0` Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SM.OtpManager.Domain.Response.ApiResponseBase"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Update/{code}",
+        "x-internal": true,
+        "security": [
+          {
+            "auth": []
+          }
+        ]
+      }
+    },
+    "/transactionCodes/delete/{code}": {
+      "delete": {
+        "tags": [
+          "TransactionCode"
+        ],
+        "parameters": [
+          {
+            "name": "code",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "`0` Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SM.OtpManager.Domain.Response.ApiResponseBase"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Delete/{code}",
+        "x-internal": true,
+        "security": [
+          {
+            "auth": []
+          }
+        ]
+      }
+    },
+    "/utility/initializeAccount": {
+      "post": {
+        "tags": [
+          "Utility"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/SM.OtpManager.Domain.Request.Utility.InitializeAccountRequest"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SM.OtpManager.Domain.Request.Utility.InitializeAccountRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SM.OtpManager.Domain.Request.Utility.InitializeAccountRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/SM.OtpManager.Domain.Request.Utility.InitializeAccountRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "`0` Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SM.OtpManager.Domain.Response.ApiResponseBase"
+                }
+              }
+            }
+          }
+        },
+        "x-internal": true,
+        "security": [
+          {
+            "auth": []
+          }
+        ]
+      }
+    },
+    "/utility/getActions": {
+      "get": {
+        "tags": [
+          "Utility"
+        ],
+        "responses": {
+          "200": {
+            "description": "`0` Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SMP.Framework.Library.API.Base.GetActionsResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/utility/healthCheck": {
+      "get": {
+        "tags": [
+          "Utility"
+        ],
+        "responses": {
+          "200": {
+            "description": "`0` Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SMP.Framework.Library.API.HealthCheck.HealthCheckResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/whitelists/add": {
+      "post": {
+        "tags": [
+          "Whitelist"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/SM.OtpManager.Domain.Request.Whitelist.CreateWhitelistRequest"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SM.OtpManager.Domain.Request.Whitelist.CreateWhitelistRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SM.OtpManager.Domain.Request.Whitelist.CreateWhitelistRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/SM.OtpManager.Domain.Request.Whitelist.CreateWhitelistRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "`0` Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SM.OtpManager.Domain.Response.ApiResponseBase"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Create",
+        "x-internal": true,
+        "security": [
+          {
+            "auth": []
+          }
+        ]
+      }
+    },
+    "/whitelists/get": {
+      "get": {
+        "tags": [
+          "Whitelist"
+        ],
+        "parameters": [
+          {
+            "name": "phoneNumber",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "The phone number added to the test list."
+          },
+          {
+            "name": "fullName",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "The name and surname of the person using the number to send the test message."
+          },
+          {
+            "name": "description",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "The test message is the explanation of the number to be sent."
+          },
+          {
+            "name": "isEnabled",
+            "in": "query",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "StartDate",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "EndDate",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "OrderBy",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Index",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "Size",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "`0` Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SM.OtpManager.Domain.Response.WhiteList.GetWhitelistResponse"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Get",
+        "x-internal": true,
+        "security": [
+          {
+            "auth": []
+          }
+        ]
+      }
+    },
+    "/whitelists/get/{phoneNumber}": {
+      "get": {
+        "tags": [
+          "Whitelist"
+        ],
+        "parameters": [
+          {
+            "name": "phoneNumber",
+            "description": "The phone number added to the test list.",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "`0` Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SM.OtpManager.Domain.Response.WhiteList.GetWhitelistResponse"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Get/{phoneNumber}",
+        "x-internal": true,
+        "security": [
+          {
+            "auth": []
+          }
+        ]
+      }
+    },
+    "/whitelists/update/{phoneNumber}": {
+      "put": {
+        "tags": [
+          "Whitelist"
+        ],
+        "parameters": [
+          {
+            "name": "phoneNumber",
+            "description": "The phone number added to the test list.",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/SM.OtpManager.Domain.Request.Whitelist.UpdateWhitelistRequest"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SM.OtpManager.Domain.Request.Whitelist.UpdateWhitelistRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SM.OtpManager.Domain.Request.Whitelist.UpdateWhitelistRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/SM.OtpManager.Domain.Request.Whitelist.UpdateWhitelistRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "`0` Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SM.OtpManager.Domain.Response.ApiResponseBase"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Update/{phoneNumber}",
+        "x-internal": true,
+        "security": [
+          {
+            "auth": []
+          }
+        ]
+      }
+    },
+    "/whitelists/delete/{phoneNumber}": {
+      "delete": {
+        "tags": [
+          "Whitelist"
+        ],
+        "parameters": [
+          {
+            "name": "phoneNumber",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "`0` Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SM.OtpManager.Domain.Response.ApiResponseBase"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Delete/{phoneNumber}",
+        "x-internal": true,
+        "security": [
+          {
+            "auth": []
+          }
+        ]
+      }
+    },
+    "/whitelists/toggleTestMode/{isEnabled}": {
+      "get": {
+        "tags": [
+          "Whitelist"
+        ],
+        "parameters": [
+          {
+            "name": "isEnabled",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "`0` Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SM.OtpManager.Domain.Response.ApiResponseBase"
+                }
+              }
+            }
+          }
+        },
+        "summary": "ToggleTestMode/{isEnabled}",
+        "x-internal": true,
+        "security": [
+          {
+            "auth": []
+          }
+        ]
+      }
+    },
+    "/whitelists/testModeStatus": {
+      "get": {
+        "tags": [
+          "Whitelist"
+        ],
+        "responses": {
+          "200": {
+            "description": "`0` Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SM.OtpManager.Domain.Response.WhiteList.GetTestModeStatusResponse"
+                }
+              }
+            }
+          }
+        },
+        "summary": "TestModeStatus",
+        "x-internal": true,
+        "security": [
+          {
+            "auth": []
+          }
+        ]
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "SM.OtpManager.Domain.Dto.BlackList.BlacklistHistoryCompactModel": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "nullable": true,
+            "description": "It is the ID information generated for the blacklist history. "
+          },
+          "operationType": {
+            "$ref": "#/components/schemas/SMP.Framework.Library.Enumeration.BlacklistOperationType"
+          },
+          "comment": {
+            "type": "string",
+            "description": "It is for entering comments on what the blacklist removal process is based on. It is optional.",
+            "nullable": true
+          },
+          "customerNo": {
+            "type": "string",
+            "description": "It is the customer number of the number to be removed from the blacklist.",
+            "nullable": true
+          },
+          "sourceApp": {
+            "type": "string",
+            "description": "It is the information that shows the phone number to be blacklisted from which application. (atm, internet banking etc.) .",
+            "nullable": true
+          },
+          "createdDate": {
+            "type": "string",
+            "format": "date-time",
+            "description": "The date the blacklist history item was created."
+          },
+          "blacklistReason": {
+            "$ref": "#/components/schemas/SMP.Framework.Library.Enumeration.BlacklistReason"
+          },
+          "modifiedBy": {
+            "type": "string",
+            "description": "Indicates which user modified the blacklist history item.",
+            "nullable": true
+          },
+          "blacklistId": {
+            "type": "string",
+            "description": "It is the ID information generated for the blacklist (Consists of phone number + customer number).",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "SM.OtpManager.Domain.Dto.BlackList.BlacklistModel": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "It is the ID information concatenated from `phoneNumber` and `customerNo`.",
+            "nullable": true,
+            "readOnly": true
+          },
+          "customerNo": {
+            "type": "string",
+            "description": "It is a blacklisted customer number.",
+            "nullable": true
+          },
+          "phoneNumber": {
+            "type": "string",
+            "description": "It is a blacklisted phone number. ",
+            "example": "9053210000001",
+            "nullable": true
+          },
+          "assumedOperator": {
+            "type": "string",
+            "description": "It is the last operator information that made the SMS sending successful.",
+            "nullable": true
+          },
+          "createdDate": {
+            "type": "string",
+            "format": "date-time",
+            "description": "It is the date when the phone number was added to the blacklist."
+          },
+          "quarantinedDate": {
+            "type": "string",
+            "format": "date-time",
+            "description": "It is the date when the phone number was added to the quarantine list.",
+            "nullable": true
+          },
+          "isQuarantined": {
+            "type": "boolean",
+            "description": "Indicates whether the phone number be added to the quarantine list."
+          },
+          "blacklistReason": {
+            "$ref": "#/components/schemas/SMP.Framework.Library.Enumeration.BlacklistReason"
+          },
+          "operatorBlacklistDate": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Indicates the date the number entered the Blacklist by the Operator.",
+            "nullable": true
+          },
+          "approvedDate": {
+            "type": "string",
+            "format": "date-time",
+            "description": "It is the date information when the phone number was removed from the blacklist.",
+            "nullable": true
+          },
+          "isApproved": {
+            "type": "boolean",
+            "description": "Indicates whether the number is blacklisted. `0: Blacklisted`, `1. Not Blacklisted`"
+          },
+          "comment": {
+            "type": "string",
+            "description": "Comment information about the reason for the removal from the blacklist.",
+            "nullable": true
+          },
+          "messageID": {
+            "type": "string",
+            "format": "uuid",
+            "description": "It is the unique id information produced by Otp Manager. It is used for reporting purposes.",
+            "nullable": true
+          },
+          "transactionCode": {
+            "type": "string",
+            "description": "Indicates the action that caused the sent message to be sent.",
+            "nullable": true
+          },
+          "sourceApp": {
+            "type": "string",
+            "description": "It is the information of which application the sent message will be sent for the operation performed. (atm, internet banking etc.) .",
+            "nullable": true
+          },
+          "historyList": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SM.OtpManager.Domain.Dto.BlackList.BlacklistHistoryCompactModel"
+            },
+            "nullable": true
+          },
+          "modifiedBy": {
+            "type": "string",
+            "description": "Indicates which user modified the blacklist item.",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "SM.OtpManager.Domain.Dto.MobilePhoneModel": {
+        "type": "object",
+        "properties": {
+          "phoneNumber": {
+            "type": "string",
+            "description": "Customer's mobile phone number.",
+            "nullable": true
+          },
+          "assumedOperator": {
+            "type": "string",
+            "description": "Indicates the default operator information of the number.",
+            "nullable": true
+          },
+          "createdDate": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Mobile phone record creation date."
+          },
+          "modifiedDate": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Mobile phone record modification date.",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "SM.OtpManager.Domain.Dto.Module.OperatorSetting": {
+        "type": "object",
+        "properties": {
+          "operatorId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "operatorName": {
+            "type": "string",
+            "nullable": true
+          },
+          "blacklistDuration": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "trustedDuration": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "isTrustedSendingSupported": {
+            "type": "boolean"
+          }
+        },
+        "additionalProperties": false
+      },
+      "SM.OtpManager.Domain.Dto.Node.NodeModel": {
+        "type": "object",
+        "description": "Database engine information.",
+        "properties": {
+          "alias": {
+            "type": "string",
+            "description": "Node name information.",
+            "nullable": true
+          },
+          "isEnabled": {
+            "type": "boolean",
+            "description": "Indicates whether the node is active or not."
+          },
+          "dbType": {
+            "$ref": "#/components/schemas/SMP.Framework.Library.Enumeration.DatabaseType"
+          },
+          "ip": {
+            "type": "string",
+            "description": "Node IP information.",
+            "nullable": true
+          },
+          "isOwnNode": {
+            "type": "boolean"
+          },
+          "apiUrl": {
+            "type": "string",
+            "nullable": true
+          },
+          "archiveDbType": {
+            "$ref": "#/components/schemas/SMP.Framework.Library.Enumeration.DatabaseType"
+          },
+          "archiveIp": {
+            "type": "string",
+            "description": "Archive node IP information.",
+            "nullable": true
+          },
+          "isPrimaryDbOk": {
+            "type": "boolean",
+            "description": "Indicates primary database health status."
+          },
+          "primaryDbErrorExplanation": {
+            "type": "string",
+            "description": "Indicates primary database error explanation.",
+            "nullable": true
+          },
+          "isArchiveDbOk": {
+            "type": "boolean",
+            "description": "Indicates archive database health status."
+          },
+          "lastUpdated": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "archiveDbErrorExplanation": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "SM.OtpManager.Domain.Dto.Report.BlacklistReportModel": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "description": "Shows options: Quarantines, Blacklisted, Remove from Blacklist.",
+            "nullable": true
+          },
+          "count": {
+            "type": "integer",
+            "format": "int64",
+            "description": "Indicates the number of record for the listed status."
+          },
+          "percentage": {
+            "type": "number",
+            "format": "double",
+            "description": "Indicates the percentage of record for the listed status."
+          }
+        },
+        "additionalProperties": false
+      },
+      "SM.OtpManager.Domain.Dto.Report.BlacklistVariationReportModel": {
+        "type": "object",
+        "properties": {
+          "in": {
+            "type": "integer",
+            "format": "int64",
+            "description": "Indicates the number of records entered in the blacklist."
+          },
+          "out": {
+            "type": "integer",
+            "format": "int64",
+            "description": "Indicates the number of records removed from the blacklist."
+          },
+          "date": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Indicates the blacklist in and out date range."
+          }
+        },
+        "additionalProperties": false
+      },
+      "SM.OtpManager.Domain.Dto.Report.DeliveryReportModel": {
+        "type": "object",
+        "properties": {
+          "groupingKey": {
+            "type": "string",
+            "description": "Indicates the operator name which the returned report records are grouped.",
+            "nullable": true
+          },
+          "pending": {
+            "type": "integer",
+            "format": "int64",
+            "description": "The number of messages pending delivery."
+          },
+          "succeeded": {
+            "type": "integer",
+            "format": "int64",
+            "description": "The number of messages that were sent successfully."
+          },
+          "failed": {
+            "type": "integer",
+            "format": "int64",
+            "description": "The number of messages that failed to send."
+          },
+          "blacklisted": {
+            "type": "integer",
+            "format": "int64",
+            "description": "The number of undelivered messages because the phone number is blacklisted."
+          },
+          "expired": {
+            "type": "integer",
+            "format": "int64",
+            "description": "The number of messages that have expired."
+          }
+        },
+        "additionalProperties": false
+      },
+      "SM.OtpManager.Domain.Dto.Report.GetBlacklistReportResponse": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SM.OtpManager.Domain.Dto.Report.BlacklistReportModel"
+            },
+            "nullable": true
+          },
+          "responseCode": {
+            "$ref": "#/components/schemas/SMP.Framework.Library.Enumeration.ApiResponseCode"
+          },
+          "explanation": {
+            "type": "string",
+            "description": "Indicates the response description.",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "SM.OtpManager.Domain.Dto.Report.GetBlacklistVariationReportResponse": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SM.OtpManager.Domain.Dto.Report.BlacklistVariationReportModel"
+            },
+            "nullable": true
+          },
+          "responseCode": {
+            "$ref": "#/components/schemas/SMP.Framework.Library.Enumeration.ApiResponseCode"
+          },
+          "explanation": {
+            "type": "string",
+            "description": "Indicates the response description.",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "SM.OtpManager.Domain.Dto.Report.GetDeliveryReportResponse": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SM.OtpManager.Domain.Dto.Report.DeliveryReportModel"
+            },
+            "nullable": true
+          },
+          "responseCode": {
+            "$ref": "#/components/schemas/SMP.Framework.Library.Enumeration.ApiResponseCode"
+          },
+          "explanation": {
+            "type": "string",
+            "description": "Indicates the response description.",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "SM.OtpManager.Domain.Dto.Report.GetMessageReportResponse": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SM.OtpManager.Domain.Dto.Report.MessageReportModel"
+            },
+            "nullable": true
+          },
+          "totalCount": {
+            "type": "integer",
+            "format": "int64",
+            "description": "Indicates the total number of sms sending according to the query criteria."
+          },
+          "responseCode": {
+            "$ref": "#/components/schemas/SMP.Framework.Library.Enumeration.ApiResponseCode"
+          },
+          "explanation": {
+            "type": "string",
+            "description": "Indicates the response description.",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "SM.OtpManager.Domain.Dto.Report.GetOperatorReportResponse": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SM.OtpManager.Domain.Dto.Report.OperatorReportModel"
+            },
+            "nullable": true
+          },
+          "responseCode": {
+            "$ref": "#/components/schemas/SMP.Framework.Library.Enumeration.ApiResponseCode"
+          },
+          "explanation": {
+            "type": "string",
+            "description": "Indicates the response description.",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "SM.OtpManager.Domain.Dto.Report.GetPasswordReportResponse": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SM.OtpManager.Domain.Dto.Report.PasswordReportModel"
+            },
+            "nullable": true
+          },
+          "responseCode": {
+            "$ref": "#/components/schemas/SMP.Framework.Library.Enumeration.ApiResponseCode"
+          },
+          "explanation": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "SM.OtpManager.Domain.Dto.Report.GetQueryReportResponse": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SM.OtpManager.Domain.Dto.Report.QueryReportModel"
+            },
+            "nullable": true
+          },
+          "responseCode": {
+            "$ref": "#/components/schemas/SMP.Framework.Library.Enumeration.ApiResponseCode"
+          },
+          "explanation": {
+            "type": "string",
+            "description": "Indicates the response description.",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "SM.OtpManager.Domain.Dto.Report.MessageLogModel": {
+        "type": "object",
+        "properties": {
+          "order": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "operator": {
+            "type": "string",
+            "nullable": true
+          },
+          "requestDate": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "responseDate": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "description": {
+            "type": "string",
+            "nullable": true
+          },
+          "isSuccess": {
+            "type": "boolean"
+          },
+          "request": {
+            "type": "string",
+            "nullable": true
+          },
+          "response": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "SM.OtpManager.Domain.Dto.Report.MessageReportModel": {
+        "type": "object",
+        "properties": {
+          "phoneNumber": {
+            "type": "string",
+            "description": "It is the phone number information from which sms sending is made.",
+            "nullable": true
+          },
+          "messageContent": {
+            "type": "string",
+            "description": "It is the information of the message content.",
+            "nullable": true
+          },
+          "node": {
+            "type": "string",
+            "nullable": true
+          },
+          "customerNo": {
+            "type": "string",
+            "description": "Customer number information.",
+            "nullable": true
+          },
+          "externalId": {
+            "type": "string",
+            "description": "It is the unique id information determined by the customer.",
+            "nullable": true
+          },
+          "messageId": {
+            "type": "string",
+            "description": "It is the unique ID information generated by OTP Manager.",
+            "nullable": true
+          },
+          "remoteId": {
+            "type": "string",
+            "nullable": true
+          },
+          "transactionCode": {
+            "type": "string",
+            "description": "It is a code information used for reporting purposes and defined in line with the customer's request, used for the classification of sent sms. If the customer does not request it, it takes the default value of \"DEFAULT\".",
+            "nullable": true
+          },
+          "sourceApp": {
+            "type": "string",
+            "description": "It is a code information used for reporting purposes and used to see from which channel the sent sms, defined in line with the customer's request, are sent. If the customer does not request it, it takes the default value of \"DEFAULT\".",
+            "nullable": true
+          },
+          "costCenter": {
+            "type": "string",
+            "description": "It is a value used to calculate the cost of messages sent by OTP Manager.",
+            "nullable": true
+          },
+          "operator": {
+            "type": "string",
+            "description": "It is the information of which operator the sms sending is made through.",
+            "nullable": true
+          },
+          "status": {
+            "$ref": "#/components/schemas/SM.OtpManager.Domain.Enumerations.MessageStatus"
+          },
+          "createdDate": {
+            "type": "string",
+            "format": "date-time",
+            "description": "It is the creation date of the sms sending request."
+          },
+          "sentDate": {
+            "type": "string",
+            "format": "date-time",
+            "description": "It is the date of the sms sending.",
+            "nullable": true
+          },
+          "ipAddress": {
+            "type": "string",
+            "nullable": true
+          },
+          "otpEnabled": {
+            "type": "boolean"
+          },
+          "otpCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "logs": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SM.OtpManager.Domain.Dto.Report.MessageLogModel"
+            },
+            "nullable": true
+          },
+          "stkStatus": {
+            "$ref": "#/components/schemas/SM.OtpManager.Domain.Enumerations.StkStatus"
+          },
+          "otpType": {
+            "type": "string",
+            "nullable": true
+          },
+          "totalCount": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "SM.OtpManager.Domain.Dto.Report.OperatorReportModel": {
+        "type": "object",
+        "properties": {
+          "operator": {
+            "type": "string",
+            "description": "It is the operator information used in sending the message.",
+            "nullable": true
+          },
+          "count": {
+            "type": "integer",
+            "format": "int64",
+            "description": "Indicates the number of members that operators have."
+          },
+          "percentage": {
+            "type": "number",
+            "format": "double",
+            "description": "Indicates the percentage distribution of members owned by operators."
+          }
+        },
+        "additionalProperties": false
+      },
+      "SM.OtpManager.Domain.Dto.Report.PasswordReportModel": {
+        "type": "object",
+        "properties": {
+          "phoneNumber": {
+            "type": "string",
+            "description": "It is the phone number information from which sms sending is made.",
+            "nullable": true
+          },
+          "customerNo": {
+            "type": "string",
+            "description": "Customer number information.",
+            "nullable": true
+          },
+          "transactionCode": {
+            "type": "string",
+            "description": "It is a code information used for reporting purposes and defined in line with the customer's request, used for the classification of sent sms. If the customer does not request it, it takes the default value of \"DEFAULT\".",
+            "nullable": true
+          },
+          "count": {
+            "type": "integer",
+            "format": "int64",
+            "description": "Indicates the  number of sms sending according to the query criteria."
+          }
+        },
+        "additionalProperties": false
+      },
+      "SM.OtpManager.Domain.Dto.Report.QueryReportModel": {
+        "type": "object",
+        "properties": {
+          "successCount": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "failedCount": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "timeoutCount": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "safeCount": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "simChangeCount": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "mnpCount": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "date": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "additionalProperties": false
+      },
+      "SM.OtpManager.Domain.Dto.Report.UpdateMessageStatusResponse": {
+        "type": "object",
+        "properties": {
+          "totalCount": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "responseCode": {
+            "$ref": "#/components/schemas/SMP.Framework.Library.Enumeration.ApiResponseCode"
+          },
+          "explanation": {
+            "type": "string",
+            "description": "Indicates the response description.",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "SM.OtpManager.Domain.Dto.Sms.MessageFrom": {
+        "type": "object",
+        "properties": {
+          "turkcell": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "vodafone": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "turkTelekom": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "unknown": {
+            "type": "string",
+            "format": "uuid"
+          }
+        },
+        "additionalProperties": false
+      },
+      "SM.OtpManager.Domain.Dto.Sms.Notification": {
+        "type": "object",
+        "properties": {
+          "from": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "blacklistInContent": {
+            "type": "string",
+            "nullable": true
+          },
+          "blacklistOutContent": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "SM.OtpManager.Domain.Dto.Sms.Settings": {
+        "type": "object",
+        "properties": {
+          "contentEncryptionEnabled": {
+            "type": "boolean"
+          },
+          "notification": {
+            "$ref": "#/components/schemas/SM.OtpManager.Domain.Dto.Sms.Notification"
+          }
+        },
+        "additionalProperties": false
+      },
+      "SM.OtpManager.Domain.Dto.TransacitonCode.TransactionCodeModel": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string",
+            "description": "It's the name of the transaction code. Indicates for which operation the sent SMS was performed. (eft, etc.)",
+            "nullable": true
+          },
+          "description": {
+            "type": "string",
+            "description": "It's the description field for the transaction.",
+            "nullable": true
+          },
+          "fromId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "fromName": {
+            "type": "string",
+            "nullable": true
+          },
+          "createdDate": {
+            "type": "string",
+            "format": "date-time",
+            "description": "TransactionCodes creation date."
+          },
+          "modifiedDate": {
+            "type": "string",
+            "format": "date-time",
+            "description": "TransactionCodes modify date.",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "SM.OtpManager.Domain.Dto.Whitelist.WhitelistModel": {
+        "type": "object",
+        "properties": {
+          "fullName": {
+            "type": "string",
+            "description": "The name and surname of the person using the number to send the test message.",
+            "nullable": true
+          },
+          "description": {
+            "type": "string",
+            "description": "The test message is the explanation of the number to be sent.",
+            "nullable": true
+          },
+          "phoneNumber": {
+            "type": "string",
+            "description": "The phone number added to the test list.",
+            "nullable": true
+          },
+          "createdDate": {
+            "type": "string",
+            "format": "date-time",
+            "description": "The date the number was added to the test list."
+          },
+          "isEnabled": {
+            "type": "boolean"
+          },
+          "modifiedDate": {
+            "type": "string",
+            "format": "date-time",
+            "description": "The date the number was modified.",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "SM.OtpManager.Domain.Enumerations.BlacklistUIFilter": {
+        "enum": [
+          0,
+          1,
+          2
+        ],
+        "type": "integer",
+        "format": "int32"
+      },
+      "SM.OtpManager.Domain.Enumerations.MessageStatus": {
+        "enum": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10
+        ],
+        "type": "integer",
+        "format": "int32",
+        "description": "It is the status information of the sms sending.\r\n`0`: `Unsent`\r\n\r\n`1`: `Sent`\r\n\r\n`2`: `Pending`\r\n\r\n`3`: `Open`\r\n\r\n`4`: `Blacklisted`\r\n\r\n`5`: `Failed`\r\n\r\n`6`: `Failed By Operator`\r\n\r\n`7`: `Hardbounced`\r\n\r\n`8`: `Softbounced`\r\n\r\n`9`: `Expired By Operator`\r\n\r\n`10`: `TestMode is active, number not in seedlist`\r\n\r\n\r\n"
+      },
+      "SM.OtpManager.Domain.Enumerations.RunningMode": {
+        "enum": [
+          0,
+          1
+        ],
+        "type": "integer",
+        "format": "int32"
+      },
+      "SM.OtpManager.Domain.Enumerations.StkStatus": {
+        "enum": [
+          0,
+          1,
+          2
+        ],
+        "type": "integer",
+        "format": "int32"
+      },
+      "SM.OtpManager.Domain.Models.Redis.TransactionalSms": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "description": {
+            "type": "string",
+            "nullable": true
+          },
+          "channel": {
+            "$ref": "#/components/schemas/SMP.Framework.Library.Enumeration.Campaign.ChannelTypes"
+          },
+          "status": {
+            "$ref": "#/components/schemas/SMP.Framework.Library.Enumeration.Campaign.SendingStatusTypes"
+          },
+          "froms": {
+            "$ref": "#/components/schemas/SM.OtpManager.Domain.Dto.Sms.MessageFrom"
+          },
+          "labels": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SMP.Framework.Library.API.SMPCommon.Label.LabelModel"
+            },
+            "nullable": true
+          },
+          "settings": {
+            "$ref": "#/components/schemas/SM.OtpManager.Domain.Dto.Sms.Settings"
+          },
+          "aid": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "crd": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "mfd": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "SM.OtpManager.Domain.Request.Blacklist.CreateBlacklistRequest": {
+        "type": "object",
+        "properties": {
+          "phoneNumber": {
+            "type": "string",
+            "description": "The phone number to be blacklisted.",
+            "nullable": true
+          },
+          "customerNo": {
+            "type": "string",
+            "description": "The customer number to be blacklisted.",
+            "nullable": true
+          },
+          "sourceApp": {
+            "type": "string",
+            "description": "It is the information that shows the phone number to be blacklisted from which application. (atm, internet banking etc.) .",
+            "nullable": true
+          },
+          "comment": {
+            "type": "string",
+            "description": "A description of why the number was blacklisted.",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "SM.OtpManager.Domain.Request.Blacklist.UpdateBlacklistRequest": {
+        "type": "object",
+        "properties": {
+          "comment": {
+            "type": "string",
+            "description": "Indicates why it was removed from the blacklist.",
+            "nullable": true
+          },
+          "sourceApp": {
+            "type": "string",
+            "description": "It is the information that shows the phone number to be blacklisted from which application. (atm, internet banking etc.) .",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "SM.OtpManager.Domain.Request.Msisdn.ConfirmMsisdnTcknRequest": {
+        "required": [
+          "msisdn",
+          "operator",
+          "tckn"
+        ],
+        "type": "object",
+        "properties": {
+          "operator": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "msisdn": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "tckn": {
+            "minLength": 1,
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      },
+      "SM.OtpManager.Domain.Request.Sms.CreateSmsRequest": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "description": {
+            "type": "string",
+            "nullable": true
+          },
+          "froms": {
+            "$ref": "#/components/schemas/SM.OtpManager.Domain.Dto.Sms.MessageFrom"
+          },
+          "labels": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "nullable": true
+          },
+          "settings": {
+            "$ref": "#/components/schemas/SM.OtpManager.Domain.Dto.Sms.Settings"
+          }
+        },
+        "additionalProperties": false
+      },
+      "SM.OtpManager.Domain.Request.Sms.UpdateSmsRequest": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "description": {
+            "type": "string",
+            "nullable": true
+          },
+          "froms": {
+            "$ref": "#/components/schemas/SM.OtpManager.Domain.Dto.Sms.MessageFrom"
+          },
+          "labels": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "nullable": true
+          },
+          "settings": {
+            "$ref": "#/components/schemas/SM.OtpManager.Domain.Dto.Sms.Settings"
+          },
+          "status": {
+            "$ref": "#/components/schemas/SMP.Framework.Library.Enumeration.Campaign.SendingStatusTypes"
+          }
+        },
+        "additionalProperties": false
+      },
+      "SM.OtpManager.Domain.Request.TransactionCode.CreateTransactionCodeRequest": {
+        "required": [
+          "code"
+        ],
+        "type": "object",
+        "properties": {
+          "code": {
+            "minLength": 1,
+            "description": "It's the name of the operation code.",
+            "type": "string"
+          },
+          "description": {
+            "type": "string",
+            "description": "It's the description field for the transaction code.",
+            "nullable": true
+          },
+          "fromId": {
+            "type": "string",
+            "format": "uuid"
+          }
+        },
+        "additionalProperties": false
+      },
+      "SM.OtpManager.Domain.Request.TransactionCode.UpdateTransactionCodeRequest": {
+        "type": "object",
+        "properties": {
+          "description": {
+            "type": "string",
+            "description": "It's the description field for the transaction.",
+            "nullable": true
+          },
+          "fromId": {
+            "type": "string",
+            "format": "uuid"
+          }
+        },
+        "additionalProperties": false
+      },
+      "SM.OtpManager.Domain.Request.Utility.InitializeAccountRequest": {
+        "type": "object",
+        "properties": {
+          "accountId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "adminRoleId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "apiUrls": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string",
+              "nullable": true
+            },
+            "nullable": true
+          },
+          "adminUserName": {
+            "type": "string",
+            "nullable": true
+          },
+          "adminEmail": {
+            "type": "string",
+            "nullable": true
+          },
+          "adminPassword": {
+            "type": "string",
+            "nullable": true
+          },
+          "parentAdminUserName": {
+            "type": "string",
+            "nullable": true
+          },
+          "parentAdminPassword": {
+            "type": "string",
+            "nullable": true
+          },
+          "parentAdminEmail": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "SM.OtpManager.Domain.Request.Whitelist.CreateWhitelistRequest": {
+        "type": "object",
+        "properties": {
+          "fullName": {
+            "type": "string",
+            "description": "The name and surname of the person using the number to send the test message.",
+            "nullable": true
+          },
+          "description": {
+            "type": "string",
+            "description": "The test message is the explanation of the number to be sent.",
+            "nullable": true
+          },
+          "phoneNumber": {
+            "type": "string",
+            "description": "The phone number added to the test list.",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "SM.OtpManager.Domain.Request.Whitelist.UpdateWhitelistRequest": {
+        "type": "object",
+        "properties": {
+          "fullName": {
+            "type": "string",
+            "description": "The name and surname of the person using the number to send the test message.",
+            "nullable": true
+          },
+          "description": {
+            "type": "string",
+            "description": "The test message is the explanation of the number to be sent.",
+            "nullable": true
+          },
+          "isEnabled": {
+            "type": "boolean",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "SM.OtpManager.Domain.Response.ApiResponseBase": {
+        "type": "object",
+        "properties": {
+          "responseCode": {
+            "$ref": "#/components/schemas/SMP.Framework.Library.Enumeration.ApiResponseCode"
+          },
+          "explanation": {
+            "type": "string",
+            "description": "Indicates the response description.",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "SM.OtpManager.Domain.Response.BlackList.AddBlacklistResponse": {
+        "type": "object",
+        "properties": {
+          "blacklistId": {
+            "type": "string",
+            "description": "Unique id of blacklist created in OTP Manager.",
+            "nullable": true
+          },
+          "responseCode": {
+            "$ref": "#/components/schemas/SMP.Framework.Library.Enumeration.ApiResponseCode"
+          },
+          "explanation": {
+            "type": "string",
+            "description": "Indicates the response description.",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "SM.OtpManager.Domain.Response.BlackList.GetBlacklistResponse": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SM.OtpManager.Domain.Dto.BlackList.BlacklistModel"
+            },
+            "nullable": true
+          },
+          "totalCount": {
+            "type": "integer",
+            "format": "int64",
+            "description": "Total number of blacklist records."
+          },
+          "responseCode": {
+            "$ref": "#/components/schemas/SMP.Framework.Library.Enumeration.ApiResponseCode"
+          },
+          "explanation": {
+            "type": "string",
+            "description": "Indicates the response description.",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "SM.OtpManager.Domain.Response.GetMobilePhoneResponse": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SM.OtpManager.Domain.Dto.MobilePhoneModel"
+            },
+            "nullable": true
+          },
+          "totalCount": {
+            "type": "integer",
+            "format": "int64",
+            "description": "Total number of phone number records."
+          },
+          "responseCode": {
+            "$ref": "#/components/schemas/SMP.Framework.Library.Enumeration.ApiResponseCode"
+          },
+          "explanation": {
+            "type": "string",
+            "description": "Indicates the response description.",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "SM.OtpManager.Domain.Response.Node.GetNodeResponse": {
+        "type": "object",
+        "properties": {
+          "runningMode": {
+            "$ref": "#/components/schemas/SM.OtpManager.Domain.Enumerations.RunningMode"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SM.OtpManager.Domain.Dto.Node.NodeModel"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "SM.OtpManager.Domain.Response.OTP.GeneratePasswordResponse": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "description": "It is the ID information generated for the OTP. This id is used to verify the generated OTP."
+          },
+          "code": {
+            "type": "string",
+            "description": "One-time password information. It is valid for 180 seconds.",
+            "nullable": true
+          },
+          "responseCode": {
+            "$ref": "#/components/schemas/SMP.Framework.Library.Enumeration.ApiResponseCode"
+          },
+          "explanation": {
+            "type": "string",
+            "description": "Indicates the response description.",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "SM.OtpManager.Domain.Response.Sms.CreateSmsResponse": {
+        "type": "object",
+        "properties": {
+          "transactionId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "responseCode": {
+            "$ref": "#/components/schemas/SMP.Framework.Library.Enumeration.ApiResponseCode"
+          },
+          "explanation": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "SM.OtpManager.Domain.Response.Sms.GetSendingResponse": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "description": {
+            "type": "string",
+            "nullable": true
+          },
+          "channel": {
+            "$ref": "#/components/schemas/SMP.Framework.Library.Enumeration.Campaign.ChannelTypes"
+          },
+          "status": {
+            "$ref": "#/components/schemas/SMP.Framework.Library.Enumeration.Campaign.SendingStatusTypes"
+          },
+          "froms": {
+            "$ref": "#/components/schemas/SM.OtpManager.Domain.Dto.Sms.MessageFrom"
+          },
+          "labels": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SMP.Framework.Library.API.SMPCommon.Label.LabelModel"
+            },
+            "nullable": true
+          },
+          "settings": {
+            "$ref": "#/components/schemas/SM.OtpManager.Domain.Dto.Sms.Settings"
+          }
+        },
+        "additionalProperties": false
+      },
+      "SM.OtpManager.Domain.Response.Sms.GetSmsResponse": {
+        "type": "object",
+        "properties": {
+          "transactionalSms": {
+            "$ref": "#/components/schemas/SM.OtpManager.Domain.Models.Redis.TransactionalSms"
+          },
+          "responseCode": {
+            "$ref": "#/components/schemas/SMP.Framework.Library.Enumeration.ApiResponseCode"
+          },
+          "explanation": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "SM.OtpManager.Domain.Response.Sms.SendSmsResponse": {
+        "type": "object",
+        "properties": {
+          "messageId": {
+            "type": "string",
+            "format": "uuid",
+            "description": "The ID given to the sent message.",
+            "nullable": true
+          },
+          "operator": {
+            "type": "string",
+            "description": "It is the name of the operator for sending SMS. If the operator name is known, this information is written to the operator parameter; otherwise, WISMO is written to this field, it finds itself.\n",
+            "nullable": true
+          },
+          "remoteId": {
+            "type": "string",
+            "description": "It is the unique id information assigned by the operator after the SMS is transmitted to the operator.",
+            "nullable": true
+          },
+          "operatorBlacklistDate": {
+            "type": "string",
+            "format": "date-time",
+            "description": "It is the date when the operator blacklisted the number.",
+            "nullable": true
+          },
+          "otpType": {
+            "type": "string",
+            "description": "There are two types as Sim OTP and SMS OTP. Unlike SMS OTP, it appears on the screen before it is sent to the phone operating system.",
+            "nullable": true
+          },
+          "passwordId": {
+            "type": "string",
+            "format": "uuid",
+            "description": "It is the unique identification of the sent OTP.",
+            "nullable": true
+          },
+          "responseCode": {
+            "$ref": "#/components/schemas/SMP.Framework.Library.Enumeration.ApiResponseCode"
+          },
+          "explanation": {
+            "type": "string",
+            "description": "Indicates the response description.",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "SM.OtpManager.Domain.Response.TransactionCode.GetTransactionCodeResponse": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SM.OtpManager.Domain.Dto.TransacitonCode.TransactionCodeModel"
+            },
+            "nullable": true
+          },
+          "totalCount": {
+            "type": "integer",
+            "format": "int64",
+            "description": "Total number of transaction code records."
+          },
+          "responseCode": {
+            "$ref": "#/components/schemas/SMP.Framework.Library.Enumeration.ApiResponseCode"
+          },
+          "explanation": {
+            "type": "string",
+            "description": "Indicates the response description.",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "SM.OtpManager.Domain.Response.Utility.GetResponse`1[[SMP.Framework.Library.LicenseDetail.OtpManagerLicenseDetail, SMP.Framework.Library, Version=23.9.29.2045, Culture=neutral, PublicKeyToken=null]]": {
+        "type": "object",
+        "properties": {
+          "totalCount": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SMP.Framework.Library.LicenseDetail.OtpManagerLicenseDetail"
+            },
+            "nullable": true
+          },
+          "responseCode": {
+            "$ref": "#/components/schemas/SMP.Framework.Library.Enumeration.ApiResponseCode"
+          },
+          "explanation": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "SM.OtpManager.Domain.Response.WhiteList.GetTestModeStatusResponse": {
+        "type": "object",
+        "properties": {
+          "isTestModeActive": {
+            "type": "boolean"
+          },
+          "responseCode": {
+            "$ref": "#/components/schemas/SMP.Framework.Library.Enumeration.ApiResponseCode"
+          },
+          "explanation": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "SM.OtpManager.Domain.Response.WhiteList.GetWhitelistResponse": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SM.OtpManager.Domain.Dto.Whitelist.WhitelistModel"
+            },
+            "nullable": true
+          },
+          "totalCount": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "responseCode": {
+            "$ref": "#/components/schemas/SMP.Framework.Library.Enumeration.ApiResponseCode"
+          },
+          "explanation": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "SMP.Framework.Library.API.Base.ActionModel": {
+        "type": "object",
+        "properties": {
+          "module": {
+            "$ref": "#/components/schemas/SMP.Framework.Library.Constants.Module"
+          },
+          "claimCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "claimGroup": {
+            "$ref": "#/components/schemas/SMP.Framework.Library.Enumeration.ClaimGroup"
+          },
+          "roleType": {
+            "$ref": "#/components/schemas/SMP.Framework.Library.Enumeration.RoleType"
+          }
+        },
+        "additionalProperties": false
+      },
+      "SMP.Framework.Library.API.Base.ApiResponse": {
+        "type": "object",
+        "properties": {
+          "responseCode": {
+            "$ref": "#/components/schemas/SMP.Framework.Library.Enumeration.ApiResponseCode"
+          },
+          "explanation": {
+            "type": "string",
+            "description": "Indicates the response description.",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "SMP.Framework.Library.API.Base.GetActionsResponse": {
+        "type": "object",
+        "properties": {
+          "moduleName": {
+            "type": "string",
+            "nullable": true
+          },
+          "totalCount": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SMP.Framework.Library.API.Base.ActionModel"
+            },
+            "nullable": true
+          },
+          "responseCode": {
+            "$ref": "#/components/schemas/SMP.Framework.Library.Enumeration.ApiResponseCode"
+          },
+          "explanation": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "SMP.Framework.Library.API.Base.GetResponse`1[[SM.OtpManager.Domain.Response.Sms.GetSendingResponse, SM.OtpManager.Domain, Version=2.4.0.0, Culture=neutral, PublicKeyToken=null]]": {
+        "type": "object",
+        "properties": {
+          "totalCount": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SM.OtpManager.Domain.Response.Sms.GetSendingResponse"
+            },
+            "nullable": true
+          },
+          "responseCode": {
+            "$ref": "#/components/schemas/SMP.Framework.Library.Enumeration.ApiResponseCode"
+          },
+          "explanation": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "SMP.Framework.Library.API.Base.GetResponse`1[[SM.OtpManager.Domain.Response.Sms.GetSmsResponse, SM.OtpManager.Domain, Version=2.4.0.0, Culture=neutral, PublicKeyToken=null]]": {
+        "type": "object",
+        "properties": {
+          "totalCount": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SM.OtpManager.Domain.Response.Sms.GetSmsResponse"
+            },
+            "nullable": true
+          },
+          "responseCode": {
+            "$ref": "#/components/schemas/SMP.Framework.Library.Enumeration.ApiResponseCode"
+          },
+          "explanation": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "SMP.Framework.Library.API.HealthCheck.HealthCheckDB": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "nullable": true
+          },
+          "tableName": {
+            "type": "string",
+            "nullable": true
+          },
+          "recordCount": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "errorMessage": {
+            "type": "string",
+            "nullable": true
+          },
+          "elapsed": {
+            "type": "string",
+            "format": "date-span"
+          }
+        },
+        "additionalProperties": false
+      },
+      "SMP.Framework.Library.API.HealthCheck.HealthCheckMongoDB": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "nullable": true
+          },
+          "errorMessage": {
+            "type": "string",
+            "nullable": true
+          },
+          "elapsed": {
+            "type": "string",
+            "format": "date-span"
+          }
+        },
+        "additionalProperties": false
+      },
+      "SMP.Framework.Library.API.HealthCheck.HealthCheckRabbitMQ": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "nullable": true
+          },
+          "errorMessage": {
+            "type": "string",
+            "nullable": true
+          },
+          "elapsed": {
+            "type": "string",
+            "format": "date-span"
+          }
+        },
+        "additionalProperties": false
+      },
+      "SMP.Framework.Library.API.HealthCheck.HealthCheckRedis": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "nullable": true
+          },
+          "databaseId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "lastSave": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "recordCount": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "errorMessage": {
+            "type": "string",
+            "nullable": true
+          },
+          "elapsed": {
+            "type": "string",
+            "format": "date-span"
+          }
+        },
+        "additionalProperties": false
+      },
+      "SMP.Framework.Library.API.HealthCheck.HealthCheckResponse": {
+        "type": "object",
+        "properties": {
+          "redis": {
+            "$ref": "#/components/schemas/SMP.Framework.Library.API.HealthCheck.HealthCheckRedis"
+          },
+          "rabbitMQ": {
+            "$ref": "#/components/schemas/SMP.Framework.Library.API.HealthCheck.HealthCheckRabbitMQ"
+          },
+          "mongoDB": {
+            "$ref": "#/components/schemas/SMP.Framework.Library.API.HealthCheck.HealthCheckMongoDB"
+          },
+          "database": {
+            "$ref": "#/components/schemas/SMP.Framework.Library.API.HealthCheck.HealthCheckDB"
+          },
+          "responseCode": {
+            "$ref": "#/components/schemas/SMP.Framework.Library.Enumeration.ApiResponseCode"
+          },
+          "explanation": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "SMP.Framework.Library.API.SMCampaign.Sms.SmsReportRequest": {
+        "type": "object",
+        "properties": {
+          "channel": {
+            "$ref": "#/components/schemas/SMP.Framework.Library.Enumeration.Campaign.ChannelTypes"
+          },
+          "accountId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "sendingId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "messageId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "status": {
+            "$ref": "#/components/schemas/SMP.Framework.Library.Enumeration.Campaign.MessageStatusTypes"
+          },
+          "phoneNumber": {
+            "type": "string",
+            "nullable": true
+          },
+          "providerName": {
+            "type": "string",
+            "nullable": true
+          },
+          "resultExplanation": {
+            "type": "string",
+            "nullable": true
+          },
+          "resultCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "statusChangeDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "readDate": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "SMP.Framework.Library.API.SMPCommon.Label.LabelModel": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "description": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "SMP.Framework.Library.API.SMSecure.Sms.SendSmsRequest": {
+        "type": "object",
+        "properties": {
+          "transactionId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "messageContent": {
+            "type": "string",
+            "description": "The content of the sent message. When [PWD] or [OTP] is entered in this field, randomly generated password information is delivered to the corresponding phone number. For example, \"Your one-time password [OTP]\" is transmitted as \"Your one-time password is 5874\".",
+            "nullable": true
+          },
+          "phoneNumber": {
+            "type": "string",
+            "description": "It is the phone number to which SMS will be sent.",
+            "nullable": true
+          },
+          "customerNo": {
+            "type": "string",
+            "description": "It is the customer number to which the send will be made.\n\n",
+            "nullable": true
+          },
+          "operator": {
+            "type": "string",
+            "description": "It is the name of the operator for sending SMS. If the operator name is known, this information is written to the operator parameter; otherwise, If WISMO is written to this field, OTP Manager finds Operator that will be sent itself.",
+            "nullable": true
+          },
+          "transactionCode": {
+            "type": "string",
+            "description": "It can be defined based on the reporting requirements. For which transaction the SMS is sent is defined as tranaction code. For example, It distinguish transactions like EFT or money orders.",
+            "nullable": true
+          },
+          "externalId": {
+            "type": "string",
+            "description": "It is the customer number of the account. It is used for reporting purposes.",
+            "nullable": true
+          },
+          "referenceNo": {
+            "maxLength": 50,
+            "minLength": 0,
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "SMP.Framework.Library.Constants.Module": {
+        "enum": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19,
+          20,
+          21
+        ],
+        "type": "integer",
+        "format": "int32"
+      },
+      "SMP.Framework.Library.Enumeration.ApiResponseCode": {
+        "enum": [
+          0,
+          1000,
+          1001,
+          1002,
+          1003,
+          1004,
+          1005,
+          1006,
+          1007,
+          1008,
+          1009,
+          1010,
+          1011,
+          1012,
+          1013,
+          1014,
+          1015,
+          1016,
+          1017,
+          1018,
+          1019,
+          1020,
+          1021,
+          1022,
+          1023,
+          1024,
+          1025,
+          1026,
+          1027,
+          1028,
+          1029,
+          1030,
+          1031,
+          1032,
+          1033,
+          1034,
+          1035,
+          1036,
+          1037,
+          1038,
+          1039,
+          1040,
+          1041,
+          1042,
+          1043,
+          1045,
+          1046,
+          1047,
+          1048,
+          1049,
+          1050,
+          1051,
+          1052,
+          1053,
+          1080,
+          1081,
+          1082,
+          1083,
+          1084,
+          1085,
+          1089,
+          1092,
+          1093,
+          1094,
+          1096,
+          1097,
+          1098,
+          1102,
+          1103,
+          1104,
+          1105,
+          1106,
+          1107,
+          1109,
+          1110,
+          1111,
+          1112,
+          1113,
+          1114,
+          1115,
+          1116,
+          1118,
+          1120,
+          1121,
+          1122,
+          1123,
+          1126,
+          1127,
+          1128,
+          1133,
+          1141,
+          1142,
+          1151,
+          1152,
+          1153,
+          1201,
+          1202,
+          1203,
+          1204,
+          1205,
+          1250,
+          1251,
+          1252,
+          1253,
+          1254,
+          1255,
+          1256,
+          1257,
+          1258,
+          1259,
+          1260,
+          1261,
+          1262,
+          1263,
+          1264,
+          1265,
+          1266,
+          1267,
+          1268,
+          1269,
+          1270,
+          1271,
+          1272,
+          1273,
+          1274,
+          1275,
+          1276,
+          1277,
+          1278,
+          1279,
+          1280,
+          1281,
+          1282,
+          1283,
+          1284,
+          1285,
+          1286,
+          1287,
+          1288,
+          1289,
+          1290,
+          1291,
+          1292,
+          1293,
+          1294,
+          1295,
+          1296,
+          1297,
+          1298,
+          1299,
+          1300,
+          1301,
+          3000,
+          3001,
+          -346,
+          -345,
+          -344,
+          -343,
+          -342,
+          -341,
+          -340,
+          -339,
+          -338,
+          -336,
+          -335,
+          -334,
+          -333,
+          -332,
+          -331,
+          -330,
+          -329,
+          -328,
+          -327,
+          -326,
+          -325,
+          -324,
+          -323,
+          -322,
+          -321,
+          -320,
+          -319,
+          -318,
+          -317,
+          -316,
+          -315,
+          -314,
+          -313,
+          -312,
+          -311,
+          -310,
+          -309,
+          -308,
+          -307,
+          -306,
+          -305,
+          -304,
+          -303,
+          -302,
+          -301,
+          -300,
+          -99,
+          -23,
+          -22,
+          -21,
+          -20,
+          -19,
+          -18,
+          -17,
+          -16,
+          -15,
+          -14,
+          -13,
+          -12,
+          -11,
+          -10,
+          -9,
+          -8,
+          -7,
+          -6,
+          -5,
+          -4,
+          -3,
+          -2,
+          -1
+        ],
+        "type": "integer",
+        "format": "int32"
+      },
+      "SMP.Framework.Library.Enumeration.BlacklistOperationType": {
+        "enum": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "type": "integer",
+        "format": "int32"
+      },
+      "SMP.Framework.Library.Enumeration.BlacklistReason": {
+        "enum": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        "type": "integer",
+        "format": "int32"
+      },
+      "SMP.Framework.Library.Enumeration.Campaign.ChannelTypes": {
+        "enum": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8
+        ],
+        "type": "integer",
+        "format": "int32"
+      },
+      "SMP.Framework.Library.Enumeration.Campaign.MessageStatusTypes": {
+        "enum": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          8,
+          -12,
+          -11,
+          -10,
+          -9,
+          -8,
+          -7,
+          -6,
+          -5,
+          -4,
+          -3,
+          -2,
+          -1
+        ],
+        "type": "integer",
+        "format": "int32"
+      },
+      "SMP.Framework.Library.Enumeration.Campaign.SendingStatusTypes": {
+        "enum": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          -5,
+          -4,
+          -3,
+          -2,
+          -1
+        ],
+        "type": "integer",
+        "format": "int32"
+      },
+      "SMP.Framework.Library.Enumeration.ClaimGroup": {
+        "enum": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19,
+          20,
+          21,
+          22,
+          23,
+          24,
+          25,
+          26,
+          27,
+          28,
+          29,
+          30,
+          31,
+          32,
+          33,
+          34,
+          35,
+          36,
+          37,
+          38,
+          39,
+          40,
+          41,
+          42,
+          43,
+          44,
+          45,
+          46,
+          47,
+          48,
+          49,
+          50,
+          51,
+          300,
+          301,
+          302,
+          303,
+          304,
+          305,
+          400,
+          401,
+          402,
+          403,
+          404,
+          405,
+          406,
+          500,
+          501,
+          502,
+          503,
+          504,
+          505,
+          506,
+          507,
+          508,
+          509,
+          510,
+          511,
+          512,
+          513,
+          514,
+          515,
+          516,
+          517,
+          518,
+          519,
+          520,
+          521
+        ],
+        "type": "integer",
+        "format": "int32"
+      },
+      "SMP.Framework.Library.Enumeration.DatabaseType": {
+        "enum": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ],
+        "type": "integer",
+        "format": "int32",
+        "description": "Database engine information."
+      },
+      "SMP.Framework.Library.Enumeration.RoleType": {
+        "enum": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "type": "integer",
+        "format": "int32"
+      },
+      "SMP.Framework.Library.LicenseDetail.Channel": {
+        "type": "object",
+        "properties": {
+          "otpSms": {
+            "$ref": "#/components/schemas/SMP.Framework.Library.LicenseDetail.OtpSms"
+          }
+        },
+        "additionalProperties": false
+      },
+      "SMP.Framework.Library.LicenseDetail.Features": {
+        "type": "object",
+        "additionalProperties": false
+      },
+      "SMP.Framework.Library.LicenseDetail.OtpManagerLicenseDetail": {
+        "type": "object",
+        "properties": {
+          "channel": {
+            "$ref": "#/components/schemas/SMP.Framework.Library.LicenseDetail.Channel"
+          }
+        },
+        "additionalProperties": false
+      },
+      "SMP.Framework.Library.LicenseDetail.OtpSms": {
+        "type": "object",
+        "properties": {
+          "active": {
+            "type": "boolean"
+          },
+          "features": {
+            "$ref": "#/components/schemas/SMP.Framework.Library.LicenseDetail.Features"
+          },
+          "package": {
+            "$ref": "#/components/schemas/SMP.Framework.Library.LicenseDetail.Package"
+          }
+        },
+        "additionalProperties": false
+      },
+      "SMP.Framework.Library.LicenseDetail.Package": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "packageType": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "smsCount": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "securitySchemes": {
+      "oauth2": {
+        "type": "oauth2",
+        "flows": {
+          "password": {
+            "authorizationUrl": "https://api.smartmessage.com/identityserver/connect/authorize",
+            "tokenUrl": "https://api.smartmessage.com/identityserver/connect/token",
+            "scopes": {}
+          }
+        }
+      }
+    }
+  },
+  "security": [
+    {
+      "oauth2": []
+    }
+  ]
+}

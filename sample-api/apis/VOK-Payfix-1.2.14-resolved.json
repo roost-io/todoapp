@@ -1,0 +1,3195 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "API for Payfix",
+    "description": "This is the sanitized version of the vastly invalid and unusable official\nspecification [Payfix delivers](https://portal.payfix.app/api/documentation).\n\n`¯\\_(ツ)_/¯`\n",
+    "version": "1.2.14"
+  },
+  "servers": [
+    {
+      "url": "https://virtserver.swaggerhub.com/VOK/Payfix/1.2.14",
+      "description": "SwaggerHub API Auto Mocking"
+    },
+    {
+      "url": "https://portal.payfix.app",
+      "description": "Production Server"
+    }
+  ],
+  "paths": {
+    "/api/customer/crm/create": {
+      "post": {
+        "tags": [
+          "Customers"
+        ],
+        "summary": "Create new Crm User",
+        "description": "Create new Crm User",
+        "operationId": "postCustomerCrmCreate",
+        "parameters": [
+          {
+            "name": "company",
+            "in": "query",
+            "required": true,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "integer",
+              "example": 23495
+            }
+          },
+          {
+            "name": "email",
+            "in": "query",
+            "required": true,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string",
+              "example": "email"
+            }
+          },
+          {
+            "name": "first_name",
+            "in": "query",
+            "required": true,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string",
+              "example": "first_name"
+            }
+          },
+          {
+            "name": "last_name",
+            "in": "query",
+            "required": true,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string",
+              "example": "last_name"
+            }
+          },
+          {
+            "name": "address",
+            "in": "query",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string",
+              "example": "address"
+            }
+          },
+          {
+            "name": "zip_code",
+            "in": "query",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string",
+              "example": "zip_code"
+            }
+          },
+          {
+            "name": "city",
+            "in": "query",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string",
+              "example": "city"
+            }
+          },
+          {
+            "name": "iban",
+            "in": "query",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string",
+              "example": "iban"
+            }
+          },
+          {
+            "name": "phone_number",
+            "in": "query",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string",
+              "example": "0123456789"
+            }
+          },
+          {
+            "name": "description",
+            "in": "query",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string",
+              "example": "description"
+            }
+          },
+          {
+            "name": "external_id",
+            "in": "query",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "integer",
+              "example": 1
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Create new Crm User",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/inline_response_200"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "OauthPW": []
+          }
+        ]
+      }
+    },
+    "/api/customer/qrCode/create": {
+      "post": {
+        "tags": [
+          "Customers"
+        ],
+        "summary": "Create new QrCode",
+        "description": "Create new QrCode",
+        "operationId": "postCustomerQrCodeCreate",
+        "parameters": [
+          {
+            "name": "company",
+            "in": "query",
+            "required": true,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "integer",
+              "example": 23495
+            }
+          },
+          {
+            "name": "categoryId",
+            "in": "query",
+            "required": true,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "integer",
+              "example": 1
+            }
+          },
+          {
+            "name": "code",
+            "in": "query",
+            "required": true,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string",
+              "example": "Code"
+            }
+          },
+          {
+            "name": "pin",
+            "in": "query",
+            "required": true,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "integer",
+              "example": 1234
+            }
+          },
+          {
+            "name": "info",
+            "in": "query",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string",
+              "example": "Info/Name"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Create new QrCode",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/inline_response_200_1"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "OauthPW": []
+          }
+        ]
+      }
+    },
+    "/api/customer/restaurantTableGroup": {
+      "get": {
+        "tags": [
+          "Customers"
+        ],
+        "summary": "Return items of Customer Restaurant Table Groups",
+        "description": "Return items of Customer Restaurant Table Groups",
+        "operationId": "getCustomerRestaurantTableGroup",
+        "parameters": [
+          {
+            "name": "company",
+            "in": "query",
+            "required": true,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "integer",
+              "example": 23495
+            }
+          },
+          {
+            "name": "from",
+            "in": "query",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string",
+              "format": "date-time",
+              "example": "2023-08-27T16:28:37+02:00"
+            }
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "integer",
+              "example": 0
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "integer",
+              "example": 25
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get Customer Restaurant Table Groups",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/inline_response_200_2"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "OauthPW": []
+          }
+        ]
+      }
+    },
+    "/api/customer/restaurantTableGroup/create": {
+      "post": {
+        "tags": [
+          "Customers"
+        ],
+        "summary": "Create new Restaurant Table Group",
+        "description": "Create new Restaurant Table Group",
+        "operationId": "postCustomerRestaurantTableGroupCreate",
+        "parameters": [
+          {
+            "name": "company",
+            "in": "query",
+            "required": true,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "integer",
+              "example": 23495
+            }
+          },
+          {
+            "name": "merchantId",
+            "in": "query",
+            "required": true,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "integer",
+              "example": 1
+            }
+          },
+          {
+            "name": "name",
+            "in": "query",
+            "required": true,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string",
+              "example": "Name"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Create new Restaurant Table",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RestaurantTableGroupCreate"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "OauthPW": []
+          }
+        ]
+      }
+    },
+    "/api/customer/restaurantTableGroup/edit": {
+      "put": {
+        "tags": [
+          "Customers"
+        ],
+        "summary": "Edit Restaurant Table Group",
+        "description": "Edit Restaurant Table Group",
+        "operationId": "putCustomerRestaurantTableGroupEdit",
+        "parameters": [
+          {
+            "name": "company",
+            "in": "query",
+            "required": true,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "integer",
+              "example": 23495
+            }
+          },
+          {
+            "name": "tableGroupId",
+            "in": "query",
+            "required": true,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "integer",
+              "example": 1
+            }
+          },
+          {
+            "name": "merchantId",
+            "in": "query",
+            "required": true,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "integer",
+              "example": 1
+            }
+          },
+          {
+            "name": "name",
+            "in": "query",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string",
+              "example": "Name"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Edit new Restaurant Table",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RestaurantTableGroupCreate"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "OauthPW": []
+          }
+        ]
+      }
+    },
+    "/api/customer/restaurantTableGroup/archive": {
+      "post": {
+        "tags": [
+          "Customers"
+        ],
+        "summary": "Archive Restaurant Table Group",
+        "description": "Archive Restaurant Table Group",
+        "operationId": "postCustomerRestaurantTableGroupArchive",
+        "parameters": [
+          {
+            "name": "company",
+            "in": "query",
+            "required": true,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "integer",
+              "example": 23495
+            }
+          },
+          {
+            "name": "tableGroupId",
+            "in": "query",
+            "required": true,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "integer",
+              "example": 1
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Archive Restaurant Table Group",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/inline_response_200_3"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "OauthPW": []
+          }
+        ]
+      }
+    },
+    "/api/customer/restaurantTableGroup/assignPointOfSale": {
+      "post": {
+        "tags": [
+          "Customers"
+        ],
+        "summary": "Assign Restaurant Table Group To Point of Sale",
+        "description": "Assign Restaurant Table Group To Point of Sale",
+        "operationId": "postCustomerRestaurantTableGroupAssignPointOfSale",
+        "parameters": [
+          {
+            "name": "company",
+            "in": "query",
+            "required": true,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "integer",
+              "example": 23495
+            }
+          },
+          {
+            "name": "pointOfSaleId",
+            "in": "query",
+            "required": true,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "integer",
+              "example": 1
+            }
+          },
+          {
+            "name": "tableGroupId",
+            "in": "query",
+            "required": true,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "integer",
+              "example": 1
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Assign Restaurant Table Group To Point of Sale",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "example": "Tischgruppe wurde erfolgreich zu Verkaufstelle hinzugefügt."
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "OauthPW": []
+          }
+        ]
+      }
+    },
+    "/api/customer/restaurantTableGroup/unassignPointOfSale": {
+      "post": {
+        "tags": [
+          "Customers"
+        ],
+        "summary": "Unassign Restaurant Table Group from Point of Sale",
+        "description": "Unassign Restaurant Table Group from Point of Sale",
+        "operationId": "postCustomerRestaurantTableGroupUnassignPointOfSale",
+        "parameters": [
+          {
+            "name": "company",
+            "in": "query",
+            "required": true,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "integer",
+              "example": 23495
+            }
+          },
+          {
+            "name": "pointOfSaleId",
+            "in": "query",
+            "required": true,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "integer",
+              "example": 1
+            }
+          },
+          {
+            "name": "tableGroupId",
+            "in": "query",
+            "required": true,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "integer",
+              "example": 1
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Unassign Restaurant Table Group from Point of Sale",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/inline_response_200_3"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "OauthPW": []
+          }
+        ]
+      }
+    },
+    "/api/customer/pointOfSale/restaurantTableGroups": {
+      "get": {
+        "tags": [
+          "Customers"
+        ],
+        "summary": "Get Active Restaurant Table Groups of Point of Sale",
+        "description": "Get Active Restaurant Table Groups of Point of Sale",
+        "operationId": "getCustomerPointOfSaleRestaurantTableGroups",
+        "parameters": [
+          {
+            "name": "company",
+            "in": "query",
+            "required": true,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "integer",
+              "example": 23495
+            }
+          },
+          {
+            "name": "pointOfSaleId",
+            "in": "query",
+            "required": true,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "integer",
+              "example": 1
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get Active Restaurant Table Groups of Point of Sale",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/inline_response_200_2"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "OauthPW": []
+          }
+        ]
+      }
+    },
+    "/api/customer/restaurantTables": {
+      "get": {
+        "tags": [
+          "Customers"
+        ],
+        "summary": "Return items of Customer Restaurant Tables",
+        "description": "Return items of Customer Restaurant Tables",
+        "operationId": "getCustomerRestaurantTables",
+        "parameters": [
+          {
+            "name": "company",
+            "in": "query",
+            "required": true,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "integer",
+              "example": 23495
+            }
+          },
+          {
+            "name": "from",
+            "in": "query",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string",
+              "format": "date-time",
+              "example": "2023-08-27T16:28:37+02:00"
+            }
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "integer",
+              "example": 0
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "integer",
+              "example": 25
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get Customer Restaurant Tables",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/inline_response_200_4"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "OauthPW": []
+          }
+        ]
+      }
+    },
+    "/api/customer/restaurantTable/create": {
+      "post": {
+        "tags": [
+          "Customers"
+        ],
+        "summary": "Create new Restaurant Table",
+        "description": "Create new Restaurant Table",
+        "operationId": "postCustomerRestaurantTableCreate",
+        "parameters": [
+          {
+            "name": "company",
+            "in": "query",
+            "required": true,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "integer",
+              "example": 23495
+            }
+          },
+          {
+            "name": "tableGroupId",
+            "in": "query",
+            "required": true,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "integer",
+              "example": 1
+            }
+          },
+          {
+            "name": "number",
+            "in": "query",
+            "required": true,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "integer",
+              "example": 1234
+            }
+          },
+          {
+            "name": "name",
+            "in": "query",
+            "required": true,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string",
+              "example": "Name"
+            }
+          },
+          {
+            "name": "externalId",
+            "in": "query",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "integer",
+              "example": 1
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Create new Restaurant Table",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/restaurantTables_Create"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "OauthPW": []
+          }
+        ]
+      }
+    },
+    "/api/customer/restaurantTable/edit": {
+      "put": {
+        "tags": [
+          "Customers"
+        ],
+        "summary": "Edit Restaurant Table",
+        "description": "Edit Restaurant Table",
+        "operationId": "putCustomerRestaurantTableEdit",
+        "parameters": [
+          {
+            "name": "company",
+            "in": "query",
+            "required": true,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "integer",
+              "example": 23495
+            }
+          },
+          {
+            "name": "tableId",
+            "in": "query",
+            "required": true,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "integer",
+              "example": 1
+            }
+          },
+          {
+            "name": "number",
+            "in": "query",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "integer",
+              "example": 1234
+            }
+          },
+          {
+            "name": "name",
+            "in": "query",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string",
+              "example": "Name"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Edit new Restaurant Table",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/restaurantTables_Create"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "OauthPW": []
+          }
+        ]
+      }
+    },
+    "/api/customer/restaurantTable/check": {
+      "get": {
+        "tags": [
+          "Customers"
+        ],
+        "summary": "Check if Table is Open",
+        "description": "Check if Table is Open",
+        "operationId": "getCustomerRestaurantTableCheck",
+        "parameters": [
+          {
+            "name": "company",
+            "in": "query",
+            "required": true,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "integer",
+              "example": 23495
+            }
+          },
+          {
+            "name": "tableId",
+            "in": "query",
+            "required": true,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "integer",
+              "example": 1
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Create new Restaurant Table",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RestaurantTableCheckOpen"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "OauthPW": []
+          }
+        ]
+      }
+    },
+    "/api/customer/restaurantTable/archive": {
+      "post": {
+        "tags": [
+          "Customers"
+        ],
+        "summary": "Archive Restaurant Table",
+        "description": "Archive Restaurant Table",
+        "operationId": "postCustomerRestaurantTableArchive",
+        "parameters": [
+          {
+            "name": "company",
+            "in": "query",
+            "required": true,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "integer",
+              "example": 23495
+            }
+          },
+          {
+            "name": "tableId",
+            "in": "query",
+            "required": true,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "integer",
+              "example": 1
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Archive Restaurant Table",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "example": "Tisch wurde erfolgreich archiviert."
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "OauthPW": []
+          }
+        ]
+      }
+    },
+    "/api/customer/transactions": {
+      "get": {
+        "tags": [
+          "Customers"
+        ],
+        "summary": "Return items of CustomerTransaction",
+        "description": "Return items of CustomerTransaction",
+        "operationId": "getCustomerTransactions",
+        "parameters": [
+          {
+            "name": "company",
+            "in": "query",
+            "required": true,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "integer",
+              "example": 23495
+            }
+          },
+          {
+            "name": "from",
+            "in": "query",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string",
+              "format": "date-time",
+              "example": "2023-11-27T11:28:37+01:00"
+            }
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "integer",
+              "example": 0
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "integer",
+              "example": 25
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get CustomerTransaction",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/inline_response_200_5"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "OauthPW": []
+          }
+        ]
+      }
+    },
+    "/api/customer/occasions": {
+      "get": {
+        "tags": [
+          "Customers"
+        ],
+        "summary": "Return items of CustomerOccasions",
+        "description": "Return items of CustomerOccasions",
+        "operationId": "getCustomerOccasions",
+        "parameters": [
+          {
+            "name": "company",
+            "in": "query",
+            "required": true,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "integer",
+              "example": 23495
+            }
+          },
+          {
+            "name": "from",
+            "in": "query",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string",
+              "format": "date-time",
+              "example": "2023-08-27T16:28:37+02:00"
+            }
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "integer",
+              "example": 0
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "integer",
+              "example": 25
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get All Customer Occasions Fields",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/inline_response_200_6"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "OauthPW": []
+          }
+        ]
+      }
+    },
+    "/api/customer/articleGroups": {
+      "get": {
+        "tags": [
+          "Customers"
+        ],
+        "summary": "Return items of Customer Article Groups",
+        "description": "Return items of Customer Article Groups",
+        "operationId": "getCustomerArticleGroups",
+        "parameters": [
+          {
+            "name": "company",
+            "in": "query",
+            "required": true,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "integer",
+              "example": 23495
+            }
+          },
+          {
+            "name": "from",
+            "in": "query",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string",
+              "format": "date-time",
+              "example": "2023-08-27T16:28:37+02:00"
+            }
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "integer",
+              "example": 0
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "integer",
+              "example": 25
+            }
+          },
+          {
+            "name": "merchant",
+            "in": "query",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "integer",
+              "example": 1144
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get Customer Article Groups",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/inline_response_200_7"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "OauthPW": []
+          }
+        ]
+      }
+    },
+    "/api/customer/articles": {
+      "get": {
+        "tags": [
+          "Customers"
+        ],
+        "summary": "Return items of Customer Articles",
+        "description": "Return items of Customer Article",
+        "operationId": "getCustomerArticles",
+        "parameters": [
+          {
+            "name": "company",
+            "in": "query",
+            "required": true,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "integer",
+              "example": 23495
+            }
+          },
+          {
+            "name": "from",
+            "in": "query",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string",
+              "format": "date-time",
+              "example": "2023-08-27T16:28:37+02:00"
+            }
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "integer",
+              "example": 0
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "integer",
+              "example": 25
+            }
+          },
+          {
+            "name": "merchant",
+            "in": "query",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "integer",
+              "example": 1144
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get Customer Articles",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/inline_response_200_8"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "OauthPW": []
+          }
+        ]
+      }
+    },
+    "/api/customer/articleAllocations": {
+      "get": {
+        "tags": [
+          "Customers"
+        ],
+        "summary": "Return items of Customer Article Allocation",
+        "description": "Return items of Customer Article Allocation",
+        "operationId": "getCustomerArticleAllocations",
+        "parameters": [
+          {
+            "name": "company",
+            "in": "query",
+            "required": true,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "integer",
+              "example": 23495
+            }
+          },
+          {
+            "name": "from",
+            "in": "query",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string",
+              "format": "date-time",
+              "example": "2023-08-27T16:28:37+02:00"
+            }
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "integer",
+              "example": 0
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "integer",
+              "example": 25
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get Customer Article Allocations",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/inline_response_200_9"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "OauthPW": []
+          }
+        ]
+      }
+    },
+    "/api/customer/devices": {
+      "get": {
+        "tags": [
+          "Customers"
+        ],
+        "summary": "Return items of Customer Devices",
+        "description": "Return items of Customer Devices",
+        "operationId": "getCustomerDevices",
+        "parameters": [
+          {
+            "name": "company",
+            "in": "query",
+            "required": true,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "integer",
+              "example": 23495
+            }
+          },
+          {
+            "name": "from",
+            "in": "query",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string",
+              "format": "date-time",
+              "example": "2023-08-27T16:28:37+02:00"
+            }
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "integer",
+              "example": 0
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "integer",
+              "example": 25
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get Customer Devices",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/inline_response_200_10"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "OauthPW": []
+          }
+        ]
+      }
+    },
+    "/api/customer/pointOfSales": {
+      "get": {
+        "tags": [
+          "Customers"
+        ],
+        "summary": "Return items of Customer point of sales",
+        "description": "Return items of Customer point of sales",
+        "operationId": "getCustomerPointOfSales",
+        "parameters": [
+          {
+            "name": "company",
+            "in": "query",
+            "required": true,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "integer",
+              "example": 23495
+            }
+          },
+          {
+            "name": "from",
+            "in": "query",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string",
+              "format": "date-time",
+              "example": "2023-08-27T16:28:37+02:00"
+            }
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "integer",
+              "example": 0
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "integer",
+              "example": 25
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get Customer point of sales",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/inline_response_200_11"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "OauthPW": []
+          }
+        ]
+      }
+    },
+    "/api/customer/merchants": {
+      "get": {
+        "tags": [
+          "Customers"
+        ],
+        "summary": "Return items of Customer Merchants",
+        "description": "Return items of Customer Merchants",
+        "operationId": "getCustomerMerchants",
+        "parameters": [
+          {
+            "name": "company",
+            "in": "query",
+            "required": true,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "integer",
+              "example": 23495
+            }
+          },
+          {
+            "name": "from",
+            "in": "query",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string",
+              "format": "date-time",
+              "example": "2023-08-27T16:28:37+02:00"
+            }
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "integer",
+              "example": 0
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "integer",
+              "example": 25
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get Customer Merchants",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/inline_response_200_12"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "OauthPW": []
+          }
+        ]
+      }
+    },
+    "/api/customer/company": {
+      "get": {
+        "tags": [
+          "Customers"
+        ],
+        "summary": "Return Customer Company Information",
+        "description": "Return Customer Company Information",
+        "operationId": "getCustomerCompany",
+        "parameters": [
+          {
+            "name": "company",
+            "in": "query",
+            "required": true,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "integer",
+              "example": 23495
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get All Company Information",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/inline_response_200_13"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "OauthPW": []
+          }
+        ]
+      }
+    },
+    "/api/customer/divisions": {
+      "get": {
+        "tags": [
+          "Customers"
+        ],
+        "summary": "Return Customer Divisions",
+        "description": "Return Customer Divisions",
+        "operationId": "getCustomerDivisions",
+        "parameters": [
+          {
+            "name": "company",
+            "in": "query",
+            "required": true,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "integer",
+              "example": 23495
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get All Divisions",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/inline_response_200_14"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "OauthPW": []
+          }
+        ]
+      }
+    },
+    "/api/customer/openRestaurantTables": {
+      "get": {
+        "tags": [
+          "Customers"
+        ],
+        "summary": "Return All Open Restaurant Tables from a Point of Sale",
+        "description": "Return All Open Restaurant Tables from a Point of Sale",
+        "operationId": "getCustomerOpenRestaurantTables",
+        "parameters": [
+          {
+            "name": "company",
+            "in": "query",
+            "required": true,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "integer",
+              "example": 23495
+            }
+          },
+          {
+            "name": "RestaurantTableGroupId",
+            "in": "query",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "integer",
+              "example": 1357
+            }
+          },
+          {
+            "name": "pointOfSaleId",
+            "in": "query",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "integer",
+              "example": 3839
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Return All Open Restaurant Tables from a Point of Sale",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/OpenRestaurantTable"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "OauthPW": []
+          }
+        ]
+      }
+    },
+    "/api/customer/dailyClosings": {
+      "get": {
+        "tags": [
+          "Customers"
+        ],
+        "summary": "Return Customer DailyClosings",
+        "description": "Return Customer DailyClosings",
+        "operationId": "getCustomerDailyClosings",
+        "parameters": [
+          {
+            "name": "company",
+            "in": "query",
+            "required": true,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "integer",
+              "example": 23495
+            }
+          },
+          {
+            "name": "from",
+            "in": "query",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string",
+              "format": "date-time",
+              "example": "2023-08-27T16:28:37+02:00"
+            }
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "integer",
+              "example": 0
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "integer",
+              "example": 25
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get Customer Merchants",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/inline_response_200_15"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "OauthPW": []
+          }
+        ]
+      }
+    },
+    "/api/paymentSolution/transactions": {
+      "get": {
+        "tags": [
+          "Payment Solution"
+        ],
+        "summary": "Return items of Payment Solution",
+        "description": "Return items of Payment Solution",
+        "operationId": "getPaymentSolutionTransactions",
+        "parameters": [
+          {
+            "name": "from (hours in the past)",
+            "in": "query",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "integer",
+              "example": 12
+            }
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "integer",
+              "example": 0
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "integer",
+              "example": 25
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get Payment Solution",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/inline_response_200_16"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/Transaction"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "422": {
+            "description": "Unprocessable Entity"
+          }
+        },
+        "security": [
+          {
+            "OauthPW": []
+          }
+        ]
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "paginatedResponse": {
+        "required": [
+          "entries",
+          "more"
+        ],
+        "type": "object",
+        "properties": {
+          "entries": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {}
+            }
+          },
+          "more": {
+            "type": "boolean",
+            "description": "Determines that are there any more records remains to be fetched."
+          }
+        }
+      },
+      "ArticleGroup": {
+        "required": [
+          "external_article_group_id",
+          "id",
+          "merchant",
+          "merchant_id",
+          "name"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "example": 5761
+          },
+          "name": {
+            "type": "string",
+            "example": "Vorspeisen"
+          },
+          "merchant_id": {
+            "type": "integer",
+            "example": 1144
+          },
+          "external_article_group_id": {
+            "type": "integer",
+            "nullable": true
+          },
+          "merchant": {
+            "$ref": "#/components/schemas/ArticleGroup_merchant"
+          }
+        }
+      },
+      "Article": {
+        "required": [
+          "articleGroup",
+          "article_group_id",
+          "division",
+          "division_id",
+          "external_article_id",
+          "id",
+          "merchant_id",
+          "mwst",
+          "mwstTakeaway",
+          "name",
+          "name_in_checkout",
+          "price"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "example": 39688
+          },
+          "name": {
+            "type": "string",
+            "example": "Grün-Tee"
+          },
+          "merchant_id": {
+            "type": "integer",
+            "example": 1144
+          },
+          "article_group_id": {
+            "type": "integer",
+            "example": 5774
+          },
+          "division_id": {
+            "type": "integer",
+            "example": 5774
+          },
+          "name_in_checkout": {
+            "type": "string",
+            "example": "Grün-Tee"
+          },
+          "price": {
+            "type": "number",
+            "example": 6
+          },
+          "external_article_id": {
+            "type": "integer",
+            "nullable": true
+          },
+          "mwst": {
+            "$ref": "#/components/schemas/Article_mwst"
+          },
+          "mwstTakeaway": {
+            "$ref": "#/components/schemas/Article_mwstTakeaway"
+          },
+          "articleGroup": {
+            "$ref": "#/components/schemas/ArticleArticleGroup"
+          },
+          "division": {
+            "$ref": "#/components/schemas/ArticleDivision"
+          }
+        }
+      },
+      "ArticleAllocation": {
+        "type": "object",
+        "properties": {
+          "merchant_id": {
+            "type": "integer"
+          },
+          "merchant_name": {
+            "type": "string"
+          },
+          "point_of_sale_id": {
+            "type": "integer"
+          },
+          "point_of_sale_name": {
+            "type": "string"
+          },
+          "article_id": {
+            "type": "integer"
+          },
+          "article_name": {
+            "type": "string"
+          },
+          "article_group_id": {
+            "type": "integer"
+          },
+          "article_group_name": {
+            "type": "string"
+          },
+          "article_name_on_checkout": {
+            "type": "string"
+          },
+          "article_price": {
+            "type": "number"
+          }
+        }
+      },
+      "Company": {
+        "required": [
+          "currency",
+          "external_id",
+          "id",
+          "mwst_external_id",
+          "name"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "example": 23495
+          },
+          "name": {
+            "type": "string",
+            "example": "Impact Hub Zuerich AG"
+          },
+          "currency": {
+            "type": "string",
+            "example": "CHF"
+          },
+          "external_id": {
+            "type": "integer",
+            "nullable": true
+          },
+          "mwst_external_id": {
+            "type": "integer",
+            "nullable": true
+          }
+        }
+      },
+      "Crm": {
+        "type": "object",
+        "properties": {
+          "first_name": {
+            "type": "string"
+          },
+          "last_name": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "company_id": {
+            "type": "string"
+          },
+          "address": {
+            "type": "string"
+          },
+          "zip_code": {
+            "type": "string"
+          },
+          "city": {
+            "type": "string"
+          },
+          "iban": {
+            "type": "string"
+          },
+          "id": {
+            "type": "integer"
+          }
+        }
+      },
+      "DailyClosing": {
+        "required": [
+          "booking_id",
+          "cancellation_count",
+          "company_id",
+          "date",
+          "device_id",
+          "employee_id",
+          "event_id",
+          "id",
+          "order_count",
+          "point_of_sale_id"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "date": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "company_id": {
+            "type": "integer",
+            "example": 23495
+          },
+          "device_id": {
+            "type": "integer",
+            "example": 24718
+          },
+          "event_id": {
+            "type": "integer",
+            "example": 24594
+          },
+          "employee_id": {
+            "type": "integer",
+            "example": 5618
+          },
+          "point_of_sale_id": {
+            "type": "integer"
+          },
+          "order_count": {
+            "type": "integer",
+            "example": 48
+          },
+          "cancellation_count": {
+            "type": "integer"
+          },
+          "booking_id": {
+            "type": "string",
+            "example": "5eb92e7e-0512-4eea-a29b-8aabc18b53ce"
+          }
+        }
+      },
+      "Device": {
+        "required": [
+          "deviceName",
+          "externalId",
+          "id",
+          "pointOfSaleId",
+          "pointOfSaleName",
+          "registrationStatus",
+          "unregisteredAt"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "pointOfSaleId": {
+            "type": "integer"
+          },
+          "deviceName": {
+            "type": "string"
+          },
+          "registrationStatus": {
+            "type": "string",
+            "enum": [
+              "registered",
+              "unRegistered"
+            ]
+          },
+          "unregisteredAt": {
+            "type": "string",
+            "format": "date"
+          },
+          "pointOfSaleName": {
+            "type": "string"
+          },
+          "externalId": {
+            "type": "integer",
+            "nullable": true
+          }
+        }
+      },
+      "Division": {
+        "type": "object",
+        "properties": {
+          "external_id": {
+            "type": "integer"
+          },
+          "merchant_id": {
+            "type": "integer"
+          },
+          "name": {
+            "type": "string"
+          },
+          "deleted_at": {
+            "type": "string"
+          }
+        }
+      },
+      "Merchant": {
+        "required": [
+          "city",
+          "company",
+          "companyId",
+          "country",
+          "externalId",
+          "id",
+          "name",
+          "phone_number",
+          "plz",
+          "street"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "example": 1146
+          },
+          "externalId": {
+            "type": "integer",
+            "nullable": true
+          },
+          "companyId": {
+            "type": "integer",
+            "example": 23495
+          },
+          "name": {
+            "type": "string",
+            "example": "Café Auer & Co (CA&C)"
+          },
+          "company": {
+            "type": "string",
+            "example": "Impact Hub Zürich AG"
+          },
+          "phone_number": {
+            "type": "string",
+            "example": "+41 (0)44 273 58 79"
+          },
+          "street": {
+            "type": "string",
+            "example": "Sihlquai 131"
+          },
+          "plz": {
+            "type": "string",
+            "example": "8005"
+          },
+          "city": {
+            "type": "string",
+            "example": "Zürich"
+          },
+          "country": {
+            "type": "string",
+            "example": "Schweiz"
+          }
+        }
+      },
+      "Occasion": {
+        "required": [
+          "external_id",
+          "name"
+        ],
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "example": "Finest Auer Nr. 7"
+          },
+          "external_id": {
+            "type": "integer",
+            "nullable": true
+          }
+        }
+      },
+      "OpenRestaurantTable": {
+        "required": [
+          "id",
+          "restaurant_table_id"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "restaurant_table_id": {
+            "type": "integer"
+          }
+        }
+      },
+      "PointOfSale": {
+        "required": [
+          "id",
+          "merchantName",
+          "merchant_id",
+          "name",
+          "pin",
+          "qrCode"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "name": {
+            "type": "string",
+            "example": "Hostdesk (CL)"
+          },
+          "merchant_id": {
+            "type": "integer",
+            "example": 1148
+          },
+          "qrCode": {
+            "type": "string"
+          },
+          "pin": {
+            "type": "string",
+            "example": "12345678"
+          },
+          "merchantName": {
+            "type": "string",
+            "example": "Colab (CL)"
+          }
+        }
+      },
+      "QrCode": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string"
+          },
+          "pin": {
+            "type": "string"
+          },
+          "info": {
+            "type": "string"
+          },
+          "qr_code_category_id": {
+            "type": "string"
+          },
+          "id": {
+            "type": "integer"
+          }
+        }
+      },
+      "RestaurantTableGroup": {
+        "required": [
+          "has_integrated_printer",
+          "id",
+          "merchant_id",
+          "name"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "example": 777
+          },
+          "name": {
+            "type": "string",
+            "example": "Kulturelle Events (KE)"
+          },
+          "merchant_id": {
+            "type": "integer",
+            "example": 1144
+          },
+          "has_integrated_printer": {
+            "type": "integer",
+            "example": 0
+          }
+        }
+      },
+      "RestaurantTableGroupArchive": {},
+      "RestaurantTableGroupCreate": {
+        "required": [
+          "created_at",
+          "id",
+          "merchant_id",
+          "name",
+          "updated_at"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "example": 777
+          },
+          "name": {
+            "type": "string",
+            "example": "Kulturelle Events (KE)"
+          },
+          "merchant_id": {
+            "type": "integer",
+            "example": 1144
+          },
+          "updated_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "restaurantTables_Archive": {},
+      "RestaurantTableCheckOpen": {},
+      "RestaurantTable": {
+        "required": [
+          "external_id",
+          "id",
+          "name",
+          "number",
+          "restaurant_table_group_id",
+          "restaurant_table_group_name"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "example": 8288
+          },
+          "external_id": {
+            "type": "integer",
+            "nullable": true
+          },
+          "number": {
+            "type": "string",
+            "example": "51"
+          },
+          "name": {
+            "type": "string",
+            "example": "Weekender"
+          },
+          "restaurant_table_group_id": {
+            "type": "integer",
+            "example": 774
+          },
+          "restaurant_table_group_name": {
+            "type": "string",
+            "example": "Café Auer & Co (CA&C)"
+          }
+        }
+      },
+      "restaurantTables_Create": {
+        "required": [
+          "created_at",
+          "external_id",
+          "id",
+          "name",
+          "number",
+          "restaurant_table_group_id",
+          "updated_at"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "example": 8288
+          },
+          "external_id": {
+            "type": "string",
+            "format": "^\\d+$",
+            "nullable": true
+          },
+          "number": {
+            "type": "string",
+            "example": "51"
+          },
+          "name": {
+            "type": "string",
+            "example": "Weekender"
+          },
+          "restaurant_table_group_id": {
+            "type": "integer",
+            "example": 774
+          },
+          "updated_at": {
+            "type": "string"
+          },
+          "created_at": {
+            "type": "string"
+          }
+        }
+      },
+      "Transaction": {
+        "required": [
+          "anzahl",
+          "bookingId",
+          "cardPaymentDetail",
+          "company",
+          "device",
+          "employee",
+          "event",
+          "id",
+          "konto",
+          "merchant",
+          "merchantId",
+          "occasion",
+          "occasionGroup",
+          "pointOfSale",
+          "pointOfSaleId",
+          "restaurantTableId",
+          "teiltyp",
+          "totalPrice",
+          "transactionDetails",
+          "zahlart",
+          "zahlungszeit"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "example": 10119281
+          },
+          "occasion": {
+            "type": "string",
+            "example": "Cafè Auer & Co"
+          },
+          "occasionGroup": {
+            "type": "string",
+            "example": "Café Auer & Co (CA&C)"
+          },
+          "company": {
+            "type": "string",
+            "example": "Impact Hub Zuerich AG"
+          },
+          "event": {
+            "type": "string",
+            "example": "Impact Hub Zuerich"
+          },
+          "pointOfSale": {
+            "type": "string",
+            "example": "Theke A&C (CA&C)"
+          },
+          "pointOfSaleId": {
+            "type": "integer",
+            "example": 3837
+          },
+          "restaurantTableId": {
+            "type": "integer",
+            "nullable": true,
+            "example": 7545
+          },
+          "merchant": {
+            "type": "string",
+            "example": "Café Auer & Co (CA&C)"
+          },
+          "merchantId": {
+            "type": "integer",
+            "example": 1144
+          },
+          "device": {
+            "type": "string",
+            "example": "Restaurant-Bar KW (RKW&C)_13"
+          },
+          "employee": {
+            "type": "string",
+            "example": "Florian Lechthaler"
+          },
+          "bookingId": {
+            "type": "string",
+            "example": "9922aa2c-ed64-4067-9b26-2c07443362b8"
+          },
+          "zahlart": {
+            "type": "string",
+            "example": "Pay"
+          },
+          "konto": {
+            "type": "string",
+            "example": "WALLEE_TERMINAL"
+          },
+          "teiltyp": {
+            "type": "string",
+            "example": "NotPartial"
+          },
+          "zahlungszeit": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "anzahl": {
+            "type": "integer",
+            "example": 2
+          },
+          "totalPrice": {
+            "type": "number",
+            "example": 2.99
+          },
+          "transactionDetails": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TransactionDetail"
+            }
+          },
+          "cardPaymentDetail": {
+            "$ref": "#/components/schemas/CardPaymentDetail"
+          }
+        }
+      },
+      "ArticleArticleGroup": {
+        "required": [
+          "external_article_group_id",
+          "merchant",
+          "name"
+        ],
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "external_article_group_id": {
+            "type": "integer",
+            "nullable": true
+          },
+          "merchant": {
+            "$ref": "#/components/schemas/ArticleArticleGroup_merchant"
+          }
+        }
+      },
+      "ArticleDivision": {
+        "required": [
+          "deleted_at",
+          "external_id",
+          "merchant_id",
+          "name"
+        ],
+        "type": "object",
+        "properties": {
+          "external_id": {
+            "type": "integer",
+            "nullable": true
+          },
+          "merchant_id": {
+            "type": "integer"
+          },
+          "name": {
+            "type": "string"
+          },
+          "deleted_at": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      },
+      "CardPaymentDetail": {
+        "required": [
+          "accountNumber",
+          "acqTransRef",
+          "aid",
+          "authCode",
+          "cardNumber",
+          "sixTrxRefNum",
+          "tenderName",
+          "timeStamp",
+          "transRef",
+          "transSeq",
+          "trmTransRef"
+        ],
+        "type": "object",
+        "properties": {
+          "accountNumber": {
+            "type": "string",
+            "nullable": true,
+            "example": "1"
+          },
+          "transRef": {
+            "type": "string",
+            "nullable": true,
+            "example": "Trans Ref"
+          },
+          "acqTransRef": {
+            "type": "string",
+            "nullable": true,
+            "example": "Acq Trans Ref"
+          },
+          "sixTrxRefNum": {
+            "type": "string",
+            "nullable": true,
+            "example": "Six Trx Ref Num"
+          },
+          "trmTransRef": {
+            "type": "string",
+            "nullable": true,
+            "example": "123456789"
+          },
+          "authCode": {
+            "type": "string",
+            "nullable": true,
+            "example": "DOPTCU"
+          },
+          "cardNumber": {
+            "type": "string",
+            "nullable": true,
+            "example": "XXXXXXXXXXXX6660"
+          },
+          "timeStamp": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "aid": {
+            "type": "string",
+            "nullable": true,
+            "example": "aid"
+          },
+          "tenderName": {
+            "type": "string",
+            "nullable": true,
+            "example": "Visa"
+          },
+          "transSeq": {
+            "type": "integer",
+            "nullable": true,
+            "example": 2007
+          }
+        }
+      },
+      "TransactionDetail": {
+        "required": [
+          "articleColor",
+          "articleExternalId",
+          "articleFinalPrice",
+          "articleGroupsExternalId",
+          "articleGroupsName",
+          "articleId",
+          "articleName",
+          "articleNameInCheckout",
+          "articlePrice",
+          "discountPercent",
+          "divisionExternalId",
+          "divisionId",
+          "divisionName",
+          "id",
+          "mwstName",
+          "mwstPercent"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "example": 34387952
+          },
+          "articleId": {
+            "type": "integer",
+            "example": 42769
+          },
+          "articleExternalId": {
+            "type": "integer",
+            "nullable": true,
+            "example": 1
+          },
+          "articleName": {
+            "type": "string",
+            "example": "Chari Tea 3.3dl"
+          },
+          "articlePrice": {
+            "type": "string",
+            "example": "6.00"
+          },
+          "articleColor": {
+            "type": "string",
+            "example": "#ffffff"
+          },
+          "divisionId": {
+            "type": "integer",
+            "nullable": true,
+            "example": 1
+          },
+          "divisionExternalId": {
+            "type": "integer",
+            "nullable": true,
+            "example": 5
+          },
+          "divisionName": {
+            "type": "string",
+            "nullable": true,
+            "example": "divisionName"
+          },
+          "mwstName": {
+            "type": "string",
+            "example": "CHF 7.7"
+          },
+          "mwstPercent": {
+            "type": "number",
+            "example": 7.7
+          },
+          "articleGroupsExternalId": {
+            "type": "integer",
+            "nullable": true,
+            "example": 1
+          },
+          "articleGroupsName": {
+            "type": "string",
+            "example": "Getränke"
+          },
+          "articleNameInCheckout": {
+            "type": "string",
+            "example": "Chari Tea 3.3dl"
+          },
+          "articleFinalPrice": {
+            "type": "number",
+            "example": 5.5
+          },
+          "discountPercent": {
+            "type": "number",
+            "nullable": true,
+            "example": 20
+          }
+        }
+      },
+      "inline_response_200": {
+        "type": "object",
+        "properties": {
+          "entries": {
+            "$ref": "#/components/schemas/Crm"
+          }
+        }
+      },
+      "inline_response_200_1": {
+        "type": "object",
+        "properties": {
+          "entries": {
+            "$ref": "#/components/schemas/QrCode"
+          }
+        }
+      },
+      "inline_response_200_2": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/paginatedResponse"
+          },
+          {
+            "properties": {
+              "entries": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/RestaurantTableGroup"
+                }
+              }
+            }
+          }
+        ]
+      },
+      "inline_response_200_3": {
+        "type": "object",
+        "properties": {
+          "entries": {
+            "$ref": "#/components/schemas/RestaurantTableGroupArchive"
+          }
+        }
+      },
+      "inline_response_200_4": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/paginatedResponse"
+          },
+          {
+            "properties": {
+              "entries": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/RestaurantTable"
+                }
+              }
+            }
+          }
+        ]
+      },
+      "inline_response_200_5": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/paginatedResponse"
+          },
+          {
+            "properties": {
+              "entries": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/Transaction"
+                }
+              }
+            }
+          }
+        ]
+      },
+      "inline_response_200_6": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/paginatedResponse"
+          },
+          {
+            "properties": {
+              "entries": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/Occasion"
+                }
+              }
+            }
+          }
+        ]
+      },
+      "inline_response_200_7": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/paginatedResponse"
+          },
+          {
+            "properties": {
+              "entries": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/ArticleGroup"
+                }
+              }
+            }
+          }
+        ]
+      },
+      "inline_response_200_8": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/paginatedResponse"
+          },
+          {
+            "properties": {
+              "entries": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/Article"
+                }
+              }
+            }
+          }
+        ]
+      },
+      "inline_response_200_9": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/paginatedResponse"
+          },
+          {
+            "properties": {
+              "entries": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/ArticleAllocation"
+                }
+              }
+            }
+          }
+        ]
+      },
+      "inline_response_200_10": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/paginatedResponse"
+          },
+          {
+            "properties": {
+              "entries": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/Device"
+                }
+              }
+            }
+          }
+        ]
+      },
+      "inline_response_200_11": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/paginatedResponse"
+          },
+          {
+            "properties": {
+              "entries": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/PointOfSale"
+                }
+              }
+            }
+          }
+        ]
+      },
+      "inline_response_200_12": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/paginatedResponse"
+          },
+          {
+            "properties": {
+              "entries": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/Merchant"
+                }
+              }
+            }
+          }
+        ]
+      },
+      "inline_response_200_13": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/paginatedResponse"
+          },
+          {
+            "properties": {
+              "entries": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/Company"
+                }
+              }
+            }
+          }
+        ]
+      },
+      "inline_response_200_14": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/paginatedResponse"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "entries": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/Division"
+                }
+              }
+            }
+          }
+        ]
+      },
+      "inline_response_200_15": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/paginatedResponse"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "entries": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/DailyClosing"
+                }
+              }
+            }
+          }
+        ]
+      },
+      "inline_response_200_16": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/paginatedResponse"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "entries": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/Transaction"
+                }
+              }
+            }
+          }
+        ]
+      },
+      "ArticleGroup_merchant": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "example": "Restaurant Kraftwerk & Catering (RKW&C)"
+          }
+        }
+      },
+      "Article_mwst": {
+        "required": [
+          "name"
+        ],
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "example": "CHF 7.7"
+          }
+        }
+      },
+      "Article_mwstTakeaway": {
+        "required": [
+          "name"
+        ],
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "example": "CHF 2.5"
+          }
+        }
+      },
+      "ArticleArticleGroup_merchant": {
+        "required": [
+          "name"
+        ],
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "responses": {
+      "401": {
+        "description": "Unauthorized"
+      },
+      "422": {
+        "description": "Unprocessable Entity"
+      }
+    },
+    "securitySchemes": {
+      "OauthPW": {
+        "type": "oauth2",
+        "flows": {
+          "password": {
+            "tokenUrl": "https://portal.payfix.app/oauth/token",
+            "scopes": {}
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,1003 @@
+{
+  "openapi" : "3.0.0",
+  "info" : {
+    "title" : "Income Calculator API",
+    "version" : "2.0.0",
+    "description" : "Income Calculator API",
+    "contact" : {
+      "name" : "Income Calculator Support Team",
+      "email" : "DI-ENGG@fanniemae.com"
+    }
+  },
+  "servers" : [ {
+    "url" : "/duiu",
+    "description" : "Income Calculator API"
+  } ],
+  "security" : [ {
+    "AccessToken" : [ "" ]
+  } ],
+  "paths" : {
+    "/eval" : {
+      "post" : {
+        "tags" : [ "Evaluation" ],
+        "summary" : "Evaluate and save new Income Calculator Request",
+        "description" : "Evaluate Income Calculator Request",
+        "operationId" : "evaluate",
+        "parameters" : [ {
+          "name" : "includePdfFindings",
+          "in" : "query",
+          "required" : false,
+          "description" : "include PDF Findings report in the response",
+          "schema" : {
+            "type" : "boolean"
+          }
+        } ],
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/IuRequest"
+              }
+            }
+          },
+          "description" : "Income Calculator Request"
+        },
+        "responses" : {
+          "200" : {
+            "description" : "Income Calculator request has been successfully processed",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/IuResponse"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "Bad Request",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ApiError"
+                }
+              }
+            }
+          },
+          "403" : {
+            "description" : "Missing required role"
+          },
+          "500" : {
+            "description" : "Could not process request"
+          }
+        }
+      }
+    },
+    "/request/{id}/report" : {
+      "get" : {
+        "tags" : [ "Request" ],
+        "summary" : "Get Evaluation Report",
+        "description" : "Get Evaluation Report",
+        "operationId" : "getEvaluationReport",
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "required" : true,
+          "description" : "The Income Calculator request Id",
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Expected response to a valid request",
+            "content" : {
+              "application/pdf" : { }
+            }
+          },
+          "400" : {
+            "description" : "Bad Request"
+          },
+          "403" : {
+            "description" : "Missing required role"
+          },
+          "404" : {
+            "description" : "Data not found"
+          },
+          "500" : {
+            "description" : "Could not process request"
+          }
+        }
+      }
+    },
+    "/health" : {
+      "get" : {
+        "tags" : [ "Support" ],
+        "summary" : "Returns health",
+        "operationId" : "getHealth",
+        "responses" : {
+          "200" : {
+            "description" : "Expected response to a health request",
+            "content" : {
+              "application/json" : { }
+            }
+          },
+          "500" : {
+            "description" : "Could not process request"
+          }
+        }
+      }
+    }
+  },
+  "components" : {
+    "schemas" : {
+      "IuBusinessStructure" : {
+        "type" : "string",
+        "description" : "Business structure",
+        "enum" : [ "rental", "soleProprietorship", "sCorp", "partnership", "corp", "llc", "unknown" ]
+      },
+      "IuIncomeType" : {
+        "type" : "string",
+        "description" : "Income type",
+        "enum" : [ "selfEmployed", "rental" ]
+      },
+      "IuFormType" : {
+        "type" : "string",
+        "enum" : [ "1040", "1040_SCH_C", "1040SR", "1040NR", "1065", "1065_SCH_K1", "1065_SCH_M3", "1120", "1120_SCH_M3", "1040_SCH_1", "1040_SCH_E", "1120S", "1120S_SCH_M3", "4684", "4562", "1120S_SCH_K1", "8825", "1125E", "W2", "LOSSES_EXPENSES" ]
+      },
+      "IuForm1040FieldType" : {
+        "type" : "string",
+        "enum" : [ "totalW2Box1", "wagesSalaries", "otherIncomeLoss", "totalIncome", "adjustedGrossIncome", "taxableIncome", "preparerName", "preparerTaxpayerId" ]
+      },
+      "IuForm1040Sch1FieldType" : {
+        "type" : "string",
+        "enum" : [ "businessIncomeLoss", "rentalReRoyaltiesPartnerships", "otherIncomeLoss", "netOperatingLoss", "carryoverLoss" ]
+      },
+      "IuForm1040SchCFieldType" : {
+        "type" : "string",
+        "enum" : [ "businessActivityCode", "businessStartedAcquired", "otherIncomeLoss", "grossReceiptsOrSales", "returnsAndAllowances", "costOfGoodsSold", "totalExpenses", "carTruckExpenses", "vehicleServiceStartDate", "depletion", "depreciation", "deductibleMeals", "mortgagePaidToBanks", "nonDeductibleMeals", "wagesLessEmploymentCredits", "otherExpenses", "businessUseHome", "netProfitLoss", "businessMileage", "amortization" ]
+      },
+      "IuForm1040SchEFieldType" : {
+        "type" : "string",
+        "enum" : [ "pOrS" ]
+      },
+      "IuForm4684FieldType" : {
+        "type" : "string",
+        "enum" : [ "casualtyTheftNonIncomePropertyShortTermGainLossAmount", "casualtyTheftIncomePropertyShortTermLossAmount", "casualtyTheftLongTermGainAmount", "casualtyTheftLongTermLossAmount" ]
+      },
+      "IuForm4562FieldType" : {
+        "type" : "string",
+        "enum" : [ "amortization4562", "totalBusinessMilesDriven", "depreciationDeduction" ]
+      },
+      "IuForm8825FieldType" : {
+        "type" : "string",
+        "enum" : [ "depreciation" ]
+      },
+      "IuFormW2FieldType" : {
+        "type" : "string",
+        "enum" : [ "w2Wages", "w2MedicareWages" ]
+      },
+      "IuFormLossesExpensesFieldType" : {
+        "type" : "string",
+        "enum" : [ "form4684Included", "extraordinaryOneTimeExpenses" ]
+      },
+      "IuForm1065FieldType" : {
+        "type" : "string",
+        "enum" : [ "businessActivityCode", "businessStartedDate", "totalAssets", "numberOfSchedulesK1", "isSchCAndM3Attached", "grossReceiptsOrSales", "returnsAndAllowances", "costOfGoodsSold", "ordinaryIncomeLossFromOtherPartnershipsEstates", "netFarmProfitLoss", "netGainLoss4797", "otherIncomeLoss", "guaranteedPaymentToPartners", "depreciation", "depletion", "otherDeductions", "totalDeductions", "ordinaryBusinessIncomeLoss", "amortization", "netRentalRealEstateIncomeLoss", "nonDeductibleExpenses", "cashEndOfTaxYear", "tradeNotesAndAccountsReceivableLessAllowanceEndOfTaxYear", "inventoriesEndOfTaxYear", "govObligationsEndOfTaxYear", "taxExemptSecuritiesEndOfTaxYear", "otherCurrentAssetsEndOfTaxYear", "accountsPayableEndOfTaxYear", "mortgagesNotesPayableLess1YrBeginningOfTaxYear", "mortgagesNotesPayableLess1YrEndOfTaxYear", "otherCurrentLiabilitiesEndOfTaxYear", "mortgagePayableLess1YrRolloverType", "nonRolloverMortgagePayableLess1YrAmount", "travelEntertainment", "capAccountsBalanceEndOfTaxYear" ]
+      },
+      "IuForm1065SchK1FieldType" : {
+        "type" : "string",
+        "enum" : [ "isBorrowerTrustGrantor", "taxPeriodEndDate", "isFinalK1", "isFinalReturnOverride", "partnerType", "partnerShareOfCapitalEndingPct", "partnerShareOfLiabilitiesRecourseEnding", "partnerEndingCapitalAccount", "ordinaryBusinessIncomeLoss", "netRentalRealEstateIncomeLoss", "otherNetRentalIncomeLoss", "ordinaryDividends", "guaranteedPaymentsForServices", "guaranteedPaymentsForCapital", "distributionCodeA", "distributionCodeAAmount", "isBusinessLiquidityAdequate" ]
+      },
+      "IuForm1065SchM3FieldType" : {
+        "type" : "string",
+        "enum" : [ "mealsAndEntertainment" ]
+      },
+      "IuForm1120FieldType" : {
+        "type" : "string",
+        "enum" : [ "taxYearEnding", "isM3Attached", "incorporatedDate", "totalAssets", "isFinal", "isFinalReturnOverride", "grossReceiptsOrSales", "returnsAndAllowances", "costOfGoodsSold", "capitalGainNetIncome", "netGainLoss4797", "otherIncomeLoss", "compensationOfOfficers", "isCompensationOfOfficersIncludedAsIncome", "depreciation", "depletion", "otherDeductions", "totalDeductions", "netOperatingLossDeduction", "specialDeductions", "taxableIncome", "totalTax", "amortization", "cashEndOfTaxYear", "tradeNotesAndAccountsReceivableLessAllowanceEndOfTaxYear", "inventoriesEndOfTaxYear", "govObligationsEndOfTaxYear", "taxExemptSecuritiesEndOfTaxYear", "otherCurrentAssetsEndOfTaxYear", "accountsPayableEndOfTaxYear", "mortgagesNotesPayableLess1YrBeginningOfTaxYear", "mortgagesNotesPayableLess1YrEndOfTaxYear", "otherCurrentLiabilitiesEndOfTaxYear", "mortgagePayableLess1YrRolloverType", "nonRolloverMortgagePayableLess1YrAmount", "retainedEarningsAppropriatedEndOfTaxYear", "retainedEarningsUnappropriatedEndOfTaxYear", "travelEntertainment", "cashDistributions" ]
+      },
+      "IuForm1120SchM3FieldType" : {
+        "type" : "string",
+        "enum" : [ "mealsAndEntertainment" ]
+      },
+      "IuForm1125eFieldType" : {
+        "type" : "string",
+        "enum" : [ "form1125eIncluded", "businessOwnerCount", "commonStockOwnershipPercent", "corporationOwnershipInterestGte25Pct", "allCorporationOwnersAreBorrowers", "corporationOwnerCount", "compensationOfOfficers", "isCompensationOfOfficersIncludedAsIncome" ]
+      },
+      "IuForm1120sFieldType" : {
+        "type" : "string",
+        "enum" : [ "businessActivityCode", "isM3Attached", "incorporatedDate", "totalAssets", "numberOfShareholders", "grossReceiptsOrSales", "returnsAndAllowances", "costOfGoodsSold", "netGainLoss4797", "otherIncomeLoss", "compensationOfOfficers", "isCompensationOfOfficersIncludedAsIncome", "depreciation", "depletion", "otherDeductions", "totalDeductions", "ordinaryBusinessIncomeLoss", "amortization", "nonDeductibleExpenses", "cashEndOfTaxYear", "tradeNotesAndAccountsReceivableLessAllowanceEndOfTaxYear", "inventoriesEndOfTaxYear", "govObligationsEndOfTaxYear", "taxExemptSecuritiesEndOfTaxYear", "otherCurrentAssetsEndOfTaxYear", "accountsPayableEndOfTaxYear", "mortgagesNotesPayableLess1YrBeginningOfTaxYear", "mortgagesNotesPayableLess1YrEndOfTaxYear", "otherCurrentLiabilitiesEndOfTaxYear", "retainedEarningsEndOfTaxYear", "mortgagePayableLess1YrRolloverType", "nonRolloverMortgagePayableLess1YrAmount", "travelEntertainment" ]
+      },
+      "IuForm1120sSchK1FieldType" : {
+        "type" : "string",
+        "enum" : [ "isBorrowerTrustGrantor", "taxPeriodEndDate", "isFinalK1", "isFinalReturnOverride", "cyAllocationPercentage", "ordinaryBusinessIncomeLoss", "netRentalRealEstateIncomeLoss", "ordinaryDividends", "otherNetRentalIncomeLoss", "itemsAffectingShareholderBasisCodeD", "itemsAffectingShareholderBasisCodeDAmount", "isBusinessLiquidityAdequate" ]
+      },
+      "IuForm1120sSchM3FieldType" : {
+        "type" : "string",
+        "enum" : [ "mealsAndEntertainment" ]
+      },
+      "IuRequest" : {
+        "type" : "object",
+        "required" : [ "businessStructure", "taxData" ],
+        "properties" : {
+          "requestId" : {
+            "type" : "string",
+            "description" : "Income Calculator Request ID"
+          },
+          "requestType" : {
+            "type" : "string",
+            "description" : "Income Calculator Request Type",
+            "enum" : [ "Import", "NewEvaluation", "Export", "Copy", "Update", "ViewFindings" ]
+          },
+          "createdDate" : {
+            "type" : "string",
+            "format" : "date-time",
+            "description" : "Created Date",
+            "example" : "2021-04-01T04:00:00.000Z"
+          },
+          "locked" : {
+            "description" : "The request has been locked for editing",
+            "type" : "boolean"
+          },
+          "hidden" : {
+            "description" : "The request is hidden for retrieval",
+            "type" : "boolean"
+          },
+          "userType" : {
+            "type" : "string",
+            "description" : "User type",
+            "enum" : [ "Borrower", "BrokerLender", "Other", "Declined" ],
+            "example" : "BrokerLender"
+          },
+          "brokerOriginatorId" : {
+            "type" : "string",
+            "description" : "Broker Originator Id"
+          },
+          "otherAgentId" : {
+            "type" : "string",
+            "description" : "Other Agent Id"
+          },
+          "integratorRequestorId" : {
+            "type" : "string",
+            "description" : "Integrator Requestor Id"
+          },
+          "incomeType" : {
+            "$ref" : "#/components/schemas/IuIncomeType"
+          },
+          "refName" : {
+            "type" : "string",
+            "description" : "Reference Name",
+            "example" : "Business Name, LLC"
+          },
+          "duCaseFileId" : {
+            "type" : "integer",
+            "format" : "int64",
+            "description" : "DU casefile ID",
+            "example" : "42326468465"
+          },
+          "businessStructure" : {
+            "$ref" : "#/components/schemas/IuBusinessStructure"
+          },
+          "employmentStartDate" : {
+            "type" : "string",
+            "format" : "date",
+            "description" : "Derived employment start date"
+          },
+          "employmentHistoryConsistentIndicator" : {
+            "type" : "boolean",
+            "description" : "Employment history consistent indicator"
+          },
+          "lastFourDigitsEmployerIdentifier" : {
+            "type" : "string",
+            "description" : "Last 4 digits of employer identifier number"
+          },
+          "requestorMonthlyQualifyingIncomeAmount" : {
+            "type" : "number",
+            "description" : "The monthly qualifying income amount calculated by the requestor and optionally provided at submission"
+          },
+          "manualDocumentMatch" : {
+            "description" : "The current and prior year tax forms are manually matched to belong to the same business",
+            "type" : "boolean"
+          },
+          "employmentType" : {
+            "type" : "string",
+            "description" : "Employment Type",
+            "enum" : [ "Primary", "Secondary" ]
+          },
+          "primaryEmploymentSelfEmployedIndicator" : {
+            "description" : "When true, the borrower's primary income is from self-employment",
+            "type" : "boolean"
+          },
+          "taxData" : {
+            "type" : "array",
+            "items" : {
+              "type" : "object",
+              "properties" : {
+                "year" : {
+                  "type" : "string"
+                },
+                "skipped" : {
+                  "type" : "boolean"
+                },
+                "formId" : {
+                  "$ref" : "#/components/schemas/IuFormType"
+                },
+                "fields" : {
+                  "type" : "array",
+                  "items" : {
+                    "type" : "object",
+                    "properties" : {
+                      "id" : {
+                        "type" : "string",
+                        "description" : "Tax form field name. Must be a value from one of the IuFormxxxFieldType enums",
+                        "x-constraints" : "ValidTaxFormField"
+                      },
+                      "isEmpty" : {
+                        "type" : "boolean"
+                      },
+                      "value" : {
+                        "type" : "string"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "IuDuData" : {
+        "type" : "object",
+        "properties" : {
+          "duCaseFileId" : {
+            "type" : "integer",
+            "format" : "int64",
+            "description" : "DU casefile ID"
+          },
+          "associationSuccessIndicator" : {
+            "type" : "boolean"
+          },
+          "caseFileDate" : {
+            "type" : "string"
+          },
+          "duFindingsId" : {
+            "type" : "integer",
+            "format" : "int64",
+            "description" : "DU findings ID"
+          },
+          "automatedUnderwritingSubmissionDate" : {
+            "type" : "string"
+          },
+          "automatedUnderwritingRecommendation" : {
+            "type" : "string"
+          },
+          "automatedUnderwritingSubmissionCount" : {
+            "type" : "string"
+          },
+          "automatedUnderwritingEngineName" : {
+            "type" : "string"
+          },
+          "documentationLevel" : {
+            "type" : "string"
+          },
+          "institutionId" : {
+            "type" : "string"
+          }
+        }
+      },
+      "IuResponse" : {
+        "type" : "object",
+        "properties" : {
+          "requestId" : {
+            "type" : "string"
+          },
+          "status" : {
+            "type" : "string"
+          },
+          "timestamp" : {
+            "type" : "string",
+            "format" : "date-time"
+          },
+          "version" : {
+            "type" : "string"
+          },
+          "createdDate" : {
+            "type" : "string",
+            "format" : "date-time"
+          },
+          "submissionCount" : {
+            "type" : "integer"
+          },
+          "incomeType" : {
+            "$ref" : "#/components/schemas/IuIncomeType"
+          },
+          "businessStructure" : {
+            "$ref" : "#/components/schemas/IuBusinessStructure"
+          },
+          "totalQualifiedIncome" : {
+            "type" : "number"
+          },
+          "monthlyQualifiedIncome" : {
+            "type" : "number"
+          },
+          "numberOfMonths" : {
+            "type" : "integer"
+          },
+          "employmentMonthsCount" : {
+            "type" : "integer"
+          },
+          "incomePerSellingGuideAndTaxTranscriptMatch" : {
+            "type" : "boolean"
+          },
+          "firstTimeScheduleCFiledIndicator" : {
+            "type" : "boolean"
+          },
+          "lastFourDigitsEmployerIdentifier" : {
+            "type" : "string",
+            "description" : "Last 4 digits of employer identifier number"
+          },
+          "documentationLevels" : {
+            "type" : "array",
+            "items" : {
+              "type" : "integer"
+            }
+          },
+          "taxYears" : {
+            "type" : "array",
+            "items" : {
+              "type" : "object",
+              "properties" : {
+                "year" : {
+                  "type" : "string"
+                },
+                "totalQualifiedIncome" : {
+                  "type" : "number"
+                },
+                "totalIncome" : {
+                  "type" : "number"
+                },
+                "totalIncomePerTaxTranscript" : {
+                  "type" : "number"
+                },
+                "netProfitLoss" : {
+                  "type" : "number"
+                },
+                "otherIncomeLoss" : {
+                  "type" : "number"
+                },
+                "depletion" : {
+                  "type" : "number"
+                },
+                "depreciation" : {
+                  "type" : "number"
+                },
+                "vehicleDepreciation" : {
+                  "type" : "number"
+                },
+                "businessMileage" : {
+                  "type" : "number"
+                },
+                "vehicleStandardMileageAllowance" : {
+                  "type" : "number"
+                },
+                "vehicleStandardMileageDepreciation" : {
+                  "type" : "number"
+                },
+                "deductibleMeals" : {
+                  "type" : "number"
+                },
+                "nonDeductibleMeals" : {
+                  "type" : "number"
+                },
+                "businessUseHome" : {
+                  "type" : "number"
+                },
+                "amortization" : {
+                  "type" : "number"
+                },
+                "amortization4562" : {
+                  "type" : "number"
+                },
+                "casualtyTheftLoss" : {
+                  "type" : "number"
+                },
+                "extraordinaryOneTimeExpenses" : {
+                  "type" : "number"
+                },
+                "w2MedicareWages" : {
+                  "type" : "number"
+                },
+                "k1Distribution" : {
+                  "type" : "number"
+                },
+                "ordinaryBusinessIncomeLoss" : {
+                  "type" : "number"
+                },
+                "netRentalRealEstateIncomeLoss" : {
+                  "type" : "number"
+                },
+                "otherNetRentalIncomeLoss" : {
+                  "type" : "number"
+                },
+                "mortgagesNotesPayableLessThanOneYearEndOfYear" : {
+                  "type" : "number"
+                },
+                "travelEntertainment" : {
+                  "type" : "number"
+                },
+                "depreciation8825" : {
+                  "type" : "number"
+                },
+                "businessOwnerCount" : {
+                  "type" : "integer"
+                },
+                "ownershipPercent" : {
+                  "type" : "number"
+                },
+                "k1Income" : {
+                  "type" : "number"
+                },
+                "totalBusinessIncome" : {
+                  "type" : "number"
+                },
+                "totalBusinessIncomeShare" : {
+                  "type" : "number"
+                },
+                "distributionGuaranteedPaymentOrK1Income" : {
+                  "type" : "number"
+                },
+                "guaranteedPaymentsForServices" : {
+                  "type" : "number"
+                },
+                "guaranteedPaymentsForCapital" : {
+                  "type" : "number"
+                },
+                "totalGuaranteedPayments" : {
+                  "type" : "number"
+                },
+                "totalCalculatedGuaranteedPayments" : {
+                  "type" : "number"
+                },
+                "ordinaryIncomeLossFromOtherPartnershipsEstates" : {
+                  "type" : "number"
+                },
+                "taxableIncome" : {
+                  "type" : "number"
+                },
+                "totalTax" : {
+                  "type" : "number"
+                },
+                "capitalGainNetIncome" : {
+                  "type" : "number"
+                },
+                "netGainLoss4797" : {
+                  "type" : "number"
+                },
+                "netFarmGainLoss" : {
+                  "type" : "number"
+                },
+                "netOperatingLossDeduction" : {
+                  "type" : "number"
+                },
+                "specialDeductions" : {
+                  "type" : "number"
+                },
+                "cashDistributions" : {
+                  "type" : "number"
+                },
+                "compensationOfOfficers" : {
+                  "type" : "number"
+                }
+              }
+            }
+          },
+          "details" : {
+            "$ref" : "#/components/schemas/IuResponseDetails"
+          },
+          "duData" : {
+            "$ref" : "#/components/schemas/IuDuData"
+          },
+          "findingsPdf" : {
+            "type" : "string"
+          },
+          "messages" : {
+            "type" : "array",
+            "items" : {
+              "type" : "object",
+              "properties" : {
+                "id" : {
+                  "type" : "integer"
+                },
+                "rule" : {
+                  "type" : "string"
+                },
+                "msg" : {
+                  "type" : "string"
+                },
+                "category" : {
+                  "type" : "string"
+                },
+                "severity" : {
+                  "type" : "string"
+                },
+                "level" : {
+                  "type" : "string"
+                }
+              }
+            }
+          }
+        }
+      },
+      "IuResponseDetails" : {
+        "type" : "object",
+        "properties" : {
+          "monthlyIncomePerSellingGuideOneYear" : {
+            "type" : "number"
+          },
+          "monthlyIncomePerSellingGuideTwoYears" : {
+            "type" : "number"
+          },
+          "monthlyIncomePerTaxTranscriptOneYear" : {
+            "type" : "number"
+          },
+          "monthlyIncomePerTaxTranscriptTwoYears" : {
+            "type" : "number"
+          },
+          "individualPriorYearReturnsProvidedIndicator" : {
+            "type" : "boolean"
+          },
+          "businessStructureChangeIndicator" : {
+            "type" : "boolean"
+          },
+          "employmentStartDate" : {
+            "type" : "string",
+            "format" : "date",
+            "description" : "Derived employment start date"
+          },
+          "fiveYearSelfEmploymentIndicator" : {
+            "description" : "When true, the borrower has a 25% or more ownership interest in the business for at least 5 calendar years",
+            "type" : "boolean"
+          },
+          "businessStructureName" : {
+            "type" : "string"
+          },
+          "soleProprietorDetails" : {
+            "$ref" : "#/components/schemas/IuResponseDetailsSoleProprietor"
+          },
+          "changeOverYear" : {
+            "$ref" : "#/components/schemas/IuResponseDetailsChangeOverYear"
+          },
+          "changeOverYearTaxReturn" : {
+            "$ref" : "#/components/schemas/IuResponseDetailsChangeOverYearTaxReturn"
+          },
+          "comparativeIncomeAnalysis" : {
+            "$ref" : "#/components/schemas/IuResponseDetailsComparativeIncomeAnalysis"
+          },
+          "businessLiquidityAnalysis" : {
+            "$ref" : "#/components/schemas/IuResponseDetailsBusinessLiquidityAnalysis"
+          },
+          "taxYears" : {
+            "type" : "array",
+            "items" : {
+              "type" : "object",
+              "properties" : {
+                "year" : {
+                  "type" : "string"
+                },
+                "businessReturnsProvidedIndicator" : {
+                  "type" : "boolean"
+                },
+                "vehicleDepreciationRate" : {
+                  "type" : "number"
+                },
+                "vehicleAllowanceRate" : {
+                  "type" : "number"
+                }
+              }
+            }
+          }
+        }
+      },
+      "IuResponseDetailsSoleProprietor" : {
+        "type" : "object",
+        "properties" : {
+          "automobileInServiceSchCDate" : {
+            "type" : "string",
+            "format" : "date"
+          }
+        }
+      },
+      "IuResponseDetailsComparativeIncomeAnalysis" : {
+        "type" : "object",
+        "properties" : {
+          "resultType" : {
+            "type" : "string"
+          },
+          "grossIncomeChange" : {
+            "type" : "number"
+          },
+          "expensesChange" : {
+            "type" : "number"
+          },
+          "taxableIncomeChange" : {
+            "type" : "number"
+          },
+          "taxableIncomeTrend" : {
+            "type" : "string"
+          },
+          "taxYears" : {
+            "type" : "array",
+            "items" : {
+              "type" : "object",
+              "properties" : {
+                "year" : {
+                  "type" : "string"
+                },
+                "grossReceiptsOrSales" : {
+                  "type" : "number"
+                },
+                "returnsAndAllowances" : {
+                  "type" : "number"
+                },
+                "costOfGoodsSold" : {
+                  "type" : "number"
+                },
+                "totalDeductions" : {
+                  "type" : "number"
+                },
+                "taxableIncome" : {
+                  "type" : "number"
+                },
+                "grossIncome" : {
+                  "type" : "number"
+                },
+                "expenses" : {
+                  "type" : "number"
+                },
+                "expenseIncomePercent" : {
+                  "type" : "number"
+                },
+                "taxableIncomePercent" : {
+                  "type" : "number"
+                }
+              }
+            }
+          }
+        }
+      },
+      "IuResponseDetailsBusinessLiquidityAnalysis" : {
+        "type" : "object",
+        "properties" : {
+          "resultType" : {
+            "type" : "string"
+          },
+          "numberOfMonths" : {
+            "type" : "integer"
+          },
+          "totalK1IncomeAmount" : {
+            "type" : "number"
+          },
+          "monthlyK1IncomeAmount" : {
+            "type" : "number"
+          },
+          "totalK1IncomeAnnualAmount" : {
+            "type" : "number"
+          },
+          "k1DistributionCY" : {
+            "type" : "number"
+          },
+          "taxYears" : {
+            "type" : "array",
+            "items" : {
+              "type" : "object",
+              "properties" : {
+                "year" : {
+                  "type" : "string"
+                },
+                "k1Income" : {
+                  "type" : "number"
+                },
+                "k1Distributions" : {
+                  "type" : "number"
+                },
+                "cashEndOfTaxYear" : {
+                  "type" : "number"
+                },
+                "tradeNotesAndAccountsReceivableLessAllowanceEndOfTaxYear" : {
+                  "type" : "number"
+                },
+                "govObligationsEndOfTaxYear" : {
+                  "type" : "number"
+                },
+                "taxExemptSecuritiesEndOfTaxYear" : {
+                  "type" : "number"
+                },
+                "otherCurrentAssetsEndOfTaxYear" : {
+                  "type" : "number"
+                },
+                "assetsExcludingInventoryAmount" : {
+                  "type" : "number"
+                },
+                "inventoriesEndOfTaxYear" : {
+                  "type" : "number"
+                },
+                "totalCurrentAssetsAmount" : {
+                  "type" : "number"
+                },
+                "accountsPayableEndOfTaxYear" : {
+                  "type" : "number"
+                },
+                "mortgagesNotesPayableLess1YrEndOfTaxYear" : {
+                  "type" : "number"
+                },
+                "otherCurrentLiabilitiesEndOfTaxYear" : {
+                  "type" : "number"
+                },
+                "totalCurrentLiabilitiesAmount" : {
+                  "type" : "number"
+                },
+                "quickRatio" : {
+                  "type" : "number"
+                },
+                "currentRatio" : {
+                  "type" : "number"
+                }
+              }
+            }
+          }
+        }
+      },
+      "IuResponseDetailsChangeOverYear" : {
+        "type" : "object",
+        "properties" : {
+          "totalIncome" : {
+            "type" : "number"
+          },
+          "netProfitLoss" : {
+            "type" : "number"
+          },
+          "otherIncomeLoss" : {
+            "type" : "number"
+          },
+          "depletion" : {
+            "type" : "number"
+          },
+          "depreciation" : {
+            "type" : "number"
+          },
+          "vehicleDepreciation" : {
+            "type" : "number"
+          },
+          "deductibleMeals" : {
+            "type" : "number"
+          },
+          "nonDeductibleMeals" : {
+            "type" : "number"
+          },
+          "businessUseHome" : {
+            "type" : "number"
+          },
+          "amortization" : {
+            "type" : "number"
+          },
+          "amortization4562" : {
+            "type" : "number"
+          },
+          "casualtyTheftLoss" : {
+            "type" : "number"
+          },
+          "extraordinaryOneTimeExpenses" : {
+            "type" : "number"
+          },
+          "w2MedicareWages" : {
+            "type" : "number"
+          },
+          "ordinaryBusinessIncomeLoss" : {
+            "type" : "number"
+          },
+          "netRentalRealEstateIncomeLoss" : {
+            "type" : "number"
+          },
+          "otherNetRentalIncomeLoss" : {
+            "type" : "number"
+          },
+          "mortgagesNotesPayableLessThanOneYearEndOfYear" : {
+            "type" : "number"
+          },
+          "travelEntertainment" : {
+            "type" : "number"
+          },
+          "depreciation8825" : {
+            "type" : "number"
+          },
+          "k1Distribution" : {
+            "type" : "number"
+          },
+          "k1Income" : {
+            "type" : "number"
+          },
+          "guaranteedPaymentsForServices" : {
+            "type" : "number"
+          },
+          "guaranteedPaymentsForCapital" : {
+            "type" : "number"
+          },
+          "ordinaryIncomeLossFromOtherPartnershipsEstates" : {
+            "type" : "number"
+          },
+          "taxableIncome" : {
+            "type" : "number"
+          },
+          "totalTax" : {
+            "type" : "number"
+          },
+          "capitalGainNetIncome" : {
+            "type" : "number"
+          },
+          "netGainLoss4797" : {
+            "type" : "number"
+          },
+          "netFarmGainLoss" : {
+            "type" : "number"
+          },
+          "netOperatingLossDeduction" : {
+            "type" : "number"
+          },
+          "specialDeductions" : {
+            "type" : "number"
+          },
+          "cashDistributions" : {
+            "type" : "number"
+          },
+          "compensationOfOfficers" : {
+            "type" : "number"
+          }
+        }
+      },
+      "IuResponseDetailsChangeOverYearTaxReturn" : {
+        "type" : "object",
+        "properties" : {
+          "otherIncomeLoss" : {
+            "type" : "number"
+          },
+          "capitalGainNetIncome" : {
+            "type" : "number"
+          },
+          "netFarmGainLoss" : {
+            "type" : "number"
+          },
+          "netGainLoss4797" : {
+            "type" : "number"
+          },
+          "travelEntertainment" : {
+            "type" : "number"
+          },
+          "deductibleMeals" : {
+            "type" : "number"
+          }
+        }
+      },
+      "ApiError" : {
+        "type" : "object",
+        "required" : [ "errorCode", "errorMessage" ],
+        "properties" : {
+          "errorCode" : {
+            "type" : "integer",
+            "format" : "int32"
+          },
+          "errorMessage" : {
+            "type" : "string"
+          }
+        }
+      }
+    },
+    "securitySchemes" : {
+      "AccessToken" : {
+        "type" : "http",
+        "description" : "seApi JWT Access Token Authentication",
+        "scheme" : "bearer",
+        "bearerFormat" : "JWT"
+      }
+    }
+  }
+}

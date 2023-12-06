@@ -1,0 +1,3930 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2.2.1",
+    "title": "API"
+  },
+  "host": "api.hsbc.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/prs.openbanking.opendata.v2.2+json"
+  ],
+  "paths": {
+    "/open-banking/v2.2/atms": {
+      "get": {
+        "tags": [
+          "ATMs"
+        ],
+        "description": "This API will return data about all our ATMs and is prepared to the Open Banking standards as defined by the Open Banking Implementation Entity (OBIE) in data dictionary version 2.2. It is regulated by the UK Competition and Markets Authority (CMA). Data is only available for the United Kingdom.",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ATMDefinitionMeta"
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/ErrorDefinition400"
+            }
+          },
+          "408": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/ErrorDefinition408"
+            }
+          },
+          "429": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/ErrorDefinition429"
+            }
+          },
+          "500": {
+            "description": "System error",
+            "schema": {
+              "$ref": "#/definitions/ErrorDefinition500"
+            }
+          },
+          "503": {
+            "description": "System error",
+            "schema": {
+              "$ref": "#/definitions/ErrorDefinition503"
+            }
+          }
+        }
+      }
+    },
+    "/x-open-banking/v2.2/atms/country/{country}": {
+      "get": {
+        "tags": [
+          "ATMs"
+        ],
+        "description": "This extended API will return data about all ATMs in the specified country. It is based-on the Open Banking standards as defined by the Open Banking Implementation Entity (OBIE) in data dictionary version 2.2. The extended functionality may not fully adhere to the non-functional requirements of the regulator. Data is only available for the United Kingdom.",
+        "parameters": [
+          {
+            "name": "country",
+            "in": "path",
+            "description": "The ISO country code e.g. &quot;GB&quot;",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ATMDefinitionMeta"
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/ErrorDefinition400"
+            }
+          },
+          "408": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/ErrorDefinition408"
+            }
+          },
+          "429": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/ErrorDefinition429"
+            }
+          },
+          "500": {
+            "description": "System error",
+            "schema": {
+              "$ref": "#/definitions/ErrorDefinition500"
+            }
+          },
+          "503": {
+            "description": "System error",
+            "schema": {
+              "$ref": "#/definitions/ErrorDefinition503"
+            }
+          }
+        }
+      }
+    },
+    "/x-open-banking/v2.2/atms/postcode/{postcode}": {
+      "get": {
+        "tags": [
+          "ATMs"
+        ],
+        "description": "This extended API will return data about all ATMs within a 5 mile radius of the specified postcode. It is based-on the Open Banking standards as defined by the Open Banking Implementation Entity (OBIE) in data dictionary version 2.2. The extended functionality may not fully adhere to the non-functional requirements of the regulator. Data is only available for the United Kingdom.",
+        "parameters": [
+          {
+            "name": "postcode",
+            "in": "path",
+            "description": "Letters and numerals only. No spaces or special characters. eg  &quotSW1A1AA&quot",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ATMDefinitionMeta"
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/ErrorDefinition400"
+            }
+          },
+          "408": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/ErrorDefinition408"
+            }
+          },
+          "429": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/ErrorDefinition429"
+            }
+          },
+          "500": {
+            "description": "System error",
+            "schema": {
+              "$ref": "#/definitions/ErrorDefinition500"
+            }
+          },
+          "503": {
+            "description": "System error",
+            "schema": {
+              "$ref": "#/definitions/ErrorDefinition503"
+            }
+          }
+        }
+      }
+    },
+    "/x-open-banking/v2.2/atms/country/{country}/town/{town}": {
+      "get": {
+        "tags": [
+          "ATMs"
+        ],
+        "description": "This extended API will return data about all ATMs in the specified town. It is based-on the Open Banking standards as defined by the Open Banking Implementation Entity (OBIE) in data dictionary version 2.2. The extended functionality may not fully adhere to the non-functional requirements of the regulator. Data is only available for the United Kingdom.",
+        "parameters": [
+          {
+            "name": "country",
+            "in": "path",
+            "description": "The ISO country code e.g. &quot;GB&quot;",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "town",
+            "in": "path",
+            "description": "Town name, not case sensitive",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ATMDefinitionMeta"
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/ErrorDefinition400"
+            }
+          },
+          "408": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/ErrorDefinition408"
+            }
+          },
+          "429": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/ErrorDefinition429"
+            }
+          },
+          "500": {
+            "description": "System error",
+            "schema": {
+              "$ref": "#/definitions/ErrorDefinition500"
+            }
+          },
+          "503": {
+            "description": "System error",
+            "schema": {
+              "$ref": "#/definitions/ErrorDefinition503"
+            }
+          }
+        }
+      }
+    },
+    "/x-open-banking/v2.2/atms/geo-location/lat/{latitude}/long/{longitude}": {
+      "get": {
+        "tags": [
+          "ATMs"
+        ],
+        "description": "This extended API will data about all ATMs within a specified radius (1 to 10 miles) of the specified latitude and longitude. It is based-on the Open Banking standards as defined by the Open Banking Implementation Entity (OBIE) in data dictionary version 2.2. The extended functionality may not fully adhere to the non-functional requirements of the regulator. Data is only available for the United Kingdom.",
+        "parameters": [
+          {
+            "name": "latitude",
+            "in": "path",
+            "description": "Positive or negative decimal value in degrees. eg &quot51.50551621597067&quot",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "longitude",
+            "in": "path",
+            "description": "Positive or negative decimal value in degrees. eg &quot-0.0180120225995&quot",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "radius",
+            "in": "query",
+            "description": "Number of miles (1 to 10) as an integer. Default = 1",
+            "required": true,
+            "type": "number"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ATMDefinitionMeta"
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/ErrorDefinition400"
+            }
+          },
+          "408": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/ErrorDefinition408"
+            }
+          },
+          "429": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/ErrorDefinition429"
+            }
+          },
+          "500": {
+            "description": "System error",
+            "schema": {
+              "$ref": "#/definitions/ErrorDefinition500"
+            }
+          },
+          "503": {
+            "description": "System error",
+            "schema": {
+              "$ref": "#/definitions/ErrorDefinition503"
+            }
+          }
+        }
+      }
+    },
+    "/open-banking/v2.2/branches": {
+      "get": {
+        "tags": [
+          "Branches"
+        ],
+        "description": "This API will return the branch details for all branches and is prepared to the Open Banking standards as defined by the Open Banking Implementation Entity (OBIE) in data dictionary version 2.2. It is regulated by the UK Competition and Markets Authority (CMA). Data is only available for the United Kingdom.",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/BranchDefinitionMeta"
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/ErrorDefinition400"
+            }
+          },
+          "408": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/ErrorDefinition408"
+            }
+          },
+          "429": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/ErrorDefinition429"
+            }
+          },
+          "500": {
+            "description": "System error",
+            "schema": {
+              "$ref": "#/definitions/ErrorDefinition500"
+            }
+          },
+          "503": {
+            "description": "System error",
+            "schema": {
+              "$ref": "#/definitions/ErrorDefinition503"
+            }
+          }
+        }
+      }
+    },
+    "/x-open-banking/v2.2/branches/country/{country}": {
+      "get": {
+        "tags": [
+          "Branches"
+        ],
+        "description": "This extended API will return the branch details for all branches in the specified country. It is based-on the Open Banking standards as defined by the Open Banking Implementation Entity (OBIE) in data dictionary version 2.2. The extended functionality may not fully adhere to the non-functional requirements of the regulator. Data is only available for the United Kingdom.",
+        "parameters": [
+          {
+            "name": "country",
+            "in": "path",
+            "description": "The ISO country code e.g. &quot;GB&quot;",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/BranchDefinitionMeta"
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/ErrorDefinition400"
+            }
+          },
+          "408": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/ErrorDefinition408"
+            }
+          },
+          "429": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/ErrorDefinition429"
+            }
+          },
+          "500": {
+            "description": "System error",
+            "schema": {
+              "$ref": "#/definitions/ErrorDefinition500"
+            }
+          },
+          "503": {
+            "description": "System error",
+            "schema": {
+              "$ref": "#/definitions/ErrorDefinition503"
+            }
+          }
+        }
+      }
+    },
+    "/x-open-banking/v2.2/branches/postcode/{postcode}": {
+      "get": {
+        "tags": [
+          "Branches"
+        ],
+        "description": "This extended API will return the branch details for all branches within a 5 mile radius of the specified postcode. It is based-on the Open Banking standards as defined by the Open Banking Implementation Entity (OBIE) in data dictionary version 2.2. The extended functionality may not fully adhere to the non-functional requirements of the regulator. Data is only available for the United Kingdom.",
+        "parameters": [
+          {
+            "name": "postcode",
+            "in": "path",
+            "description": "Letters and numerals only. No spaces or special characters. eg. &quotSW1A1AA&quot",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/BranchDefinitionMeta"
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/ErrorDefinition400"
+            }
+          },
+          "408": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/ErrorDefinition408"
+            }
+          },
+          "429": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/ErrorDefinition429"
+            }
+          },
+          "500": {
+            "description": "System error",
+            "schema": {
+              "$ref": "#/definitions/ErrorDefinition500"
+            }
+          },
+          "503": {
+            "description": "System error",
+            "schema": {
+              "$ref": "#/definitions/ErrorDefinition503"
+            }
+          }
+        }
+      }
+    },
+    "/x-open-banking/v2.2/branches/country/{country}/town/{town}": {
+      "get": {
+        "tags": [
+          "Branches"
+        ],
+        "description": "This extended API will return the branch details for all branches in the specified town. It is based-on the Open Banking standards as defined by the Open Banking Implementation Entity (OBIE) in data dictionary version 2.2. The extended functionality may not fully adhere to the non-functional requirements of the regulator. Data is only available for the United Kingdom.",
+        "parameters": [
+          {
+            "name": "country",
+            "in": "path",
+            "description": "The ISO country code e.g. &quot;GB&quot;",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "town",
+            "in": "path",
+            "description": "Town name, not case sensitive",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/BranchDefinitionMeta"
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/ErrorDefinition400"
+            }
+          },
+          "408": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/ErrorDefinition408"
+            }
+          },
+          "429": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/ErrorDefinition429"
+            }
+          },
+          "500": {
+            "description": "System error",
+            "schema": {
+              "$ref": "#/definitions/ErrorDefinition500"
+            }
+          },
+          "503": {
+            "description": "System error",
+            "schema": {
+              "$ref": "#/definitions/ErrorDefinition503"
+            }
+          }
+        }
+      }
+    },
+    "/x-open-banking/v2.2/branches/sortcode/{sortcode}": {
+      "get": {
+        "tags": [
+          "Branches"
+        ],
+        "description": "This extended API will return the branch details for a branch specified by its sort code. It is based-on the Open Banking standards as defined by the Open Banking Implementation Entity (OBIE) in data dictionary version 2.2. The extended functionality may not fully adhere to the non-functional requirements of the regulator. Data is only available for the United Kingdom.",
+        "parameters": [
+          {
+            "name": "sortcode",
+            "in": "path",
+            "description": "6 digit number with no spaces or special characters. eg. &quot400003&quot",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/BranchDefinitionMeta"
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/ErrorDefinition400"
+            }
+          },
+          "408": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/ErrorDefinition408"
+            }
+          },
+          "429": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/ErrorDefinition429"
+            }
+          },
+          "500": {
+            "description": "System error",
+            "schema": {
+              "$ref": "#/definitions/ErrorDefinition500"
+            }
+          },
+          "503": {
+            "description": "System error",
+            "schema": {
+              "$ref": "#/definitions/ErrorDefinition503"
+            }
+          }
+        }
+      }
+    },
+    "/x-open-banking/v2.2/branches/geo-location/lat/{latitude}/long/{longitude}": {
+      "get": {
+        "tags": [
+          "Branches"
+        ],
+        "description": "This API will return the branch details for all branches within a specified radius (1 to 10 miles) of the specified latitude and longitude. It is based-on the Open Banking standards as defined by the Open Banking Implementation Entity (OBIE) in data dictionary version 2.2. The extended functionality may not fully adhere to the non-functional requirements of the regulator. Data is only available for the United Kingdom.",
+        "parameters": [
+          {
+            "name": "latitude",
+            "in": "path",
+            "description": "Positive or negative decimal value in degrees. eg &quot51.50551621597067&quot",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "longitude",
+            "in": "path",
+            "description": "Positive or negative decimal value in degrees. eg &quot-0.0180120225995&quot",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "radius",
+            "in": "query",
+            "description": "Number of miles (1 to 10) as an integer. Default = 1",
+            "required": true,
+            "type": "number"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/BranchDefinitionMeta"
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/ErrorDefinition400"
+            }
+          },
+          "408": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/ErrorDefinition408"
+            }
+          },
+          "429": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/ErrorDefinition429"
+            }
+          },
+          "500": {
+            "description": "System error",
+            "schema": {
+              "$ref": "#/definitions/ErrorDefinition500"
+            }
+          },
+          "503": {
+            "description": "System error",
+            "schema": {
+              "$ref": "#/definitions/ErrorDefinition503"
+            }
+          }
+        }
+      }
+    },
+    "/open-banking/v2.2/personal-current-accounts": {
+      "get": {
+        "tags": [
+          "Products PCA"
+        ],
+        "description": "This API will return data about all PCA productsand is prepared to the Open Banking standards as defined by the Open Banking Implementation Entity (OBIE) in data dictionary version 2.2. It is regulated by the UK Competition and Markets Authority (CMA). Data is only available for the United Kingdom.",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/PCADefinitionMeta"
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/ErrorDefinition400"
+            }
+          },
+          "408": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/ErrorDefinition408"
+            }
+          },
+          "429": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/ErrorDefinition429"
+            }
+          },
+          "500": {
+            "description": "System error",
+            "schema": {
+              "$ref": "#/definitions/ErrorDefinition500"
+            }
+          },
+          "503": {
+            "description": "System error",
+            "schema": {
+              "$ref": "#/definitions/ErrorDefinition503"
+            }
+          }
+        }
+      }
+    },
+    "/x-open-banking/v2.2/personal-current-accounts/segment/{segment}": {
+      "get": {
+        "tags": [
+          "Products PCA"
+        ],
+        "description": "This extended API will return data about all PCA products for the specified segment. It is based-on the Open Banking standards as defined by the Open Banking Implementation Entity (OBIE) in data dictionary version 2.2. The extended functionality may not fully adhere to the non-functional requirements of the regulator. Data is only available for the United Kingdom.",
+        "parameters": [
+          {
+            "name": "segment",
+            "in": "path",
+            "description": "Segment name from this list&#58; &quot;Basic&quot;, &quot;General&quot;, &quot;Graduate&quot;, &quot;Packaged&quot;, &quot;Premium&quot;, &quot;Reward&quot;, &quot;Student&quot;, &quot;YoungAdult&quot;, &quot;Youth&quot;.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/PCADefinitionMeta"
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/ErrorDefinition400"
+            }
+          },
+          "408": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/ErrorDefinition408"
+            }
+          },
+          "429": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/ErrorDefinition429"
+            }
+          },
+          "500": {
+            "description": "System error",
+            "schema": {
+              "$ref": "#/definitions/ErrorDefinition500"
+            }
+          },
+          "503": {
+            "description": "System error",
+            "schema": {
+              "$ref": "#/definitions/ErrorDefinition503"
+            }
+          }
+        }
+      }
+    },
+    "/open-banking/v2.2/business-current-accounts": {
+      "get": {
+        "tags": [
+          "Products BCA"
+        ],
+        "description": "This API will return data about all BCA productsand is prepared to the Open Banking standards as defined by the Open Banking Implementation Entity (OBIE) in data dictionary version 2.2. It is regulated by the UK Competition and Markets Authority (CMA). Data is only available for the United Kingdom.",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/BCADefinitionMeta"
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/ErrorDefinition400"
+            }
+          },
+          "408": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/ErrorDefinition408"
+            }
+          },
+          "429": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/ErrorDefinition429"
+            }
+          },
+          "500": {
+            "description": "System error",
+            "schema": {
+              "$ref": "#/definitions/ErrorDefinition500"
+            }
+          },
+          "503": {
+            "description": "System error",
+            "schema": {
+              "$ref": "#/definitions/ErrorDefinition503"
+            }
+          }
+        }
+      }
+    },
+    "/x-open-banking/v2.2/business-current-accounts/segment/{segment}": {
+      "get": {
+        "tags": [
+          "Products BCA"
+        ],
+        "description": "This extended API will return data about all BCA products for the specified segment. It is based-on the Open Banking standards as defined by the Open Banking Implementation Entity (OBIE) in data dictionary version 2.2. The extended functionality may not fully adhere to the non-functional requirements of the regulator. Data is only available for the United Kingdom.",
+        "parameters": [
+          {
+            "name": "segment",
+            "in": "path",
+            "description": "Segment name from this list&#58; &quot;ClientAccount&quot;, &quot;Standard&quot;, &quot;NonCommercial&quot;, &quot;Religious&quot;, &quot;SectorSpecific&quot;, &quot;Startup&quot;, &quot;Switcher&quot;.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/BCADefinitionMeta"
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/ErrorDefinition400"
+            }
+          },
+          "408": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/ErrorDefinition408"
+            }
+          },
+          "429": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/ErrorDefinition429"
+            }
+          },
+          "500": {
+            "description": "System error",
+            "schema": {
+              "$ref": "#/definitions/ErrorDefinition500"
+            }
+          },
+          "503": {
+            "description": "System error",
+            "schema": {
+              "$ref": "#/definitions/ErrorDefinition503"
+            }
+          }
+        }
+      }
+    },
+    "/open-banking/v2.2/unsecured-sme-loans": {
+      "get": {
+        "tags": [
+          "Products SME Lending"
+        ],
+        "description": "This API will return data about all SME lending productsand is prepared to the Open Banking standards as defined by the Open Banking Implementation Entity (OBIE) in data dictionary version 2.2. It is regulated by the UK Competition and Markets Authority (CMA). Data is only available for the United Kingdom.",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/SMELendingDefinitionMeta"
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/ErrorDefinition400"
+            }
+          },
+          "408": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/ErrorDefinition408"
+            }
+          },
+          "429": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/ErrorDefinition429"
+            }
+          },
+          "500": {
+            "description": "System error",
+            "schema": {
+              "$ref": "#/definitions/ErrorDefinition500"
+            }
+          },
+          "503": {
+            "description": "System error",
+            "schema": {
+              "$ref": "#/definitions/ErrorDefinition503"
+            }
+          }
+        }
+      }
+    },
+    "/x-open-banking/v2.2/unsecured-sme-loans/segment/{segment}": {
+      "get": {
+        "tags": [
+          "Products SME Lending"
+        ],
+        "description": "This extended API will return data about all SME lending products for the specified segment. It is based-on the Open Banking standards as defined by the Open Banking Implementation Entity (OBIE) in data dictionary version 2.2. The extended functionality may not fully adhere to the non-functional requirements of the regulator. Data is only available for the United Kingdom.",
+        "parameters": [
+          {
+            "name": "segment",
+            "in": "path",
+            "description": "Segment name from this list&#58; &quot;AgricultureSector&quot;, &quot;Business&quot;, &quot;FixedGroup&quot;, &quot;FlexibleBusinessLoan&quot;, &quot;GovernmentScheme&quot;, &quot;Other&quot;, &quot;SectorSpecific&quot;.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/SMELendingDefinitionMeta"
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/ErrorDefinition400"
+            }
+          },
+          "408": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/ErrorDefinition408"
+            }
+          },
+          "429": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/ErrorDefinition429"
+            }
+          },
+          "500": {
+            "description": "System error",
+            "schema": {
+              "$ref": "#/definitions/ErrorDefinition500"
+            }
+          },
+          "503": {
+            "description": "System error",
+            "schema": {
+              "$ref": "#/definitions/ErrorDefinition503"
+            }
+          }
+        }
+      }
+    },
+    "/open-banking/v2.2/commercial-credit-cards": {
+      "get": {
+        "tags": [
+          "Products Commercial Credit Cards"
+        ],
+        "description": "This API will return data about all commercial credit cards productsand is prepared to the Open Banking standards as defined by the Open Banking Implementation Entity (OBIE) in data dictionary version 2.2. It is regulated by the UK Competition and Markets Authority (CMA). Data is only available for the United Kingdom.",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/CCCDefinitionMeta"
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/ErrorDefinition400"
+            }
+          },
+          "408": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/ErrorDefinition408"
+            }
+          },
+          "429": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/ErrorDefinition429"
+            }
+          },
+          "500": {
+            "description": "System error",
+            "schema": {
+              "$ref": "#/definitions/ErrorDefinition500"
+            }
+          },
+          "503": {
+            "description": "System error",
+            "schema": {
+              "$ref": "#/definitions/ErrorDefinition503"
+            }
+          }
+        }
+      }
+    },
+    "/x-open-banking/v2.2/commercial-credit-cards/segment/{segment}": {
+      "get": {
+        "tags": [
+          "Products Commercial Credit Cards"
+        ],
+        "description": "This extended API will return data about all commercial credit cards products for the specified segment. It is based-on the Open Banking standards as defined by the Open Banking Implementation Entity (OBIE) in data dictionary version 2.2. The extended functionality may not fully adhere to the non-functional requirements of the regulator. Data is only available for the United Kingdom.",
+        "parameters": [
+          {
+            "name": "segment",
+            "in": "path",
+            "description": "Segment name from this list&#58 &quot;General&quot;.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/CCCDefinitionMeta"
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/ErrorDefinition400"
+            }
+          },
+          "408": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/ErrorDefinition408"
+            }
+          },
+          "429": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/ErrorDefinition429"
+            }
+          },
+          "500": {
+            "description": "System error",
+            "schema": {
+              "$ref": "#/definitions/ErrorDefinition500"
+            }
+          },
+          "503": {
+            "description": "System error",
+            "schema": {
+              "$ref": "#/definitions/ErrorDefinition503"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ATMDefinitionMeta": {
+      "required": [
+        "data",
+        "meta"
+      ],
+      "properties": {
+        "meta": {
+          "$ref": "#/definitions/MetaDefinition"
+        },
+        "data": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ATMDefinition"
+          }
+        }
+      }
+    },
+    "BranchDefinitionMeta": {
+      "required": [
+        "data",
+        "meta"
+      ],
+      "properties": {
+        "meta": {
+          "$ref": "#/definitions/MetaDefinition"
+        },
+        "data": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/BranchDefinition"
+          }
+        }
+      }
+    },
+    "PCADefinitionMeta": {
+      "required": [
+        "data",
+        "meta"
+      ],
+      "properties": {
+        "meta": {
+          "$ref": "#/definitions/MetaDefinition"
+        },
+        "data": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PCADefinition"
+          }
+        }
+      }
+    },
+    "BCADefinitionMeta": {
+      "required": [
+        "data",
+        "meta"
+      ],
+      "properties": {
+        "meta": {
+          "$ref": "#/definitions/MetaDefinition"
+        },
+        "data": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/BCADefinition"
+          }
+        }
+      }
+    },
+    "SMELendingDefinitionMeta": {
+      "required": [
+        "data",
+        "meta"
+      ],
+      "properties": {
+        "meta": {
+          "$ref": "#/definitions/MetaDefinition"
+        },
+        "data": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SMELendingDefinition"
+          }
+        }
+      }
+    },
+    "CCCDefinitionMeta": {
+      "required": [
+        "data",
+        "meta"
+      ],
+      "properties": {
+        "meta": {
+          "$ref": "#/definitions/MetaDefinition"
+        },
+        "data": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CCCDefinition"
+          }
+        }
+      }
+    },
+    "MetaDefinition": {
+      "type": "object",
+      "required": [
+        "Agreement",
+        "LastUpdated",
+        "License",
+        "TermsOfUse",
+        "TotalResults"
+      ],
+      "properties": {
+        "LastUpdated": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "TotalResults": {
+          "type": "integer"
+        },
+        "Agreement": {
+          "type": "string",
+          "enum": [
+            "Use of the APIs and any related data will be subject to the terms of the Open Licence and subject to terms and conditions"
+          ]
+        },
+        "License": {
+          "type": "string",
+          "format": "uri",
+          "description": "Open Banking License",
+          "enum": [
+            "https://www.openbanking.org.uk/open-licence"
+          ]
+        },
+        "TermsOfUse": {
+          "type": "string",
+          "format": "uri",
+          "description": "Open Banking Terms of Use",
+          "enum": [
+            "https://www.openbanking.org.uk/terms"
+          ]
+        }
+      },
+      "title": "Meta data",
+      "additionalProperties": false
+    },
+    "ATMDefinition": {
+      "type": "object",
+      "required": [
+        "Brand"
+      ],
+      "properties": {
+        "Brand": {
+          "type": "array",
+          "description": "Brand of the Acquirer of transactions captured by the ATM",
+          "title": "Brand",
+          "items": {
+            "$ref": "#/definitions/ATMDefinition_Brand"
+          },
+          "minItems": 1
+        }
+      },
+      "description": "Environment of the ATM."
+    },
+    "BranchDefinition": {
+      "type": "object",
+      "required": [
+        "Brand"
+      ],
+      "properties": {
+        "Brand": {
+          "type": "array",
+          "description": "Brand owned by an organisation",
+          "title": "Brand",
+          "items": {
+            "$ref": "#/definitions/BranchDefinition_Brand"
+          },
+          "minItems": 1
+        }
+      },
+      "description": "Environment of the branch"
+    },
+    "PCADefinition": {
+      "type": "object",
+      "required": [
+        "Brand"
+      ],
+      "properties": {
+        "Brand": {
+          "type": "array",
+          "description": "Brand registered by the banking group at https://register.fca.org.uk/",
+          "title": "Brand",
+          "items": {
+            "$ref": "#/definitions/PCADefinition_Brand"
+          },
+          "minItems": 1
+        }
+      },
+      "description": "Open Banking Personal Current Account product data details"
+    },
+    "BCADefinition": {
+      "type": "object",
+      "required": [
+        "Brand"
+      ],
+      "properties": {
+        "Brand": {
+          "type": "array",
+          "description": "Brand registered by the banking group at https://register.fca.org.uk/",
+          "title": "Brand",
+          "items": {
+            "$ref": "#/definitions/BCADefinition_Brand"
+          },
+          "minItems": 1
+        }
+      },
+      "description": "Open Banking Business Current Account product data details"
+    },
+    "SMELendingDefinition": {
+      "type": "object",
+      "required": [
+        "Brand"
+      ],
+      "properties": {
+        "Brand": {
+          "type": "array",
+          "description": "Brand registered by the banking group at https://register.fca.org.uk/",
+          "title": "Brand",
+          "items": {
+            "$ref": "#/definitions/SMELendingDefinition_Brand"
+          },
+          "minItems": 1
+        }
+      },
+      "description": "Open Banking SME Unsecured Loan product data details"
+    },
+    "CCCDefinition": {
+      "type": "object",
+      "required": [
+        "Brand"
+      ],
+      "properties": {
+        "Brand": {
+          "type": "array",
+          "description": "Brand registered by the banking group at https://register.fca.org.uk/",
+          "title": "Brand",
+          "items": {
+            "$ref": "#/definitions/CCCDefinition_Brand"
+          },
+          "minItems": 1
+        }
+      },
+      "description": "Open Banking Commercial Credit Card product data details"
+    },
+    "ErrorDefinition400": {
+      "type": "object",
+      "required": [
+        "description",
+        "status",
+        "title"
+      ],
+      "properties": {
+        "status": {
+          "type": "string",
+          "enum": [
+            "400"
+          ]
+        },
+        "title": {
+          "type": "string",
+          "enum": [
+            "Bad request"
+          ]
+        },
+        "description": {
+          "type": "string",
+          "enum": [
+            "You have sent a request which could not be understood."
+          ]
+        }
+      },
+      "title": "400 Error object",
+      "additionalProperties": false
+    },
+    "ErrorDefinition408": {
+      "type": "object",
+      "required": [
+        "description",
+        "status",
+        "title"
+      ],
+      "properties": {
+        "status": {
+          "type": "string",
+          "enum": [
+            "408"
+          ]
+        },
+        "title": {
+          "type": "string",
+          "enum": [
+            "Client timeout"
+          ]
+        },
+        "description": {
+          "type": "string",
+          "enum": [
+            "Your client has failed to submit a request, and a timeout has occurred."
+          ]
+        }
+      },
+      "title": "408 Error object",
+      "additionalProperties": false
+    },
+    "ErrorDefinition429": {
+      "type": "object",
+      "required": [
+        "description",
+        "status",
+        "title"
+      ],
+      "properties": {
+        "status": {
+          "type": "string",
+          "enum": [
+            "429"
+          ]
+        },
+        "title": {
+          "type": "string",
+          "enum": [
+            "Too many requests"
+          ]
+        },
+        "description": {
+          "type": "string",
+          "enum": [
+            "You have requested this resource too often. Slow down."
+          ]
+        }
+      },
+      "title": "429 Error object",
+      "additionalProperties": false
+    },
+    "ErrorDefinition500": {
+      "type": "object",
+      "required": [
+        "description",
+        "status",
+        "title"
+      ],
+      "properties": {
+        "status": {
+          "type": "string",
+          "enum": [
+            "500"
+          ]
+        },
+        "title": {
+          "type": "string",
+          "enum": [
+            "Internal server error"
+          ]
+        },
+        "description": {
+          "type": "string",
+          "enum": [
+            "An error occurred on the server. No further information is available."
+          ]
+        }
+      },
+      "title": "500 Error object",
+      "additionalProperties": false
+    },
+    "ErrorDefinition503": {
+      "type": "object",
+      "required": [
+        "description",
+        "status",
+        "title"
+      ],
+      "properties": {
+        "status": {
+          "type": "string",
+          "enum": [
+            "503"
+          ]
+        },
+        "title": {
+          "type": "string",
+          "enum": [
+            "Service temporarily unavailable"
+          ]
+        },
+        "description": {
+          "type": "string",
+          "enum": [
+            "The service is temporarily unavailable."
+          ]
+        }
+      },
+      "title": "503 Error object",
+      "additionalProperties": false
+    },
+    "ATMDefinition_OtherAccessibility": {
+      "type": "object",
+      "required": [
+        "Description",
+        "Name"
+      ],
+      "properties": {
+        "Code": {
+          "type": "string",
+          "description": "The four letter Mnemonic used within an XML file to identify a code",
+          "title": "Code",
+          "minLength": 0,
+          "maxLength": 4,
+          "pattern": "^\\w{0,4}$"
+        },
+        "Name": {
+          "type": "string",
+          "description": "Long name associated with the code",
+          "title": "Name",
+          "minLength": 1,
+          "maxLength": 70
+        },
+        "Description": {
+          "type": "string",
+          "description": "Description to describe the purpose of the code",
+          "title": "Description",
+          "minLength": 1,
+          "maxLength": 350
+        }
+      },
+      "description": "Enter a new code , name and description for any other ATM accessibility options"
+    },
+    "ATMDefinition_OtherATMServices": {
+      "type": "object",
+      "required": [
+        "Description",
+        "Name"
+      ],
+      "properties": {
+        "Code": {
+          "type": "string",
+          "description": "The four letter Mnemonic used within an XML file to identify a code",
+          "title": "Code",
+          "minLength": 0,
+          "maxLength": 4,
+          "pattern": "^\\w{0,4}$"
+        },
+        "Name": {
+          "type": "string",
+          "description": "Long name associated with the code",
+          "title": "Name",
+          "minLength": 1,
+          "maxLength": 70
+        },
+        "Description": {
+          "type": "string",
+          "description": "Description to describe the purpose of the code",
+          "title": "Description",
+          "minLength": 1,
+          "maxLength": 350
+        }
+      },
+      "description": "Enter a new code , name and description for any other ATM Service"
+    },
+    "ATMDefinition_ATM": {
+      "type": "object",
+      "required": [
+        "Identification",
+        "Location",
+        "SupportedCurrencies"
+      ],
+      "properties": {
+        "Identification": {
+          "type": "string",
+          "description": "ATM terminal device identification for the acquirer and the issuer.",
+          "title": "Identification",
+          "minLength": 1,
+          "maxLength": 35
+        },
+        "SupportedLanguages": {
+          "type": "array",
+          "description": "Identification of the language name according to the ISO 639-1 codes. The type is validated by the list of values coded with two alphabetic characters, defined in the standard.",
+          "title": "SupportedLanguages",
+          "items": {
+            "type": "string",
+            "description": "Identification of the language name according to the ISO 639-1 codes. The type is validated by the list of values coded with two alphabetic characters, defined in the standard.",
+            "pattern": "[a-z]{2}"
+          }
+        },
+        "ATMServices": {
+          "type": "array",
+          "description": "Describes the type of transaction available for a customer on an ATM.",
+          "title": "ATMServices",
+          "items": {
+            "type": "string",
+            "description": "Describes the type of transaction available for a customer on an ATM.",
+            "enum": [
+              "Balance",
+              "BillPayments",
+              "CashDeposits",
+              "CharityDonation",
+              "ChequeDeposits",
+              "CashWithdrawal",
+              "EnvelopeDeposit",
+              "FastCash",
+              "MobileBankingRegistration",
+              "MobilePaymentRegistration",
+              "MobilePhoneTopUp",
+              "OrderStatement",
+              "Other",
+              "PINActivation",
+              "PINChange",
+              "PINUnblock",
+              "MiniStatement"
+            ]
+          }
+        },
+        "Accessibility": {
+          "type": "array",
+          "description": "Indicates Types of Accessibility",
+          "title": "Accessibility",
+          "items": {
+            "type": "string",
+            "description": "Indicates Types of Accessibility",
+            "enum": [
+              "AudioCashMachine",
+              "AutomaticDoors",
+              "ExternalRamp",
+              "InductionLoop",
+              "InternalRamp",
+              "LevelAccess",
+              "LowerLevelCounter",
+              "Other",
+              "WheelchairAccess"
+            ]
+          }
+        },
+        "Access24HoursIndicator": {
+          "type": "boolean",
+          "description": "Indicates that the ATM is available for use by customers 24 hours per day",
+          "title": "Access24HoursIndicator"
+        },
+        "SupportedCurrencies": {
+          "type": "array",
+          "description": "All ISO 4217 defined currency  supported by the ATM.",
+          "title": "SupportedCurrencies",
+          "items": {
+            "type": "string",
+            "description": "ISO 4217 defined currency",
+            "pattern": "[A-Z]{3}"
+          },
+          "minItems": 1
+        },
+        "MinimumPossibleAmount": {
+          "type": "string",
+          "description": "Minimum amount allowed for a transaction in the service.",
+          "title": "MinimumPossibleAmount",
+          "pattern": "^-?\\d{1,10}\\.?\\d{0,2}$"
+        },
+        "Note": {
+          "type": "array",
+          "description": "Summary description of the ATM.",
+          "title": "Note",
+          "items": {
+            "type": "string",
+            "description": "maxLength 2000 text",
+            "minLength": 1,
+            "maxLength": 2000
+          }
+        },
+        "OtherAccessibility": {
+          "type": "array",
+          "description": "Enter a new code , name and description for any other ATM accessibility options",
+          "title": "OtherAccessibility",
+          "items": {
+            "$ref": "#/definitions/ATMDefinition_OtherAccessibility"
+          }
+        },
+        "OtherATMServices": {
+          "type": "array",
+          "description": "Enter a new code , name and description for any other ATM Service",
+          "title": "OtherATMServices",
+          "items": {
+            "$ref": "#/definitions/ATMDefinition_OtherATMServices"
+          }
+        },
+        "Branch": {
+          "type": "object",
+          "description": "Information that locates and identifies a specific branch of a financial institution.",
+          "title": "Branch",
+          "additionalProperties": false
+        },
+        "Location": {
+          "type": "object",
+          "description": "Location of the ATM.",
+          "title": "Location",
+          "additionalProperties": false
+        }
+      },
+      "description": "ATM information."
+    },
+    "ATMDefinition_Brand": {
+      "type": "object",
+      "required": [
+        "ATM",
+        "BrandName"
+      ],
+      "properties": {
+        "BrandName": {
+          "type": "string",
+          "description": "Brand Name that an organisation uses to market its products or services to a consumer",
+          "title": "BrandName",
+          "minLength": 1,
+          "maxLength": 140
+        },
+        "ATM": {
+          "type": "array",
+          "description": "ATM information.",
+          "title": "ATM",
+          "items": {
+            "$ref": "#/definitions/ATMDefinition_ATM"
+          },
+          "minItems": 1
+        }
+      },
+      "description": "Brand of the Acquirer of transactions captured by the ATM"
+    },
+    "BranchDefinition_OtherCustomerSegment": {
+      "type": "object",
+      "required": [
+        "Description",
+        "Name"
+      ],
+      "properties": {
+        "Code": {
+          "type": "string",
+          "description": "The four letter Mnemonic used within an XML file to identify a code",
+          "title": "Code",
+          "minLength": 0,
+          "maxLength": 4,
+          "pattern": "^\\w{0,4}$"
+        },
+        "Name": {
+          "type": "string",
+          "description": "Long name associated with the code",
+          "title": "Name",
+          "minLength": 1,
+          "maxLength": 70
+        },
+        "Description": {
+          "type": "string",
+          "description": "Description to describe the purpose of the code",
+          "title": "Description",
+          "minLength": 1,
+          "maxLength": 350
+        }
+      },
+      "description": "Enter a new code , name and description for any other Customer Segment"
+    },
+    "BranchDefinition_OtherAccessibility": {
+      "type": "object",
+      "required": [
+        "Description",
+        "Name"
+      ],
+      "properties": {
+        "Code": {
+          "type": "string",
+          "description": "The four letter Mnemonic used within an XML file to identify a code",
+          "title": "Code",
+          "minLength": 0,
+          "maxLength": 4,
+          "pattern": "^\\w{0,4}$"
+        },
+        "Name": {
+          "type": "string",
+          "description": "Long name associated with the code",
+          "title": "Name",
+          "minLength": 1,
+          "maxLength": 70
+        },
+        "Description": {
+          "type": "string",
+          "description": "Description to describe the purpose of the code",
+          "title": "Description",
+          "minLength": 1,
+          "maxLength": 350
+        }
+      },
+      "description": "Enter any new code , name and description for any other Accessibility"
+    },
+    "BranchDefinition_OtherServiceAndFacility": {
+      "type": "object",
+      "required": [
+        "Description",
+        "Name"
+      ],
+      "properties": {
+        "Code": {
+          "type": "string",
+          "description": "The four letter Mnemonic used within an XML file to identify a code",
+          "title": "Code",
+          "minLength": 0,
+          "maxLength": 4,
+          "pattern": "^\\w{0,4}$"
+        },
+        "Name": {
+          "type": "string",
+          "description": "Long name associated with the code",
+          "title": "Name",
+          "minLength": 1,
+          "maxLength": 70
+        },
+        "Description": {
+          "type": "string",
+          "description": "Description to describe the purpose of the code",
+          "title": "Description",
+          "minLength": 1,
+          "maxLength": 350
+        }
+      },
+      "description": "Enter any new code , name and description for any Other Facility"
+    },
+    "BranchDefinition_ContactInfo": {
+      "type": "object",
+      "required": [
+        "ContactContent",
+        "ContactType"
+      ],
+      "properties": {
+        "ContactType": {
+          "type": "string",
+          "description": "Contact type such Phone, Fax and email",
+          "title": "ContactType",
+          "enum": [
+            "AlternateEmail",
+            "AlternateFax",
+            "AlternatePhone",
+            "Email",
+            "Fax",
+            "Other",
+            "Phone"
+          ]
+        },
+        "ContactContent": {
+          "type": "string",
+          "description": "Collection of information that identifies a phone/Fax number/ email, as defined by telecom services.",
+          "title": "ContactContent",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "ContactDescription": {
+          "type": "string",
+          "description": "Description of contact such as main phone number, alternate phone number, Fax number, alternate fax number, email and alternate email",
+          "title": "ContactDescription",
+          "minLength": 1,
+          "maxLength": 70
+        },
+        "OtherContactType": {
+          "type": "object",
+          "description": "Other contact type which is not in the standard code list",
+          "title": "OtherContactType",
+          "additionalProperties": false
+        }
+      },
+      "description": "Communication device number or electronic address used for communication."
+    },
+    "BranchDefinition_Branch": {
+      "type": "object",
+      "required": [
+        "CustomerSegment",
+        "Identification",
+        "PostalAddress",
+        "SequenceNumber",
+        "Type"
+      ],
+      "properties": {
+        "Identification": {
+          "type": "string",
+          "description": "Unique and unambiguous identification of a branch of a financial institution.",
+          "title": "Identification",
+          "minLength": 1,
+          "maxLength": 35
+        },
+        "SequenceNumber": {
+          "type": "string",
+          "description": "Sequence Number that is used in conjunction with Identification to uniquely identify a branch. Physical branches should have 0 assigned, mobile and sub branches should have 1,2,3....etc. assigned.",
+          "title": "SequenceNumber",
+          "minLength": 1,
+          "maxLength": 35
+        },
+        "Name": {
+          "type": "string",
+          "description": "Name by which a branch is known and which is usually used to identify that branch.",
+          "title": "Name",
+          "minLength": 1,
+          "maxLength": 140
+        },
+        "Type": {
+          "type": "string",
+          "description": "Codeset to indicate if a branch is physically in 1 location or is mobile",
+          "title": "Type",
+          "enum": [
+            "Mobile",
+            "Physical"
+          ]
+        },
+        "SortCode": {
+          "type": "array",
+          "description": "United Kingdom (UK) Sort Code - identifies British financial institutions on the British national clearing systems. The sort code, which is a six-digit number, is usually formatted as three pairs of numbers, for example 12-34-56. It identifies both the bank and the branch(s) where the account is held.",
+          "title": "SortCode",
+          "items": {
+            "type": "string",
+            "description": "maxLength 8 text",
+            "minLength": 1,
+            "maxLength": 8
+          }
+        },
+        "Photo": {
+          "type": "string",
+          "description": "Image related to the branch",
+          "title": "Photo"
+        },
+        "CustomerSegment": {
+          "type": "array",
+          "description": "The marketing segment which the branch is able to address in terms of customer type. Market segmentation is a marketing term referring to the aggregating of prospective buyers into groups, or segments, that have common needs and respond similarly to a marketing action. Market segmentation enables companies to target different categories of consumers who perceive the full value of certain products and services differently from one another",
+          "title": "CustomerSegment",
+          "items": {
+            "type": "string",
+            "description": "The marketing segment which the branch is able to address in terms of customer type. Market segmentation is a marketing term referring to the aggregating of prospective buyers into groups, or segments, that have common needs and respond similarly to a marketing action. Market segmentation enables companies to target different categories of consumers who perceive the full value of certain products and services differently from one another",
+            "enum": [
+              "Business",
+              "Corporate",
+              "Other",
+              "Personal",
+              "Private",
+              "Premier",
+              "Select",
+              "SME",
+              "Wealth"
+            ]
+          },
+          "minItems": 1
+        },
+        "ServiceAndFacility": {
+          "type": "array",
+          "description": "Service/Facilities offered at a branch.",
+          "title": "ServiceAndFacility",
+          "items": {
+            "type": "string",
+            "description": "Service/Facilities offered at a branch.",
+            "enum": [
+              "AssistedServiceCounter",
+              "ExternalATM",
+              "AccountVerificationService",
+              "BusinessCounter",
+              "BureauDeChange",
+              "BusinessDepositTerminal",
+              "BusinessITSupport",
+              "CardIssuanceFacility",
+              "CollectionLockers",
+              "CounterServices",
+              "ExternalQuickServicePoint",
+              "InternalQuickServicePoint",
+              "InternalATM",
+              "LodgementDevice",
+              "MortgageAdvisor",
+              "MeetingRooms",
+              "NightSafe",
+              "OnlineBankingPoint",
+              "OnDemandCurrency",
+              "Other",
+              "Parking",
+              "PremierCounter",
+              "QuickDeposit",
+              "SaturdayCounterService",
+              "StatementPrinter",
+              "SelfServiceAccountOpening",
+              "VideoBanking",
+              "WiFi"
+            ]
+          }
+        },
+        "Accessibility": {
+          "type": "array",
+          "description": "Accessibility is the ability and ease a customer can access a service, good, associate, or facility. Features which make the Bank accessible to disabled people",
+          "title": "Accessibility",
+          "items": {
+            "type": "string",
+            "description": "Accessibility is the ability and ease a customer can access a service, good, associate, or facility. Features which make the Bank accessible to disabled people",
+            "enum": [
+              "AutomaticDoors",
+              "AudioCashMachine",
+              "ExternalRamp",
+              "HelpingHandUnit",
+              "InductionLoop",
+              "InternalRamp",
+              "LevelAccess",
+              "LowerLevelCounter",
+              "Other",
+              "WheelchairAccess"
+            ]
+          }
+        },
+        "Note": {
+          "type": "string",
+          "description": "Summary description of services, facility and availability.",
+          "title": "Note",
+          "minLength": 1,
+          "maxLength": 2000
+        },
+        "OtherCustomerSegment": {
+          "type": "array",
+          "description": "Enter a new code , name and description for any other Customer Segment",
+          "title": "OtherCustomerSegment",
+          "items": {
+            "$ref": "#/definitions/BranchDefinition_OtherCustomerSegment"
+          }
+        },
+        "OtherAccessibility": {
+          "type": "array",
+          "description": "Enter any new code , name and description for any other Accessibility",
+          "title": "OtherAccessibility",
+          "items": {
+            "$ref": "#/definitions/BranchDefinition_OtherAccessibility"
+          }
+        },
+        "OtherServiceAndFacility": {
+          "type": "array",
+          "description": "Enter any new code , name and description for any Other Facility",
+          "title": "OtherServiceAndFacility",
+          "items": {
+            "$ref": "#/definitions/BranchDefinition_OtherServiceAndFacility"
+          }
+        },
+        "Availability": {
+          "type": "object",
+          "description": "Days and times defining when the branch is available for use by a customer",
+          "title": "Availability",
+          "additionalProperties": false
+        },
+        "ContactInfo": {
+          "type": "array",
+          "description": "Communication device number or electronic address used for communication.",
+          "title": "ContactInfo",
+          "items": {
+            "$ref": "#/definitions/BranchDefinition_ContactInfo"
+          }
+        },
+        "PostalAddress": {
+          "type": "object",
+          "description": "Information that locates and identifies a specific address, as defined by postal services.",
+          "title": "PostalAddress",
+          "additionalProperties": false
+        }
+      },
+      "description": "Information that locates and identifies a specific branch of a financial institution."
+    },
+    "BranchDefinition_Brand": {
+      "type": "object",
+      "required": [
+        "Branch",
+        "BrandName"
+      ],
+      "properties": {
+        "BrandName": {
+          "type": "string",
+          "description": "Brand Name that an organisation uses to market its products or services to a consumer",
+          "title": "BrandName",
+          "minLength": 1,
+          "maxLength": 140
+        },
+        "Branch": {
+          "type": "array",
+          "description": "Information that locates and identifies a specific branch of a financial institution.",
+          "title": "Branch",
+          "items": {
+            "$ref": "#/definitions/BranchDefinition_Branch"
+          },
+          "minItems": 1
+        }
+      },
+      "description": "Brand owned by an organisation"
+    },
+    "PCADefinition_PCAMarketingState": {
+      "type": "object",
+      "required": [
+        "Identification",
+        "MarketingState",
+        "OtherFeesCharges"
+      ],
+      "properties": {
+        "Identification": {
+          "type": "string",
+          "description": "Unique and unambiguous identification of a  Eligibility Marketing state.",
+          "title": "Identification",
+          "minLength": 1,
+          "maxLength": 35
+        },
+        "PredecessorID": {
+          "type": "string",
+          "description": "Identifies the marketing state that precedes this marketing state",
+          "title": "PredecessorID",
+          "minLength": 1,
+          "maxLength": 35
+        },
+        "MarketingState": {
+          "type": "string",
+          "description": "Describes the marketing state (regular or promotional) for which the eligibility criteria applies",
+          "title": "MarketingState",
+          "enum": [
+            "Promotional",
+            "Regular"
+          ]
+        },
+        "FirstMarketedDate": {
+          "type": "string",
+          "format": "date",
+          "description": "Marketing state start date",
+          "title": "FirstMarketedDate"
+        },
+        "LastMarketedDate": {
+          "type": "string",
+          "format": "date",
+          "description": "Marketing state end date",
+          "title": "LastMarketedDate"
+        },
+        "StateTenureLength": {
+          "type": "number",
+          "format": "float",
+          "description": "The length/duration of a promotional state",
+          "title": "StateTenureLength"
+        },
+        "StateTenurePeriod": {
+          "type": "string",
+          "description": "The unit of period (days, weeks, months etc.) of the promotional length",
+          "title": "StateTenurePeriod",
+          "enum": [
+            "Day",
+            "Half Year",
+            "Month",
+            "Quarter",
+            "Week",
+            "AcademicTerm",
+            "Year"
+          ]
+        },
+        "Notes": {
+          "type": "array",
+          "description": "Free text for adding details for marketing state",
+          "title": "Notes",
+          "items": {
+            "type": "string",
+            "description": "maxLength 2000 text",
+            "minLength": 1,
+            "maxLength": 2000
+          }
+        },
+        "CreditInterest": {
+          "type": "object",
+          "description": "Details about the interest that may be payable to the PCA account holders",
+          "title": "CreditInterest",
+          "additionalProperties": false
+        },
+        "Overdraft": {
+          "type": "object",
+          "description": "Borrowing details",
+          "title": "Overdraft",
+          "additionalProperties": false
+        },
+        "Eligibility": {
+          "type": "object",
+          "description": "Eligibility details for this product i.e. the criteria that an accountholder has to meet in order to be eligible for the PCA product.",
+          "title": "Eligibility",
+          "additionalProperties": false
+        },
+        "FeaturesAndBenefits": {
+          "type": "object",
+          "description": "Feature And Benefits Details",
+          "title": "FeaturesAndBenefits",
+          "additionalProperties": false
+        },
+        "OtherFeesCharges": {
+          "type": "object",
+          "description": "Contains details of fees and charges which are not associated with either borrowing or features/benefits",
+          "title": "OtherFeesCharges",
+          "additionalProperties": false
+        },
+        "CoreProduct": {
+          "type": "object",
+          "description": "Core feature of the PCA product which can be associated to a particular Marketing State",
+          "title": "CoreProduct",
+          "additionalProperties": false
+        }
+      },
+      "description": "Describes the type of the known state (regular, promotional )  of the product."
+    },
+    "PCADefinition_PCA": {
+      "type": "object",
+      "required": [
+        "Identification",
+        "Name",
+        "PCAMarketingState"
+      ],
+      "properties": {
+        "Name": {
+          "type": "string",
+          "description": "The name of the PCA product used for marketing purposes from a customer perspective. I.e. what the customer would recognise.",
+          "title": "Name",
+          "minLength": 1,
+          "maxLength": 350
+        },
+        "Identification": {
+          "type": "string",
+          "description": "The unique ID that has been internally assigned by the financial institution to each of the current account banking products they market to their retail and/or small to medium enterprise (SME) customers.",
+          "title": "Identification",
+          "minLength": 1,
+          "maxLength": 35
+        },
+        "Segment": {
+          "type": "array",
+          "description": "Market segmentation is a marketing term referring to the aggregating of prospective buyers into groups, or segments, that have common needs and respond similarly to a marketing action. Market segmentation enables companies to target different categories of consumers who perceive the full value of certain products and services differently from one another.\n\nRead more: Market Segmentation http://www.investopedia.com/terms/m/marketsegmentation.asp#ixzz4gfEEalTd \nFollow us: Investopedia on Facebook\n\nWith respect to PCA products, they are segmented in relation to different markets that they wish to focus on. For example, Basic PCA products target consumers with poor credit history, Reward PCA products target consumers who spend a lot, and Premium products target High Net Worth individuals.",
+          "title": "Segment",
+          "items": {
+            "type": "string",
+            "description": "Market segmentation is a marketing term referring to the aggregating of prospective buyers into groups, or segments, that have common needs and respond similarly to a marketing action. Market segmentation enables companies to target different categories of consumers who perceive the full value of certain products and services differently from one another.\n\nRead more: Market Segmentation http://www.investopedia.com/terms/m/marketsegmentation.asp#ixzz4gfEEalTd \nFollow us: Investopedia on Facebook\n\nWith respect to PCA products, they are segmented in relation to different markets that they wish to focus on. For example, Basic PCA products target consumers with poor credit history, Reward PCA products target consumers who spend a lot, and Premium products target High Net Worth individuals.",
+            "enum": [
+              "Basic",
+              "BenefitAndReward",
+              "CreditInterest",
+              "Cashback",
+              "General",
+              "Graduate",
+              "Other",
+              "Overdraft",
+              "Packaged",
+              "Premium",
+              "Reward",
+              "Student",
+              "YoungAdult",
+              "Youth"
+            ]
+          }
+        },
+        "OnSaleIndicator": {
+          "type": "boolean",
+          "description": "Indicates that the published product is OnSale(value 1) or Back Book (value 0) ",
+          "title": "OnSaleIndicator"
+        },
+        "Notes": {
+          "type": "array",
+          "description": "Optional additional notes to supplement the product details",
+          "title": "Notes",
+          "items": {
+            "type": "string",
+            "description": "maxLength 2000 text",
+            "minLength": 1,
+            "maxLength": 2000
+          }
+        },
+        "PCAMarketingState": {
+          "type": "array",
+          "description": "Describes the type of the known state (regular, promotional )  of the product.",
+          "title": "PCAMarketingState",
+          "items": {
+            "$ref": "#/definitions/PCADefinition_PCAMarketingState"
+          },
+          "minItems": 1
+        }
+      },
+      "description": "PCA' means a personal current account. That is an account marketed to individuals rather than businesses, which provides the facility to place funds, withdraw cash, hold deposits and to execute payment transaction to and from third parties but does not include any of the following types of accounts: \n(a) an account in which money is held on deposit in a currency other than sterling;  (b) current account mortgage, ie a single account comprising both a personal current account and a mortgage, which is regulated and marketed principally as a mortgage;  \n(c) savings accounts (including instant access savings accounts);  \n(d) credit card accounts where funds are usually paid in for the sole purpose of repaying a credit card debt; and \n(e) e-money accounts."
+    },
+    "PCADefinition_Brand": {
+      "type": "object",
+      "required": [
+        "BrandName",
+        "PCA"
+      ],
+      "properties": {
+        "BrandName": {
+          "type": "string",
+          "description": "Brand Name that an organisation uses to market its products or services to a consumer as registered at https://register.fca.org.uk/",
+          "title": "BrandName",
+          "minLength": 1,
+          "maxLength": 140
+        },
+        "PCA": {
+          "type": "array",
+          "description": "PCA' means a personal current account. That is an account marketed to individuals rather than businesses, which provides the facility to place funds, withdraw cash, hold deposits and to execute payment transaction to and from third parties but does not include any of the following types of accounts: \n(a) an account in which money is held on deposit in a currency other than sterling;  (b) current account mortgage, ie a single account comprising both a personal current account and a mortgage, which is regulated and marketed principally as a mortgage;  \n(c) savings accounts (including instant access savings accounts);  \n(d) credit card accounts where funds are usually paid in for the sole purpose of repaying a credit card debt; and \n(e) e-money accounts.",
+          "title": "PCA",
+          "items": {
+            "$ref": "#/definitions/PCADefinition_PCA"
+          },
+          "minItems": 1
+        }
+      },
+      "description": "Brand registered by the banking group at https://register.fca.org.uk/"
+    },
+    "BCADefinition_FeeChargeDetail": {
+      "type": "object",
+      "required": [
+        "ApplicationFrequency",
+        "CalculationFrequency",
+        "FeeCategory",
+        "FeeType"
+      ],
+      "properties": {
+        "FeeCategory": {
+          "type": "string",
+          "description": "Categorisation of fees and charges into standard categories.",
+          "title": "FeeCategory",
+          "enum": [
+            "Auto",
+            "ATM",
+            "BankersDrafts",
+            "Card",
+            "Cheque",
+            "CounterServices",
+            "DirectDebit",
+            "Deeds",
+            "Foreign",
+            "FX",
+            "International",
+            "Investigation",
+            "Legal",
+            "Loan",
+            "NightSafe",
+            "Online",
+            "Other",
+            "PostOffice",
+            "PaymentScheme",
+            "Report",
+            "Safekeeping",
+            "Servicing",
+            "Transaction"
+          ]
+        },
+        "FeeType": {
+          "type": "string",
+          "description": "Fee/Charge Type",
+          "title": "FeeType",
+          "enum": [
+            "ATMDeposATMPaidIn",
+            "ReportCertBalance",
+            "ATMAbroadConVisaDebit",
+            "ATMCardnetEnvIn",
+            "ATMCashGroupATMDebitCard",
+            "ATMCashNonGroupATMDebitcard",
+            "ATMConGroupATM",
+            "ATMAbroad",
+            "ATMForeignCashDebCard",
+            "ATMAbroadGoldVisaDebit",
+            "ATMNonSterlingWithdrawal",
+            "ATMAbroadVisaDebit",
+            "ATMWithdrawCash",
+            "BACSOnLineAncilliary",
+            "BACSBatch",
+            "BACSOnLineFile",
+            "BACSItem",
+            "BACSBulkBatch",
+            "BACSOnLineOverlimit",
+            "BACSOnLinePayment",
+            "BACSOnLineService",
+            "BACSBulkInternet",
+            "BACSTELDirDebSmartCard",
+            "BACSTELDirDebWebInit",
+            "BACSTELirDebWebInit",
+            "BACSTELDirDebOverlimit",
+            "BACSTELDirDebPayment",
+            "BACSTELDirDebService",
+            "BACSTELDirDebAncilliary",
+            "BACSTELAncilliary",
+            "BACSTELSmartCard",
+            "BACSTELFile",
+            "BACSTELOverlimit",
+            "BACSTELPayment",
+            "BACSTELService",
+            "CHAPSOutBranch",
+            "CHAPSOutOnlineDepositAcc",
+            "CHAPSIn",
+            "CHAPSOutPost",
+            "CHAPSOut",
+            "CHAPSOutOnline",
+            "CHAPSOutManual",
+            "CardCardReplacement",
+            "DraftsBankers",
+            "DraftsCancellation",
+            "CardGuaranteed",
+            "DraftsIntlPayableAbroad",
+            "DraftsIntlStoppedCancelled",
+            "EuroChqXLess",
+            "EuroChqXPlus",
+            "FPSOut",
+            "FPSOutOwn",
+            "FPSInBranch",
+            "LegalArticlesReport",
+            "LegalSealing",
+            "LegalBondAndGuarantee",
+            "LegalCoSearch",
+            "LegalDepositAssignment",
+            "LegalGuaranteePrep",
+            "LegalLifePolicyPrepCo",
+            "LegalLifePolicyPrepPersonal",
+            "LegalPriorityPariPassu",
+            "LegalSubordinationAgreement",
+            "DirDebDirectDebitAdmin",
+            "DirDebDirectDebitCancel",
+            "IntlPayBIBForeignLimit",
+            "IntlPayCreditTransCust",
+            "IntlPayCreditTransNonCust",
+            "IntlPayExpressMoneyMover",
+            "IntlPayEEAPayUrgent",
+            "IntlPayIrishPayUrgent",
+            "IntlPayEEAPay",
+            "IntlPayFXPaymentIn",
+            "IntlPayForeignIn1CPlus",
+            "IntlPayForeignCharge",
+            "IntlPayForeignInternet",
+            "IntlPayForeignInSub1C",
+            "IntlPayPurchaseNonSterling",
+            "IntlPayPaymentTracing",
+            "IntlPayStandardMoneyMover",
+            "IntlPayMT101Transaction",
+            "IntlPayWorldpayPayment",
+            "InvPayBankDetailsWrong",
+            "InvPayForeignBCNR",
+            "InvPayForeignRecall",
+            "InvGeneralInq",
+            "InvOldInstruction",
+            "InvPayReturnDebitXVLess",
+            "InvPayReturnDebitXVPlus",
+            "InvPayStopPayment",
+            "InvPayStandingOrdUnpaid",
+            "SafeKeepAccess",
+            "SafeKeepDeedMedium",
+            "SafeKeepingEnvelope",
+            "SafeKeepingInspection",
+            "SafeKeepingLargeItem",
+            "SafeKeepMultipleItems",
+            "SafeKeepingParcel",
+            "SafeKeepDeedSmall",
+            "SafeKeepOneItem",
+            "LoanArrangement",
+            "NightSafeNightSafeBankOpen",
+            "NightSafeCreditSub5K",
+            "NightSafeNightSafe",
+            "NightSafeNightSafePaidIn",
+            "POPostOfficeCounterCredit",
+            "POPostOfficeCashCredit",
+            "POPostOfficeCashOut",
+            "POPostOfficeWithdrawal",
+            "ChqBookTheftLossAllStopped",
+            "ChqIssuedCurrencyAcc",
+            "ChqCopy",
+            "ChqDraft",
+            "ChqIn",
+            "ChqSpecialChqClearance",
+            "ChqOutIssued",
+            "ChqSpecialChqPresentation",
+            "ChqCounterCheque",
+            "ChqChequeswithStatement",
+            "ChqStopped",
+            "ChqTrans",
+            "ChqDraftFX",
+            "ChqForeignCourier",
+            "ChqForeignNegTenThou",
+            "ChqForeignNegHundred",
+            "ChequeForeignBankDivi",
+            "ChqForeignNegFiftyThou",
+            "ChqPensionCheque",
+            "ChequeForeignOtherDivi",
+            "ChqForeignNegFiveThou",
+            "ChqForeignNegMax",
+            "ChqForeignGBPMMDPlus",
+            "ChqGiftCheque",
+            "ChqCounterLodgement",
+            "ChqCashDropLodgement",
+            "ChqForeign",
+            "ChqChequePhotocopy",
+            "ChqPostOfficeCredit",
+            "ChqPostOfficeChequeCollected",
+            "ChqChequeRetrieval",
+            "ChqReconcilliationPerTrans",
+            "ChqSpecialPresentationCount",
+            "ChqSpecialPresentationPTT",
+            "ChqDraftSterling",
+            "ChqUnpaidCharge",
+            "ChqUnpaidTransIn",
+            "ChqUnpaidTransOut",
+            "ChqUnpaidCheque",
+            "ReportAuditLetter",
+            "ReportFAXAdviceAdditional",
+            "ReportTelAdviceAdditional",
+            "ReportCreditHistory",
+            "ReportCertInterestDuplicate",
+            "ReportCertInterest",
+            "ReportCreditHistoryAdditionalInYear",
+            "ReportForeignStatusEnqElec",
+            "ReportForeignStatusEnq",
+            "ReportStatementChqDaily",
+            "ReportStatementChqFortnightly",
+            "ReportStatementChqMonthly",
+            "ReportStatementChqWeekly",
+            "ReportStatementAndDiviChq",
+            "ReportReferralItem",
+            "ReportStatementByATM",
+            "ReportStatementByBranch",
+            "ReportStatementCopyRegular",
+            "ReportStatementDaily",
+            "ReportStatusEnquiry",
+            "ReportStatementFrequent",
+            "ReportStatementMonthly",
+            "ReportStatementCopy1",
+            "ReportStatementToBranch",
+            "ReportSMSTextMiniStatementorAlert",
+            "ReportStatementFortnightly",
+            "ReportSMSTextMiniStatementWoM",
+            "ReportSMSTextAlertBalance",
+            "ReportSMSTextAlert",
+            "ReportTaxCert",
+            "ReportWeeklyStatement",
+            "SEPABranch",
+            "SEPACredit",
+            "SEPADirectDebit",
+            "SEPAIn",
+            "SEPAEuro",
+            "SEPAOut",
+            "SEPAUnpaid",
+            "SEPAWinbitsTransaction",
+            "TransBillPaymentBranch",
+            "TransBillCollect",
+            "TransTelephoneBillPayment",
+            "TransBankPayment",
+            "TransBillPaymentTelephone",
+            "TransCorrespondentBankFee",
+            "TransCreditTransferUKDifferent",
+            "TransCreditTransferUKSame",
+            "TransCredit",
+            "TransCreditTransfer",
+            "TransBranchCredit",
+            "TransDebit",
+            "TransDebCardDeb",
+            "TransUKDirDeb",
+            "TransManualDeb",
+            "TitleDeeds",
+            "TransBuyForeignWithGBP",
+            "TransGoodValueReq",
+            "TransSWIFTOutUKForeign",
+            "TransInconpleteInstruction",
+            "TransManualEntries",
+            "TransManualTrans",
+            "TransNonSterling",
+            "Other",
+            "TransPOSSaleForeign",
+            "TransPriPaymentPost",
+            "TransPOSSaleUK",
+            "TransReconciliationPerTrans",
+            "TransStandingOrdAdmin",
+            "TransStandingOrd",
+            "TransStandingOrdManPay",
+            "TransTelBusiPriPaymentForeignToUKAcc",
+            "TransTeleItem",
+            "TransTelBusiPriPaymentToGrpAcc",
+            "TransTransferExGroup",
+            "TransTelBusiPriPaymentToNonGrpAcc",
+            "TransSWIFTOutNonEEASterling",
+            "AutoAutoCredit",
+            "AutoAutomatedEntries",
+            "AutoAutoCreditPhoneInet",
+            "AutoAutomatedTrans",
+            "AutoDebitCardCommercial",
+            "AutoFPSAutoCredit",
+            "VisaTravellersChqorCurrency",
+            "OnlineInternetBillPayment",
+            "OnlineBusinessOnlineEuroPayment",
+            "OnlineBusinessOnlineUrgentEuroPayment",
+            "OnlineBusinessOnlineForeignPayment",
+            "OnlineInterbankTransfer",
+            "OnlineInterbankPerTransfer",
+            "OnlineInterbranchTransfer",
+            "OnlineInterbranchPerTransfer",
+            "OnlineSubscriptionMonthly",
+            "OnlineBankingPayment",
+            "OnlineReplacementCardReader",
+            "OnlinePaymentinGBPtoUK",
+            "OnlineUrgentPayment",
+            "OnlinePaymentinUSDtoUS",
+            "OnlineBulkDirectDebSterling",
+            "ForeignChqSent",
+            "ForeignChqSelf",
+            "ForeignChqEncashment",
+            "ForeignFXInwardsCust",
+            "ForeignFXTransfersROI",
+            "ForeignFXForwardTrans",
+            "ForeignExMaintenance",
+            "ForeignFXInwardsNonCust",
+            "ForeignFXOutwards",
+            "ForeignPurchase",
+            "ForeignStatusRep",
+            "ForeignChqDraft",
+            "ForeignChqCLess",
+            "ForeignChqMLess",
+            "ForeignChqOther",
+            "ForeignChqMPlus",
+            "ForeignChqCCC",
+            "ServiceCAccountFee",
+            "ServiceCAccountFeeMonthly",
+            "ServiceCAccountFeeQuarterly",
+            "ServiceCFixedTariff",
+            "ServiceCBusiDepAccBreakage",
+            "ServiceCMonitorDaily",
+            "ServiceCMinimumMonthlyFee",
+            "ServiceCMonitorMonthly",
+            "ServiceCMonitorWeekly",
+            "ServiceCMT940AccountFirst",
+            "ServiceCMT940AccountSubsequent",
+            "ServiceCOther",
+            "CounterCoinHandling",
+            "CounterCashIn",
+            "CounterCashInNotUs",
+            "CounterCashOut",
+            "CounterCashX",
+            "CounterForeignNoteHandling",
+            "CounterCashFeeRate",
+            "CounterForeignCashOutTx",
+            "CounterCounterLodgement",
+            "CounterCashDropLodgement",
+            "CounterNotesLodged",
+            "CounterNotesOut",
+            "CounterCashInOwn",
+            "CounterCashFeePercent"
+          ]
+        },
+        "NegotiableIndicator": {
+          "type": "boolean",
+          "description": "Fee/charge which is usually negotiable rather than a fixed amount",
+          "title": "NegotiableIndicator"
+        },
+        "IncludedInMonthlyChargeIndicator": {
+          "type": "boolean",
+          "description": "Indicates that fee/charge is already included in the monthly charge.",
+          "title": "IncludedInMonthlyChargeIndicator"
+        },
+        "FeeAmount": {
+          "type": "string",
+          "description": "Fee Amount charged for a fee/charge (where it is charged in terms of an amount rather than a rate)",
+          "title": "FeeAmount",
+          "pattern": "^(-?\\d{1,14}){1}(\\.\\d{1,4}){0,1}$"
+        },
+        "FeeRate": {
+          "type": "string",
+          "description": "Rate charged for Fee/Charge (where it is charged in terms of a rate rather than an amount)",
+          "title": "FeeRate",
+          "pattern": "^(-?\\d{1,3}){1}(\\.\\d{1,4}){0,1}$"
+        },
+        "FeeRateType": {
+          "type": "string",
+          "description": "Rate type for Fee/Charge (where it is charged in terms of a rate rather than an amount)",
+          "title": "FeeRateType",
+          "enum": [
+            "Gross",
+            "Other"
+          ]
+        },
+        "ApplicationFrequency": {
+          "type": "string",
+          "description": "How frequently the fee/charge is applied to the account",
+          "title": "ApplicationFrequency",
+          "enum": [
+            "OnClosing",
+            "OnOpening",
+            "ChargingPeriod",
+            "Daily",
+            "PerItem",
+            "Monthly",
+            "OnAnniversary",
+            "Other",
+            "PerHundredPounds",
+            "PerHour",
+            "PerOccurrence",
+            "PerSheet",
+            "PerTransaction",
+            "PerTransactionAmount",
+            "PerTransactionPercentage",
+            "Quarterly",
+            "SixMonthly",
+            "StatementMonthly",
+            "Weekly",
+            "Yearly"
+          ]
+        },
+        "CalculationFrequency": {
+          "type": "string",
+          "description": "How frequently the fee/charge is calculated",
+          "title": "CalculationFrequency",
+          "enum": [
+            "OnClosing",
+            "OnOpening",
+            "ChargingPeriod",
+            "Daily",
+            "PerItem",
+            "Monthly",
+            "OnAnniversary",
+            "Other",
+            "PerHundredPounds",
+            "PerHour",
+            "PerOccurrence",
+            "PerSheet",
+            "PerTransaction",
+            "PerTransactionAmount",
+            "PerTransactionPercentage",
+            "Quarterly",
+            "SixMonthly",
+            "StatementMonthly",
+            "Weekly",
+            "Yearly"
+          ]
+        },
+        "Notes": {
+          "type": "array",
+          "description": "Optional additional notes to supplement the fee/charge details.",
+          "title": "Notes",
+          "items": {
+            "type": "string",
+            "description": "maxLength 2000 text",
+            "minLength": 1,
+            "maxLength": 2000
+          }
+        },
+        "OtherFeeCategory": {
+          "type": "object",
+          "title": "OtherFeeCategory",
+          "additionalProperties": false
+        },
+        "OtherFeeType": {
+          "type": "object",
+          "description": "Other Fee/charge type which is not available in the standard code set",
+          "title": "OtherFeeType",
+          "additionalProperties": false
+        },
+        "OtherFeeRateType": {
+          "type": "object",
+          "description": "Other fee rate type which is not available in the standard code set",
+          "title": "OtherFeeRateType",
+          "additionalProperties": false
+        },
+        "OtherApplicationFrequency": {
+          "type": "object",
+          "description": "Other application frequencies not covered in the standard code list",
+          "title": "OtherApplicationFrequency",
+          "additionalProperties": false
+        },
+        "OtherCalculationFrequency": {
+          "type": "object",
+          "description": "Other calculation frequency which is not available in standard code set.",
+          "title": "OtherCalculationFrequency",
+          "additionalProperties": false
+        },
+        "FeeApplicableRange": {
+          "type": "object",
+          "description": "Range or amounts or rates for which the fee/charge applies",
+          "title": "FeeApplicableRange",
+          "additionalProperties": false
+        }
+      },
+      "description": "Other fees/charges details"
+    },
+    "BCADefinition_OtherFeeType": {
+      "type": "object",
+      "required": [
+        "Description",
+        "Name"
+      ],
+      "properties": {
+        "Code": {
+          "type": "string",
+          "description": "The four letter Mnemonic used within an XML file to identify a code",
+          "title": "Code",
+          "minLength": 0,
+          "maxLength": 4,
+          "pattern": "^\\w{0,4}$"
+        },
+        "Name": {
+          "type": "string",
+          "description": "Long name associated with the code",
+          "title": "Name",
+          "minLength": 1,
+          "maxLength": 70
+        },
+        "Description": {
+          "type": "string",
+          "description": "Description to describe the purpose of the code",
+          "title": "Description",
+          "minLength": 1,
+          "maxLength": 350
+        }
+      },
+      "description": "Other fee type code which is not available in the standard code set"
+    },
+    "BCADefinition_FeeChargeCap": {
+      "type": "object",
+      "required": [
+        "FeeType",
+        "MinMaxType"
+      ],
+      "properties": {
+        "FeeType": {
+          "type": "array",
+          "description": "Fee/charge type which is being capped",
+          "title": "FeeType",
+          "items": {
+            "type": "string",
+            "description": "Fee/charge type which is being capped",
+            "enum": [
+              "ATMDeposATMPaidIn",
+              "ReportCertBalance",
+              "ATMAbroadConVisaDebit",
+              "ATMCardnetEnvIn",
+              "ATMCashGroupATMDebitCard",
+              "ATMCashNonGroupATMDebitcard",
+              "ATMConGroupATM",
+              "ATMAbroad",
+              "ATMForeignCashDebCard",
+              "ATMAbroadGoldVisaDebit",
+              "ATMNonSterlingWithdrawal",
+              "ATMAbroadVisaDebit",
+              "ATMWithdrawCash",
+              "BACSOnLineAncilliary",
+              "BACSBatch",
+              "BACSOnLineFile",
+              "BACSItem",
+              "BACSBulkBatch",
+              "BACSOnLineOverlimit",
+              "BACSOnLinePayment",
+              "BACSOnLineService",
+              "BACSBulkInternet",
+              "BACSTELDirDebSmartCard",
+              "BACSTELDirDebWebInit",
+              "BACSTELirDebWebInit",
+              "BACSTELDirDebOverlimit",
+              "BACSTELDirDebPayment",
+              "BACSTELDirDebService",
+              "BACSTELDirDebAncilliary",
+              "BACSTELAncilliary",
+              "BACSTELSmartCard",
+              "BACSTELFile",
+              "BACSTELOverlimit",
+              "BACSTELPayment",
+              "BACSTELService",
+              "CHAPSOutBranch",
+              "CHAPSOutOnlineDepositAcc",
+              "CHAPSIn",
+              "CHAPSOutPost",
+              "CHAPSOut",
+              "CHAPSOutOnline",
+              "CHAPSOutManual",
+              "CardCardReplacement",
+              "DraftsBankers",
+              "DraftsCancellation",
+              "CardGuaranteed",
+              "DraftsIntlPayableAbroad",
+              "DraftsIntlStoppedCancelled",
+              "EuroChqXLess",
+              "EuroChqXPlus",
+              "FPSOut",
+              "FPSOutOwn",
+              "FPSInBranch",
+              "LegalArticlesReport",
+              "LegalSealing",
+              "LegalBondAndGuarantee",
+              "LegalCoSearch",
+              "LegalDepositAssignment",
+              "LegalGuaranteePrep",
+              "LegalLifePolicyPrepCo",
+              "LegalLifePolicyPrepPersonal",
+              "LegalPriorityPariPassu",
+              "LegalSubordinationAgreement",
+              "DirDebDirectDebitAdmin",
+              "DirDebDirectDebitCancel",
+              "IntlPayBIBForeignLimit",
+              "IntlPayCreditTransCust",
+              "IntlPayCreditTransNonCust",
+              "IntlPayExpressMoneyMover",
+              "IntlPayEEAPayUrgent",
+              "IntlPayIrishPayUrgent",
+              "IntlPayEEAPay",
+              "IntlPayFXPaymentIn",
+              "IntlPayForeignIn1CPlus",
+              "IntlPayForeignCharge",
+              "IntlPayForeignInternet",
+              "IntlPayForeignInSub1C",
+              "IntlPayPurchaseNonSterling",
+              "IntlPayPaymentTracing",
+              "IntlPayStandardMoneyMover",
+              "IntlPayMT101Transaction",
+              "IntlPayWorldpayPayment",
+              "InvPayBankDetailsWrong",
+              "InvPayForeignBCNR",
+              "InvPayForeignRecall",
+              "InvGeneralInq",
+              "InvOldInstruction",
+              "InvPayReturnDebitXVLess",
+              "InvPayReturnDebitXVPlus",
+              "InvPayStopPayment",
+              "InvPayStandingOrdUnpaid",
+              "SafeKeepAccess",
+              "SafeKeepDeedMedium",
+              "SafeKeepingEnvelope",
+              "SafeKeepingInspection",
+              "SafeKeepingLargeItem",
+              "SafeKeepMultipleItems",
+              "SafeKeepingParcel",
+              "SafeKeepDeedSmall",
+              "SafeKeepOneItem",
+              "LoanArrangement",
+              "NightSafeNightSafeBankOpen",
+              "NightSafeCreditSub5K",
+              "NightSafeNightSafe",
+              "NightSafeNightSafePaidIn",
+              "POPostOfficeCounterCredit",
+              "POPostOfficeCashCredit",
+              "POPostOfficeCashOut",
+              "POPostOfficeWithdrawal",
+              "ChqBookTheftLossAllStopped",
+              "ChqIssuedCurrencyAcc",
+              "ChqCopy",
+              "ChqDraft",
+              "ChqIn",
+              "ChqSpecialChqClearance",
+              "ChqOutIssued",
+              "ChqSpecialChqPresentation",
+              "ChqCounterCheque",
+              "ChqChequeswithStatement",
+              "ChqStopped",
+              "ChqTrans",
+              "ChqDraftFX",
+              "ChqForeignCourier",
+              "ChqForeignNegTenThou",
+              "ChqForeignNegHundred",
+              "ChequeForeignBankDivi",
+              "ChqForeignNegFiftyThou",
+              "ChqPensionCheque",
+              "ChequeForeignOtherDivi",
+              "ChqForeignNegFiveThou",
+              "ChqForeignNegMax",
+              "ChqForeignGBPMMDPlus",
+              "ChqGiftCheque",
+              "ChqCounterLodgement",
+              "ChqCashDropLodgement",
+              "ChqForeign",
+              "ChqChequePhotocopy",
+              "ChqPostOfficeCredit",
+              "ChqPostOfficeChequeCollected",
+              "ChqChequeRetrieval",
+              "ChqReconcilliationPerTrans",
+              "ChqSpecialPresentationCount",
+              "ChqSpecialPresentationPTT",
+              "ChqDraftSterling",
+              "ChqUnpaidCharge",
+              "ChqUnpaidTransIn",
+              "ChqUnpaidTransOut",
+              "ChqUnpaidCheque",
+              "ReportAuditLetter",
+              "ReportFAXAdviceAdditional",
+              "ReportTelAdviceAdditional",
+              "ReportCreditHistory",
+              "ReportCertInterestDuplicate",
+              "ReportCertInterest",
+              "ReportCreditHistoryAdditionalInYear",
+              "ReportForeignStatusEnqElec",
+              "ReportForeignStatusEnq",
+              "ReportStatementChqDaily",
+              "ReportStatementChqFortnightly",
+              "ReportStatementChqMonthly",
+              "ReportStatementChqWeekly",
+              "ReportStatementAndDiviChq",
+              "ReportReferralItem",
+              "ReportStatementByATM",
+              "ReportStatementByBranch",
+              "ReportStatementCopyRegular",
+              "ReportStatementDaily",
+              "ReportStatusEnquiry",
+              "ReportStatementFrequent",
+              "ReportStatementMonthly",
+              "ReportStatementCopy1",
+              "ReportStatementToBranch",
+              "ReportSMSTextMiniStatementorAlert",
+              "ReportStatementFortnightly",
+              "ReportSMSTextMiniStatementWoM",
+              "ReportSMSTextAlertBalance",
+              "ReportSMSTextAlert",
+              "ReportTaxCert",
+              "ReportWeeklyStatement",
+              "SEPABranch",
+              "SEPACredit",
+              "SEPADirectDebit",
+              "SEPAIn",
+              "SEPAEuro",
+              "SEPAOut",
+              "SEPAUnpaid",
+              "SEPAWinbitsTransaction",
+              "TransBillPaymentBranch",
+              "TransBillCollect",
+              "TransTelephoneBillPayment",
+              "TransBankPayment",
+              "TransBillPaymentTelephone",
+              "TransCorrespondentBankFee",
+              "TransCreditTransferUKDifferent",
+              "TransCreditTransferUKSame",
+              "TransCredit",
+              "TransCreditTransfer",
+              "TransBranchCredit",
+              "TransDebit",
+              "TransDebCardDeb",
+              "TransUKDirDeb",
+              "TransManualDeb",
+              "TitleDeeds",
+              "TransBuyForeignWithGBP",
+              "TransGoodValueReq",
+              "TransSWIFTOutUKForeign",
+              "TransInconpleteInstruction",
+              "TransManualEntries",
+              "TransManualTrans",
+              "TransNonSterling",
+              "Other",
+              "TransPOSSaleForeign",
+              "TransPriPaymentPost",
+              "TransPOSSaleUK",
+              "TransReconciliationPerTrans",
+              "TransStandingOrdAdmin",
+              "TransStandingOrd",
+              "TransStandingOrdManPay",
+              "TransTelBusiPriPaymentForeignToUKAcc",
+              "TransTeleItem",
+              "TransTelBusiPriPaymentToGrpAcc",
+              "TransTransferExGroup",
+              "TransTelBusiPriPaymentToNonGrpAcc",
+              "TransSWIFTOutNonEEASterling",
+              "AutoAutoCredit",
+              "AutoAutomatedEntries",
+              "AutoAutoCreditPhoneInet",
+              "AutoAutomatedTrans",
+              "AutoDebitCardCommercial",
+              "AutoFPSAutoCredit",
+              "VisaTravellersChqorCurrency",
+              "OnlineInternetBillPayment",
+              "OnlineBusinessOnlineEuroPayment",
+              "OnlineBusinessOnlineUrgentEuroPayment",
+              "OnlineBusinessOnlineForeignPayment",
+              "OnlineInterbankTransfer",
+              "OnlineInterbankPerTransfer",
+              "OnlineInterbranchTransfer",
+              "OnlineInterbranchPerTransfer",
+              "OnlineSubscriptionMonthly",
+              "OnlineBankingPayment",
+              "OnlineReplacementCardReader",
+              "OnlinePaymentinGBPtoUK",
+              "OnlineUrgentPayment",
+              "OnlinePaymentinUSDtoUS",
+              "OnlineBulkDirectDebSterling",
+              "ForeignChqSent",
+              "ForeignChqSelf",
+              "ForeignChqEncashment",
+              "ForeignFXInwardsCust",
+              "ForeignFXTransfersROI",
+              "ForeignFXForwardTrans",
+              "ForeignExMaintenance",
+              "ForeignFXInwardsNonCust",
+              "ForeignFXOutwards",
+              "ForeignPurchase",
+              "ForeignStatusRep",
+              "ForeignChqDraft",
+              "ForeignChqCLess",
+              "ForeignChqMLess",
+              "ForeignChqOther",
+              "ForeignChqMPlus",
+              "ForeignChqCCC",
+              "ServiceCAccountFee",
+              "ServiceCAccountFeeMonthly",
+              "ServiceCAccountFeeQuarterly",
+              "ServiceCFixedTariff",
+              "ServiceCBusiDepAccBreakage",
+              "ServiceCMonitorDaily",
+              "ServiceCMinimumMonthlyFee",
+              "ServiceCMonitorMonthly",
+              "ServiceCMonitorWeekly",
+              "ServiceCMT940AccountFirst",
+              "ServiceCMT940AccountSubsequent",
+              "ServiceCOther",
+              "CounterCoinHandling",
+              "CounterCashIn",
+              "CounterCashInNotUs",
+              "CounterCashOut",
+              "CounterCashX",
+              "CounterForeignNoteHandling",
+              "CounterCashFeeRate",
+              "CounterForeignCashOutTx",
+              "CounterCounterLodgement",
+              "CounterCashDropLodgement",
+              "CounterNotesLodged",
+              "CounterNotesOut",
+              "CounterCashInOwn",
+              "CounterCashFeePercent"
+            ]
+          },
+          "minItems": 1
+        },
+        "MinMaxType": {
+          "type": "string",
+          "description": "Min Max type",
+          "title": "MinMaxType",
+          "enum": [
+            "Minimum",
+            "Maximum"
+          ]
+        },
+        "FeeCapOccurrence": {
+          "type": "number",
+          "format": "float",
+          "description": "fee/charges are captured dependent on the number of occurrences rather than capped at a particular amount",
+          "title": "FeeCapOccurrence"
+        },
+        "FeeCapAmount": {
+          "type": "string",
+          "description": "Cap amount charged for a fee/charge (where it is charged in terms of an amount rather than a rate)",
+          "title": "FeeCapAmount",
+          "pattern": "^(-?\\d{1,14}){1}(\\.\\d{1,4}){0,1}$"
+        },
+        "CappingPeriod": {
+          "type": "string",
+          "description": "Period e.g. day, week, month etc. for which the fee/charge is capped",
+          "title": "CappingPeriod",
+          "enum": [
+            "Day",
+            "Half Year",
+            "Month",
+            "Quarter",
+            "Week",
+            "AcademicTerm",
+            "Year"
+          ]
+        },
+        "Notes": {
+          "type": "array",
+          "description": "Free text for adding  extra details for fee charge cap",
+          "title": "Notes",
+          "items": {
+            "type": "string",
+            "description": "maxLength 2000 text",
+            "minLength": 1,
+            "maxLength": 2000
+          }
+        },
+        "OtherFeeType": {
+          "type": "array",
+          "description": "Other fee type code which is not available in the standard code set",
+          "title": "OtherFeeType",
+          "items": {
+            "$ref": "#/definitions/BCADefinition_OtherFeeType"
+          }
+        }
+      },
+      "description": "Details about any caps (maximum charges) that apply to a particular fee/charge"
+    },
+    "BCADefinition_OtherFeesCharges": {
+      "type": "object",
+      "required": [
+        "FeeChargeDetail"
+      ],
+      "properties": {
+        "TariffType": {
+          "type": "string",
+          "description": "TariffType which defines the fee and charges.",
+          "title": "TariffType",
+          "enum": [
+            "Electronic",
+            "Mixed",
+            "Other"
+          ]
+        },
+        "TariffName": {
+          "type": "string",
+          "description": "Name of the tariff",
+          "title": "TariffName",
+          "minLength": 1,
+          "maxLength": 350
+        },
+        "OtherTariffType": {
+          "type": "object",
+          "description": "Other tariff type which is not in the standard list.",
+          "title": "OtherTariffType",
+          "additionalProperties": false
+        },
+        "FeeChargeDetail": {
+          "type": "array",
+          "description": "Other fees/charges details",
+          "title": "FeeChargeDetail",
+          "items": {
+            "$ref": "#/definitions/BCADefinition_FeeChargeDetail"
+          },
+          "minItems": 1
+        },
+        "FeeChargeCap": {
+          "type": "array",
+          "description": "Details about any caps (maximum charges) that apply to a particular fee/charge",
+          "title": "FeeChargeCap",
+          "items": {
+            "$ref": "#/definitions/BCADefinition_FeeChargeCap"
+          }
+        }
+      },
+      "description": "Contains details of fees and charges which are not associated with either Overdraft or features/benefits"
+    },
+    "BCADefinition_BCAMarketingState": {
+      "type": "object",
+      "required": [
+        "Identification",
+        "MarketingState",
+        "OtherFeesCharges"
+      ],
+      "properties": {
+        "Identification": {
+          "type": "string",
+          "description": "Unique and unambiguous identification of a  BCA Product Marketing State.",
+          "title": "Identification",
+          "minLength": 1,
+          "maxLength": 35
+        },
+        "PredecessorID": {
+          "type": "string",
+          "description": "Identifies the marketing state that precedes this marketing state",
+          "title": "PredecessorID",
+          "minLength": 1,
+          "maxLength": 35
+        },
+        "MarketingState": {
+          "type": "string",
+          "description": "Describes the marketing state (regular or promotional) of the BCA Product",
+          "title": "MarketingState",
+          "enum": [
+            "Promotional",
+            "Regular"
+          ]
+        },
+        "FirstMarketedDate": {
+          "type": "string",
+          "format": "date",
+          "description": "Marketing state start date",
+          "title": "FirstMarketedDate"
+        },
+        "LastMarketedDate": {
+          "type": "string",
+          "format": "date",
+          "description": "Marketing state end date",
+          "title": "LastMarketedDate"
+        },
+        "StateTenureLength": {
+          "type": "number",
+          "format": "float",
+          "description": "The length/duration of a promotional state",
+          "title": "StateTenureLength"
+        },
+        "StateTenurePeriod": {
+          "type": "string",
+          "description": "The unit of period (days, weeks, months etc.) of the promotional length",
+          "title": "StateTenurePeriod",
+          "enum": [
+            "Day",
+            "Half Year",
+            "Month",
+            "Quarter",
+            "Week",
+            "AcademicTerm",
+            "Year"
+          ]
+        },
+        "Notes": {
+          "type": "array",
+          "description": "Free text for adding details for marketing state",
+          "title": "Notes",
+          "items": {
+            "type": "string",
+            "description": "maxLength 2000 text",
+            "minLength": 1,
+            "maxLength": 2000
+          }
+        },
+        "CreditInterest": {
+          "type": "object",
+          "description": "Details about the interest that may be payable to the BCA account holders",
+          "title": "CreditInterest",
+          "additionalProperties": false
+        },
+        "Overdraft": {
+          "type": "object",
+          "description": "Borrowing details",
+          "title": "Overdraft",
+          "additionalProperties": false
+        },
+        "Eligibility": {
+          "type": "object",
+          "description": "Eligibility details for this product i.e. the criteria that an accountholder has to meet in order to be eligible for the BCA product.",
+          "title": "Eligibility",
+          "additionalProperties": false
+        },
+        "FeaturesAndBenefits": {
+          "type": "object",
+          "description": "Feature And Benefits Details",
+          "title": "FeaturesAndBenefits",
+          "additionalProperties": false
+        },
+        "OtherFeesCharges": {
+          "type": "array",
+          "description": "Contains details of fees and charges which are not associated with either Overdraft or features/benefits",
+          "title": "OtherFeesCharges",
+          "items": {
+            "$ref": "#/definitions/BCADefinition_OtherFeesCharges"
+          },
+          "minItems": 1
+        },
+        "CoreProduct": {
+          "type": "object",
+          "description": "BCA core product details.",
+          "title": "CoreProduct",
+          "additionalProperties": false
+        }
+      },
+      "description": "The marketing state (promotional or regular) of the BCA Product."
+    },
+    "BCADefinition_BCA": {
+      "type": "object",
+      "required": [
+        "BCAMarketingState",
+        "Identification",
+        "Name"
+      ],
+      "properties": {
+        "Name": {
+          "type": "string",
+          "description": "The name of the BCA product used for marketing purposes from a customer perspective. I.e. what the customer would recognise.",
+          "title": "Name",
+          "minLength": 1,
+          "maxLength": 350
+        },
+        "Identification": {
+          "type": "string",
+          "description": "The unique ID that has been internally assigned by the financial institution to each of the current account banking products they market to their retail and/or small to medium enterprise (SME) customers.",
+          "title": "Identification",
+          "minLength": 1,
+          "maxLength": 35
+        },
+        "Segment": {
+          "type": "array",
+          "description": "Market segmentation is a marketing term referring to the aggregating of prospective buyers into groups, or segments, that have common needs and respond similarly to a marketing action. Market segmentation enables companies to target different categories of consumers who perceive the full value of certain products and services differently from one another.\n\nRead more: Market Segmentation http://www.investopedia.com/terms/m/marketsegmentation.asp#ixzz4gfEEalTd \nFollow us: Investopedia on Facebook\n\nWith respect to BCA products, they are segmented in relation to different markets that they wish to focus on.",
+          "title": "Segment",
+          "items": {
+            "type": "string",
+            "description": "Market segmentation is a marketing term referring to the aggregating of prospective buyers into groups, or segments, that have common needs and respond similarly to a marketing action. Market segmentation enables companies to target different categories of consumers who perceive the full value of certain products and services differently from one another.\n\nRead more: Market Segmentation http://www.investopedia.com/terms/m/marketsegmentation.asp#ixzz4gfEEalTd \nFollow us: Investopedia on Facebook\n\nWith respect to BCA products, they are segmented in relation to different markets that they wish to focus on.",
+            "enum": [
+              "ClientAccount",
+              "Standard",
+              "NonCommercialChaitiesClbSoc",
+              "NonCommercialPublicAuthGovt",
+              "Religious",
+              "SectorSpecific",
+              "Startup",
+              "Switcher",
+              "NonCommercial"
+            ]
+          }
+        },
+        "OnSaleIndicator": {
+          "type": "boolean",
+          "description": "Indicates that the published product is OnSale(value 1) or Back Book (value 0) ",
+          "title": "OnSaleIndicator"
+        },
+        "FeeFreeLength": {
+          "type": "number",
+          "format": "float",
+          "description": "The length/duration of the fee free period",
+          "title": "FeeFreeLength"
+        },
+        "FeeFreeLengthPeriod": {
+          "type": "string",
+          "description": "The unit of period (days, weeks, months etc.) of the promotional length",
+          "title": "FeeFreeLengthPeriod",
+          "enum": [
+            "Day",
+            "Half Year",
+            "Month",
+            "Quarter",
+            "Week",
+            "AcademicTerm",
+            "Year"
+          ]
+        },
+        "Notes": {
+          "type": "array",
+          "description": "Optional additional notes to supplement the product details",
+          "title": "Notes",
+          "items": {
+            "type": "string",
+            "description": "maxLength 2000 text",
+            "minLength": 1,
+            "maxLength": 2000
+          }
+        },
+        "BCAMarketingState": {
+          "type": "array",
+          "description": "The marketing state (promotional or regular) of the BCA Product.",
+          "title": "BCAMarketingState",
+          "items": {
+            "$ref": "#/definitions/BCADefinition_BCAMarketingState"
+          },
+          "minItems": 1
+        }
+      },
+      "description": "BCA means a Business Current Account."
+    },
+    "BCADefinition_Brand": {
+      "type": "object",
+      "required": [
+        "BCA",
+        "BrandName"
+      ],
+      "properties": {
+        "BrandName": {
+          "type": "string",
+          "description": "Brand Name that an organisation uses to market its products or services to a consumer as registered at https://register.fca.org.uk/",
+          "title": "BrandName",
+          "minLength": 1,
+          "maxLength": 140
+        },
+        "BCA": {
+          "type": "array",
+          "description": "BCA means a Business Current Account.",
+          "title": "BCA",
+          "items": {
+            "$ref": "#/definitions/BCADefinition_BCA"
+          },
+          "minItems": 1
+        }
+      },
+      "description": "Brand registered by the banking group at https://register.fca.org.uk/"
+    },
+    "SMELendingDefinition_RepaymentHoliday": {
+      "type": "object",
+      "properties": {
+        "MaxHolidayLength": {
+          "type": "number",
+          "format": "float",
+          "description": "The maximum length/duration of a Repayment Holiday",
+          "title": "MaxHolidayLength"
+        },
+        "MaxHolidayPeriod": {
+          "type": "string",
+          "description": "The unit of period (days, weeks, months etc.) of the repayment holiday",
+          "title": "MaxHolidayPeriod",
+          "enum": [
+            "Day",
+            "Half Year",
+            "Month",
+            "Quarter",
+            "Week",
+            "Year"
+          ]
+        },
+        "Notes": {
+          "type": "array",
+          "description": "Free text for adding details for repayment holiday",
+          "title": "Notes",
+          "items": {
+            "type": "string",
+            "description": "maxLength 2000 text",
+            "minLength": 1,
+            "maxLength": 2000
+          }
+        }
+      },
+      "description": "Details of capital repayment holiday if any"
+    },
+    "SMELendingDefinition_Repayment": {
+      "type": "object",
+      "properties": {
+        "RepaymentType": {
+          "type": "string",
+          "description": "Repayment type",
+          "title": "RepaymentType",
+          "enum": [
+            "Balloon",
+            "Bullet",
+            "CapitalAndInterest",
+            "CustomSchedule",
+            "EarlyRepayment",
+            "FixedCapitalFullyAmortising",
+            "FixedCapitalWithBullet",
+            "FixedCapitalAndInterestReducingBalance",
+            "InterestOnly",
+            "PrepaymentFee",
+            "RepaymentWithBullet",
+            "StraightLineInterestOnly"
+          ]
+        },
+        "RepaymentFrequency": {
+          "type": "string",
+          "description": "Repayment frequency",
+          "title": "RepaymentFrequency",
+          "enum": [
+            "Daily",
+            "Flexible",
+            "Fortnightly",
+            "HalfYearly",
+            "Monthly",
+            "Other",
+            "Quarterly",
+            "Weekly",
+            "Yearly"
+          ]
+        },
+        "AmountType": {
+          "type": "string",
+          "description": "The repayment is for paying just the interest only or both interest and capital or bullet amount or balance to date etc",
+          "title": "AmountType",
+          "enum": [
+            "BalanceToDate",
+            "Balloon",
+            "CapitalAndInterest",
+            "FeeChargeCap",
+            "InterestOnly",
+            "Bullet",
+            "Other"
+          ]
+        },
+        "Notes": {
+          "type": "array",
+          "description": "Optional additional notes to supplement the Repayment",
+          "title": "Notes",
+          "items": {
+            "type": "string",
+            "description": "maxLength 2000 text",
+            "minLength": 1,
+            "maxLength": 2000
+          }
+        },
+        "OtherRepaymentType": {
+          "type": "object",
+          "description": "Other repayment type which is not in the standard code list",
+          "title": "OtherRepaymentType",
+          "additionalProperties": false
+        },
+        "OtherRepaymentFrequency": {
+          "type": "object",
+          "description": "Other repayment frequency which is not in the standard code list",
+          "title": "OtherRepaymentFrequency",
+          "additionalProperties": false
+        },
+        "OtherAmountType": {
+          "type": "object",
+          "description": "Other amount type which is not in the standard code list",
+          "title": "OtherAmountType",
+          "additionalProperties": false
+        },
+        "RepaymentFeeCharges": {
+          "type": "object",
+          "description": "Applicable fee/charges for repayment such as prepayment, full early repayment or non repayment.",
+          "title": "RepaymentFeeCharges",
+          "additionalProperties": false
+        },
+        "RepaymentHoliday": {
+          "type": "array",
+          "description": "Details of capital repayment holiday if any",
+          "title": "RepaymentHoliday",
+          "items": {
+            "$ref": "#/definitions/SMELendingDefinition_RepaymentHoliday"
+          }
+        }
+      },
+      "description": "Repayment details of the Loan product"
+    },
+    "SMELendingDefinition_SMELoanMarketingState": {
+      "type": "object",
+      "required": [
+        "CoreProduct",
+        "Eligibility",
+        "FeaturesAndBenefits",
+        "Identification",
+        "LoanInterest",
+        "MarketingState",
+        "Repayment"
+      ],
+      "properties": {
+        "Identification": {
+          "type": "string",
+          "description": "Unique and unambiguous identification of a  SME Loan Product Marketing State.",
+          "title": "Identification",
+          "minLength": 1,
+          "maxLength": 35
+        },
+        "PredecessorID": {
+          "type": "string",
+          "description": "Identifies the marketing state that precedes this marketing state",
+          "title": "PredecessorID",
+          "minLength": 1,
+          "maxLength": 35
+        },
+        "MarketingState": {
+          "type": "string",
+          "description": "Describes the marketing state (regular or promotional) of the SME Loan Product",
+          "title": "MarketingState",
+          "enum": [
+            "Promotional",
+            "Regular"
+          ]
+        },
+        "FirstMarketedDate": {
+          "type": "string",
+          "format": "date",
+          "description": "Marketing state start date",
+          "title": "FirstMarketedDate"
+        },
+        "LastMarketedDate": {
+          "type": "string",
+          "format": "date",
+          "description": "Marketing state end date",
+          "title": "LastMarketedDate"
+        },
+        "StateTenureLength": {
+          "type": "number",
+          "format": "float",
+          "description": "The length/duration of a promotional state",
+          "title": "StateTenureLength"
+        },
+        "StateTenurePeriod": {
+          "type": "string",
+          "description": "The unit of period (days, weeks, months etc.) of the promotional length",
+          "title": "StateTenurePeriod",
+          "enum": [
+            "Day",
+            "Half Year",
+            "Month",
+            "Quarter",
+            "Week",
+            "Year"
+          ]
+        },
+        "Notes": {
+          "type": "array",
+          "description": "Free text for adding details for marketing state",
+          "title": "Notes",
+          "items": {
+            "type": "string",
+            "description": "maxLength 2000 text",
+            "minLength": 1,
+            "maxLength": 2000
+          }
+        },
+        "LoanInterest": {
+          "type": "object",
+          "description": "Details about the interest that may be payable to the SME Loan",
+          "title": "LoanInterest",
+          "additionalProperties": false
+        },
+        "Repayment": {
+          "type": "array",
+          "description": "Repayment details of the Loan product",
+          "title": "Repayment",
+          "items": {
+            "$ref": "#/definitions/SMELendingDefinition_Repayment"
+          },
+          "minItems": 1
+        },
+        "Eligibility": {
+          "type": "object",
+          "description": "Eligibility details for this product i.e. the criteria that an business has to meet in order to be eligible for the SME Loan product.",
+          "title": "Eligibility",
+          "additionalProperties": false
+        },
+        "FeaturesAndBenefits": {
+          "type": "object",
+          "description": "Feature And Benefits Details",
+          "title": "FeaturesAndBenefits",
+          "additionalProperties": false
+        },
+        "OtherFeesCharges": {
+          "type": "object",
+          "description": "Contains details of fees and charges which are not associated with either loan interest or repayments",
+          "title": "OtherFeesCharges",
+          "additionalProperties": false
+        },
+        "CoreProduct": {
+          "type": "object",
+          "description": "SME Loan core product details.",
+          "title": "CoreProduct",
+          "additionalProperties": false
+        }
+      },
+      "description": "The marketing state (promotional or regular) of the SME Loan Product."
+    },
+    "SMELendingDefinition_SMELoan": {
+      "type": "object",
+      "required": [
+        "Identification",
+        "Name",
+        "SMELoanMarketingState",
+        "Segment"
+      ],
+      "properties": {
+        "Name": {
+          "type": "string",
+          "description": "The name of the SME Loan product used for marketing purposes from a customer perspective. I.e. what the customer would recognise.",
+          "title": "Name",
+          "minLength": 1,
+          "maxLength": 350
+        },
+        "Identification": {
+          "type": "string",
+          "description": "The unique ID that has been internally assigned by the financial institution to each of the current account banking products they market to their retail and/or small to medium enterprise (SME) customers.",
+          "title": "Identification",
+          "minLength": 1,
+          "maxLength": 35
+        },
+        "Segment": {
+          "type": "array",
+          "description": "Market segmentation is a marketing term referring to the aggregating of prospective buyers into groups, or segments, that have common needs and respond similarly to a marketing action. Market segmentation enables companies to target different categories of consumers who perceive the full value of certain products and services differently from one another.\n\nRead more: Market Segmentation http://www.investopedia.com/terms/m/marketsegmentation.asp#ixzz4gfEEalTd \nFollow us: Investopedia on Facebook\n\nWith respect to SME Loan products, they are segmented in relation to different markets that they wish to focus on.",
+          "title": "Segment",
+          "items": {
+            "type": "string",
+            "description": "Market segmentation is a marketing term referring to the aggregating of prospective buyers into groups, or segments, that have common needs and respond similarly to a marketing action. Market segmentation enables companies to target different categories of consumers who perceive the full value of certain products and services differently from one another.\n\nRead more: Market Segmentation http://www.investopedia.com/terms/m/marketsegmentation.asp#ixzz4gfEEalTd \nFollow us: Investopedia on Facebook\n\nWith respect to SME Loan products, they are segmented in relation to different markets that they wish to focus on.",
+            "enum": [
+              "AgricultureSector",
+              "Business",
+              "FlexibleBusinessLoan",
+              "FixedGroup",
+              "GovernmentScheme",
+              "Other",
+              "SectorSpecific"
+            ]
+          },
+          "minItems": 1
+        },
+        "OtherSegment": {
+          "type": "object",
+          "description": "Other segment code which is not available in the standard code set",
+          "title": "OtherSegment",
+          "additionalProperties": false
+        },
+        "SMELoanMarketingState": {
+          "type": "array",
+          "description": "The marketing state (promotional or regular) of the SME Loan Product.",
+          "title": "SMELoanMarketingState",
+          "items": {
+            "$ref": "#/definitions/SMELendingDefinition_SMELoanMarketingState"
+          },
+          "minItems": 1
+        }
+      },
+      "description": "SMELoan means SME unsecured loan."
+    },
+    "SMELendingDefinition_Brand": {
+      "type": "object",
+      "required": [
+        "BrandName",
+        "SMELoan"
+      ],
+      "properties": {
+        "BrandName": {
+          "type": "string",
+          "description": "Brand Name that an organisation uses to market its products or services to a consumer as registered at https://register.fca.org.uk/",
+          "title": "BrandName",
+          "minLength": 1,
+          "maxLength": 140
+        },
+        "SMELoan": {
+          "type": "array",
+          "description": "SMELoan means SME unsecured loan.",
+          "title": "SMELoan",
+          "items": {
+            "$ref": "#/definitions/SMELendingDefinition_SMELoan"
+          },
+          "minItems": 1
+        }
+      },
+      "description": "Brand registered by the banking group at https://register.fca.org.uk/"
+    },
+    "CCCDefinition_CCCMarketingState": {
+      "type": "object",
+      "required": [
+        "CoreProduct",
+        "Eligibility",
+        "FeaturesAndBenefits",
+        "Identification",
+        "MarketingState",
+        "OtherFeesCharges"
+      ],
+      "properties": {
+        "Identification": {
+          "type": "string",
+          "description": "Unique and unambiguous identification of a  CCC Product Marketing State.",
+          "title": "Identification",
+          "minLength": 1,
+          "maxLength": 35
+        },
+        "PredecessorID": {
+          "type": "string",
+          "description": "Identifies the marketing state that precedes this marketing state",
+          "title": "PredecessorID",
+          "minLength": 1,
+          "maxLength": 35
+        },
+        "MarketingState": {
+          "type": "string",
+          "description": "Describes the marketing state (regular or promotional) of the CCC Product",
+          "title": "MarketingState",
+          "enum": [
+            "Promotional",
+            "Regular"
+          ]
+        },
+        "FirstMarketedDate": {
+          "type": "string",
+          "format": "date",
+          "description": "Marketing state start date",
+          "title": "FirstMarketedDate"
+        },
+        "LastMarketedDate": {
+          "type": "string",
+          "format": "date",
+          "description": "Marketing state end date",
+          "title": "LastMarketedDate"
+        },
+        "StateTenureLength": {
+          "type": "number",
+          "format": "float",
+          "description": "The length/duration of a promotional state",
+          "title": "StateTenureLength"
+        },
+        "StateTenurePeriod": {
+          "type": "string",
+          "description": "The unit of period (days, weeks, months etc.) of the promotional length",
+          "title": "StateTenurePeriod",
+          "enum": [
+            "Day",
+            "Half Year",
+            "Month",
+            "Quarter",
+            "Week",
+            "Year"
+          ]
+        },
+        "Notes": {
+          "type": "array",
+          "description": "Free text for adding details for marketing state",
+          "title": "Notes",
+          "items": {
+            "type": "string",
+            "description": "maxLength 2000 text",
+            "minLength": 1,
+            "maxLength": 2000
+          }
+        },
+        "Repayment": {
+          "type": "object",
+          "description": "Repayment details of the CCC product",
+          "title": "Repayment",
+          "additionalProperties": false
+        },
+        "Eligibility": {
+          "type": "object",
+          "description": "Eligibility details for this product i.e. the criteria that an accountholder has to meet in order to be eligible for the CCC product.",
+          "title": "Eligibility",
+          "additionalProperties": false
+        },
+        "FeaturesAndBenefits": {
+          "type": "object",
+          "description": "Feature And Benefits Details",
+          "title": "FeaturesAndBenefits",
+          "additionalProperties": false
+        },
+        "OtherFeesCharges": {
+          "type": "object",
+          "description": "Contains details of fees and charges which are not associated with either NonRepayment or features/benefits",
+          "title": "OtherFeesCharges",
+          "additionalProperties": false
+        },
+        "CoreProduct": {
+          "type": "object",
+          "description": "CCC core product details.",
+          "title": "CoreProduct",
+          "additionalProperties": false
+        }
+      },
+      "description": "The marketing state (promotional or regular) of the CCC Product."
+    },
+    "CCCDefinition_CCC": {
+      "type": "object",
+      "required": [
+        "CCCMarketingState",
+        "Identification",
+        "Name",
+        "Segment"
+      ],
+      "properties": {
+        "Name": {
+          "type": "string",
+          "description": "The name of the CCC product used for marketing purposes from a customer perspective. I.e. what the customer would recognise.",
+          "title": "Name",
+          "minLength": 1,
+          "maxLength": 350
+        },
+        "Identification": {
+          "type": "string",
+          "description": "The unique ID that has been internally assigned by the financial institution to each of the Commercial Credit Card products they market to their retail and/or small to medium enterprise (SME) customers.",
+          "title": "Identification",
+          "minLength": 1,
+          "maxLength": 35
+        },
+        "Segment": {
+          "type": "array",
+          "description": "Market segmentation is a marketing term referring to the aggregating of prospective buyers into groups, or segments, that have common needs and respond similarly to a marketing action. Market segmentation enables companies to target different categories of consumers who perceive the full value of certain products and services differently from one another.\n\nRead more: Market Segmentation http://www.investopedia.com/terms/m/marketsegmentation.asp#ixzz4gfEEalTd \nFollow us: Investopedia on Facebook\n\nWith respect to CCC products, they are segmented in relation to different markets that they wish to focus on.",
+          "title": "Segment",
+          "items": {
+            "type": "string",
+            "description": "Market segmentation is a marketing term referring to the aggregating of prospective buyers into groups, or segments, that have common needs and respond similarly to a marketing action. Market segmentation enables companies to target different categories of consumers who perceive the full value of certain products and services differently from one another.\n\nRead more: Market Segmentation http://www.investopedia.com/terms/m/marketsegmentation.asp#ixzz4gfEEalTd \nFollow us: Investopedia on Facebook\n\nWith respect to CCC products, they are segmented in relation to different markets that they wish to focus on.",
+            "enum": [
+              "General"
+            ]
+          },
+          "minItems": 1
+        },
+        "CCCMarketingState": {
+          "type": "array",
+          "description": "The marketing state (promotional or regular) of the CCC Product.",
+          "title": "CCCMarketingState",
+          "items": {
+            "$ref": "#/definitions/CCCDefinition_CCCMarketingState"
+          },
+          "minItems": 1
+        }
+      },
+      "description": "CCC means a Commercial Credit Card."
+    },
+    "CCCDefinition_Brand": {
+      "type": "object",
+      "required": [
+        "BrandName",
+        "CCC"
+      ],
+      "properties": {
+        "BrandName": {
+          "type": "string",
+          "description": "Brand Name that an organisation uses to market its products or services to a consumer as registered at https://register.fca.org.uk/",
+          "title": "BrandName",
+          "minLength": 1,
+          "maxLength": 140
+        },
+        "CCC": {
+          "type": "array",
+          "description": "CCC means a Commercial Credit Card.",
+          "title": "CCC",
+          "items": {
+            "$ref": "#/definitions/CCCDefinition_CCC"
+          },
+          "minItems": 1
+        }
+      },
+      "description": "Brand registered by the banking group at https://register.fca.org.uk/"
+    }
+  }
+}

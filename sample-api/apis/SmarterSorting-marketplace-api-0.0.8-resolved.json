@@ -1,0 +1,208 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "version": "0.0.8",
+    "title": "Marketplace API",
+    "description": "This API is designed to enable the generation and retrieval of probabalistic classification outputs for a product by providing only basic identifying information, such as product name and brand name."
+  },
+  "servers": [
+    {
+      "url": "https://api-staging.smartersorting.com/v1/marketplace",
+      "description": "Beta server"
+    }
+  ],
+  "paths": {
+    "/products:search": {
+      "get": {
+        "security": [
+          {
+            "api_key": []
+          }
+        ],
+        "summary": "Search for product details and classification outputs for a product.",
+        "parameters": [
+          {
+            "name": "brand_name",
+            "in": "query",
+            "description": "The name of the brand",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "Clorox"
+            }
+          },
+          {
+            "name": "product_name",
+            "in": "query",
+            "description": "The name of the product",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "Clorox Clinical Germicidal Cleaner + Bleach"
+            }
+          },
+          {
+            "name": "upc",
+            "in": "query",
+            "description": "Universal Product Code",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "00048415000093"
+            }
+          },
+          {
+            "name": "model_number",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "example": "123456"
+            }
+          },
+          {
+            "name": "confidence_model",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "enum": [
+                90,
+                95,
+                98
+              ],
+              "example": 98
+            }
+          },
+          {
+            "name": "product_description",
+            "in": "query",
+            "description": "Long form description of the product",
+            "schema": {
+              "type": "string",
+              "example": "Specially formulated to kill more than 50 microorganisms, including C. diff and the COVID-19 Virus1. This 3-in-1 solution cleans, disinfects and deodorizes with the power of Clorox® bleach."
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Product found as a result of search criteria.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "type": "object",
+                      "properties": {
+                        "source_integrity": {
+                          "type": "object",
+                          "properties": {
+                            "score": {
+                              "type": "string",
+                              "enum": [
+                                "HIGH",
+                                "MEDIUM",
+                                "LOW"
+                              ]
+                            },
+                            "source": {
+                              "type": "string"
+                            },
+                            "reason": {
+                              "type": "string"
+                            }
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "error": {
+                          "type": "string",
+                          "description": "The error message",
+                          "example": "No product found matching the provided search criteria"
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "api_key": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "Authorization"
+      }
+    },
+    "schemas": {
+      "Error": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string",
+            "description": "The error message",
+            "example": "No product found matching the provided search criteria"
+          }
+        }
+      },
+      "SourceIntegrity": {
+        "type": "object",
+        "properties": {
+          "score": {
+            "type": "string",
+            "enum": [
+              "HIGH",
+              "MEDIUM",
+              "LOW"
+            ]
+          },
+          "source": {
+            "type": "string"
+          },
+          "reason": {
+            "type": "string"
+          }
+        }
+      },
+      "Product": {
+        "type": "object",
+        "properties": {
+          "source_integrity": {
+            "type": "object",
+            "properties": {
+              "score": {
+                "type": "string",
+                "enum": [
+                  "HIGH",
+                  "MEDIUM",
+                  "LOW"
+                ]
+              },
+              "source": {
+                "type": "string"
+              },
+              "reason": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      },
+      "SourceIntegrityScore": {
+        "type": "string",
+        "enum": [
+          "HIGH",
+          "MEDIUM",
+          "LOW"
+        ]
+      }
+    }
+  }
+}

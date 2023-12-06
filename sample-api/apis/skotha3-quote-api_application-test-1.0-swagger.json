@@ -1,0 +1,4949 @@
+{
+  "openapi" : "3.0.1",
+  "info" : {
+    "title" : "Quote API Application",
+    "description" : "Quote API which provides higher order orchestration of smaller Quoting services",
+    "version" : "1.0"
+  },
+  "servers" : [ {
+    "url" : "http://localhost:8080/v1/qapi-quote",
+    "description" : "Generated server url"
+  } ],
+  "tags" : [ {
+    "name" : "QAPI 2.0",
+    "description" : "Property Metada API controller which provides orchestration Evaluate Property and Product Cofiguration Quote Data"
+  }, {
+    "name" : "QAPI 2.0 Bind",
+    "description" : "Bind API controller which provides higher order orchestration of Bind services"
+  }, {
+    "name" : "QAPI 2.0 Validate Against Eligibility Matrix",
+    "description" : "Validate Against Eligibility Matrix"
+  }, {
+    "name" : "QAPI 2.0",
+    "description" : "Quote API controller which provides higher order orchestration of smaller Quoting services"
+  }, {
+    "name" : "QAPI 2.0 Retrieve",
+    "description" : "Retrieve controller"
+  } ],
+  "paths" : {
+    "/validateEligibility" : {
+      "post" : {
+        "tags" : [ "QAPI 2.0 Validate Against Eligibility Matrix" ],
+        "summary" : "Validate Eligibility",
+        "description" : "Validate Eligibility based on Zip, CovA value and Year built.",
+        "operationId" : "validateEligibility",
+        "parameters" : [ {
+          "name" : "x-trace-id",
+          "description" : "trace id for tracking the request",
+          "in" : "header",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/EligibilityMatrixRequest"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "200" : {
+            "description" : "Success",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Eligibility"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "Bad Request",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Eligibility"
+                }
+              }
+            }
+          },
+          "412" : {
+            "description" : "Bad Request",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Eligibility"
+                }
+              }
+            }
+          },
+          "500" : {
+            "description" : "Internal Server Error",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Eligibility"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/retrieve" : {
+      "post" : {
+        "tags" : [ "QAPI 2.0 Retrieve" ],
+        "summary" : "Retrieve",
+        "description" : "Retrieve Quote",
+        "operationId" : "retrieve",
+        "parameters" : [ {
+          "name" : "x-trace-id",
+          "description" : "trace id for tracking the request",
+          "in" : "header",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/QuoteRequest"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "200" : {
+            "description" : "Success",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/QuoteResponse"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "Bad Request",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Eligibility"
+                }
+              }
+            }
+          },
+          "500" : {
+            "description" : "Internal Server Error",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Eligibility"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/quotemetadata/" : {
+      "post" : {
+        "tags" : [ "QAPI 2.0" ],
+        "summary" : "Post Quote",
+        "description" : "Returns validated PropertyData",
+        "operationId" : "getPropertyMetadata",
+        "parameters" : [ {
+          "name" : "x-trace-id",
+          "description" : "trace id for tracking the request",
+          "in" : "header",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/QuoteRequest"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "200" : {
+            "description" : "Success",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/EvaluatePropertyResponse"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "Bad Request",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Eligibility"
+                }
+              }
+            }
+          },
+          "500" : {
+            "description" : "Internal Server Error",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Eligibility"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/quote/" : {
+      "post" : {
+        "tags" : [ "QAPI 2.0" ],
+        "summary" : "Post Quote",
+        "description" : "Create Session",
+        "operationId" : "quoteSave",
+        "parameters" : [ {
+          "name" : "x-trace-id",
+          "description" : "trace id for tracking the request",
+          "in" : "header",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/QuoteRequest"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "200" : {
+            "description" : "Success",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/QuoteResponse"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "Bad Request",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Eligibility"
+                }
+              }
+            }
+          },
+          "500" : {
+            "description" : "Internal Server Error",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Eligibility"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/bind/{sessionHash}" : {
+      "post" : {
+        "tags" : [ "QAPI 2.0 Bind" ],
+        "summary" : "Post Bind",
+        "description" : "Bind Quote against Session Hash",
+        "operationId" : "bindQuote",
+        "parameters" : [ {
+          "name" : "sessionHash",
+          "description" : "sessionHash associated with quote",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "x-trace-id",
+          "description" : "trace id for tracking the request",
+          "in" : "header",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/BindRequest"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "200" : {
+            "description" : "Success",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/BindResponse"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "Bad Request",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Eligibility"
+                }
+              }
+            }
+          },
+          "500" : {
+            "description" : "Internal Server Error",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Eligibility"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/quote/{sessionHash}" : {
+      "get" : {
+        "tags" : [ "QAPI 2.0" ],
+        "summary" : "Complete GET",
+        "description" : "Update Quote Information",
+        "operationId" : "quoteGet",
+        "parameters" : [ {
+          "name" : "sessionHash",
+          "description" : "sessionHash associated with quote",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "x-trace-id",
+          "description" : "trace id for tracking the request",
+          "in" : "header",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Success",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/QuoteResponse"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "Bad Request",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Eligibility"
+                }
+              }
+            }
+          },
+          "500" : {
+            "description" : "Internal Server Error",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Eligibility"
+                }
+              }
+            }
+          }
+        }
+      },
+      "patch" : {
+        "tags" : [ "QAPI 2.0" ],
+        "summary" : "Patch Quote",
+        "description" : "Update Quote Information",
+        "operationId" : "quoteUpdate",
+        "parameters" : [ {
+          "name" : "sessionHash",
+          "description" : "sessionHash associated with quote",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "x-trace-id",
+          "description" : "trace id for tracking the request",
+          "in" : "header",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/QuoteRequest"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "200" : {
+            "description" : "Success",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/QuoteResponse"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "Bad Request",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Eligibility"
+                }
+              }
+            }
+          },
+          "500" : {
+            "description" : "Internal Server Error",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Eligibility"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/quote/{sessionHash}/signature" : {
+      "get" : {
+        "tags" : [ "QAPI 2.0" ],
+        "summary" : "Signature",
+        "description" : "Signature",
+        "operationId" : "getSignature",
+        "parameters" : [ {
+          "name" : "sessionHash",
+          "description" : "sessionHash associated with quote",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "x-trace-id",
+          "description" : "trace id for tracking the request",
+          "in" : "header",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Success",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/QuoteHomeOwnersResponse"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "Bad Request",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500" : {
+            "description" : "Internal Server Error",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/quote/{sessionHash}/ratingcriteria" : {
+      "get" : {
+        "tags" : [ "QAPI 2.0" ],
+        "summary" : "GET Rating Criteria Metadata",
+        "description" : "Rating Criteria Info",
+        "operationId" : "getRatingCriteriaMetaData",
+        "parameters" : [ {
+          "name" : "sessionHash",
+          "description" : "sessionHash associated with quote",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "x-trace-id",
+          "description" : "trace id for tracking the request",
+          "in" : "header",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Success",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/RatingCriteria"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "Bad Request",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Eligibility"
+                }
+              }
+            }
+          },
+          "500" : {
+            "description" : "Internal Server Error",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Eligibility"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/quote/{sessionHash}/propertyData" : {
+      "get" : {
+        "tags" : [ "QAPI 2.0" ],
+        "summary" : "Property Data",
+        "description" : "PropertyData Info",
+        "operationId" : "getPropertyData",
+        "parameters" : [ {
+          "name" : "sessionHash",
+          "description" : "sessionHash associated with quote",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "x-trace-id",
+          "description" : "trace id for tracking the request",
+          "in" : "header",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Success",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Address"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "Bad Request",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Eligibility"
+                }
+              }
+            }
+          },
+          "500" : {
+            "description" : "Internal Server Error",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Eligibility"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/quote/{sessionHash}/person" : {
+      "get" : {
+        "tags" : [ "quote-get-controller" ],
+        "operationId" : "getPerson",
+        "parameters" : [ {
+          "name" : "sessionHash",
+          "description" : "sessionHash associated with quote",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "x-trace-id",
+          "description" : "trace id for tracking the request",
+          "in" : "header",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "type" : "array",
+                  "items" : {
+                    "$ref" : "#/components/schemas/PrimaryPerson"
+                  }
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "Bad Request",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/quote/{sessionHash}/paymentDetails" : {
+      "get" : {
+        "tags" : [ "QAPI 2.0" ],
+        "summary" : "GET Payment Details",
+        "description" : "Payment Info",
+        "operationId" : "getPaymentDetails",
+        "parameters" : [ {
+          "name" : "sessionHash",
+          "description" : "sessionHash associated with quote",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "x-trace-id",
+          "description" : "trace id for tracking the request",
+          "in" : "header",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Success",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/CheckoutResponse"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "Bad Request",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Eligibility"
+                }
+              }
+            }
+          },
+          "500" : {
+            "description" : "Internal Server Error",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Eligibility"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/quote/{sessionHash}/inspection" : {
+      "get" : {
+        "tags" : [ "QAPI 2.0" ],
+        "summary" : "GET Inspection Details",
+        "description" : "Inspection Info",
+        "operationId" : "getInspectionDetails",
+        "parameters" : [ {
+          "name" : "sessionHash",
+          "description" : "sessionHash associated with quote",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "x-trace-id",
+          "description" : "trace id for tracking the request",
+          "in" : "header",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Success",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Inspection"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "Bad Request",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500" : {
+            "description" : "Internal Server Error",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/quote/{sessionHash}/effectivedaterange" : {
+      "get" : {
+        "tags" : [ "QAPI 2.0" ],
+        "summary" : "Returns Policy Effective Date Range",
+        "description" : "Policy Effective Date Info",
+        "operationId" : "getEffectiveDateRange",
+        "parameters" : [ {
+          "name" : "sessionHash",
+          "description" : "sessionHash associated with quote",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "x-trace-id",
+          "description" : "trace id for tracking the request",
+          "in" : "header",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Success",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/PolicyEffectiveDateRange"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "Bad Request",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Eligibility"
+                }
+              }
+            }
+          },
+          "500" : {
+            "description" : "Internal Server Error",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Eligibility"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/quote/{sessionHash}/disclosures" : {
+      "get" : {
+        "tags" : [ "QAPI 2.0" ],
+        "summary" : "Disclosures Metadata",
+        "description" : "Disclosures Info",
+        "operationId" : "getDisclosuresMetaData",
+        "parameters" : [ {
+          "name" : "sessionHash",
+          "description" : "sessionHash associated with quote",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "x-trace-id",
+          "description" : "trace id for tracking the request",
+          "in" : "header",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Success",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Disclosures"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "Bad Request",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Eligibility"
+                }
+              }
+            }
+          },
+          "500" : {
+            "description" : "Internal Server Error",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Eligibility"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/quote/{sessionHash}/customeracknowledgementcriteria" : {
+      "get" : {
+        "tags" : [ "QAPI 2.0" ],
+        "summary" : "Customer Acknowledgement Criteria Metadata",
+        "description" : "Customer Acknowledgement Info",
+        "operationId" : "getCustomerAcknowledgementMetaData",
+        "parameters" : [ {
+          "name" : "sessionHash",
+          "description" : "sessionHash associated with quote",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "x-trace-id",
+          "description" : "trace id for tracking the request",
+          "in" : "header",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Success",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/CustomerAcknowledgementResponse"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "Bad Request",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Eligibility"
+                }
+              }
+            }
+          },
+          "500" : {
+            "description" : "Internal Server Error",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Eligibility"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/quote/{sessionHash}/coverages" : {
+      "get" : {
+        "tags" : [ "QAPI 2.0" ],
+        "summary" : "Coverages, Premiums, Discounts, Surcharges, Fees Metadata",
+        "description" : "Coverage Info",
+        "operationId" : "getCoveragesMetaData",
+        "parameters" : [ {
+          "name" : "sessionHash",
+          "description" : "sessionHash associated with quote",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "x-trace-id",
+          "description" : "trace id for tracking the request",
+          "in" : "header",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Success",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/CoverageResponse"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "Bad Request",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Eligibility"
+                }
+              }
+            }
+          },
+          "500" : {
+            "description" : "Internal Server Error",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Eligibility"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/quote/{sessionHash}/checkout" : {
+      "get" : {
+        "tags" : [ "QAPI 2.0" ],
+        "summary" : "GET Bill Plans, Payment Types Metadata",
+        "description" : "Payment Info",
+        "operationId" : "getCheckoutMetaData",
+        "parameters" : [ {
+          "name" : "sessionHash",
+          "description" : "sessionHash associated with quote",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "x-trace-id",
+          "description" : "trace id for tracking the request",
+          "in" : "header",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Success",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/CheckoutResponse"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "Bad Request",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Eligibility"
+                }
+              }
+            }
+          },
+          "500" : {
+            "description" : "Internal Server Error",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Eligibility"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/quote/{sessionHash}/apiData" : {
+      "get" : {
+        "tags" : [ "QAPI 2.0" ],
+        "summary" : "ApiData",
+        "description" : "ApiData",
+        "operationId" : "getApiData",
+        "parameters" : [ {
+          "name" : "sessionHash",
+          "description" : "sessionHash associated with quote",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "x-trace-id",
+          "description" : "trace id for tracking the request",
+          "in" : "header",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Success",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ApiData"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "Bad Request",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500" : {
+            "description" : "Internal Server Error",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/quote/{sessionHash}/address" : {
+      "get" : {
+        "tags" : [ "quote-get-controller" ],
+        "operationId" : "getAddress",
+        "parameters" : [ {
+          "name" : "sessionHash",
+          "description" : "sessionHash associated with quote",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "x-trace-id",
+          "description" : "trace id for tracking the request",
+          "in" : "header",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/PrimaryAddress"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "Bad Request",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/quote/{sessionHash}/additionalInterests" : {
+      "get" : {
+        "tags" : [ "QAPI 2.0" ],
+        "summary" : "Additional Interests",
+        "description" : "AdditionalInterests",
+        "operationId" : "getAdditionalInterests",
+        "parameters" : [ {
+          "name" : "sessionHash",
+          "description" : "sessionHash associated with quote",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "x-trace-id",
+          "description" : "trace id for tracking the request",
+          "in" : "header",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Success",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/AdditionalInterests"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "Bad Request",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500" : {
+            "description" : "Internal Server Error",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/bind/{sessionHash}/eoi" : {
+      "get" : {
+        "tags" : [ "QAPI 2.0 Bind" ],
+        "summary" : "Get EOI",
+        "description" : "Retrieve EOI Information",
+        "operationId" : "getEoi",
+        "parameters" : [ {
+          "name" : "sessionHash",
+          "description" : "sessionHash associated with quote",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "x-trace-id",
+          "description" : "trace id for tracking the request",
+          "in" : "header",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Success",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/EOIResponse"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "Bad Request",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Eligibility"
+                }
+              }
+            }
+          },
+          "412" : {
+            "description" : "Bad Request",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/EOIResponse"
+                }
+              }
+            }
+          },
+          "500" : {
+            "description" : "Internal Server Error",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Eligibility"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components" : {
+    "schemas" : {
+      "ErrorResponse" : {
+        "type" : "object",
+        "properties" : {
+          "timestamp" : {
+            "type" : "string"
+          },
+          "error" : {
+            "type" : "string"
+          },
+          "message" : {
+            "type" : "string"
+          },
+          "traceId" : {
+            "type" : "string"
+          },
+          "trace" : {
+            "type" : "string"
+          },
+          "status" : {
+            "type" : "string"
+          },
+          "path" : {
+            "type" : "string"
+          }
+        }
+      },
+      "AdditionalPropertyData" : {
+        "type" : "object",
+        "properties" : {
+          "burglarAlarm" : {
+            "$ref" : "#/components/schemas/PropertyDataObjectString"
+          },
+          "distanceToFireStation" : {
+            "$ref" : "#/components/schemas/PropertyDataObjectBoolean"
+          },
+          "distanceToHydrant" : {
+            "$ref" : "#/components/schemas/PropertyDataObjectBoolean"
+          },
+          "deadboltLocks" : {
+            "$ref" : "#/components/schemas/PropertyDataObjectBoolean"
+          },
+          "fireAlarm" : {
+            "$ref" : "#/components/schemas/PropertyDataObjectString"
+          },
+          "fireExtinguishers" : {
+            "$ref" : "#/components/schemas/PropertyDataObjectBoolean"
+          },
+          "smokeDetectors" : {
+            "$ref" : "#/components/schemas/PropertyDataObjectString"
+          },
+          "indoorSprinklers" : {
+            "$ref" : "#/components/schemas/PropertyDataObjectBoolean"
+          },
+          "mineSubsidenceStructureDamageFlag" : {
+            "$ref" : "#/components/schemas/PropertyDataObjectBoolean"
+          },
+          "propertyCurrentlyInsured" : {
+            "$ref" : "#/components/schemas/PropertyDataObjectBoolean"
+          },
+          "severeStormProtectiveFixtureFlag" : {
+            "$ref" : "#/components/schemas/PropertyDataObjectBoolean"
+          },
+          "sixtyFeetFence" : {
+            "$ref" : "#/components/schemas/PropertyDataObjectBoolean"
+          },
+          "swimmingPoolFenceFlag" : {
+            "$ref" : "#/components/schemas/PropertyDataObjectBoolean"
+          },
+          "swimmingPoolType" : {
+            "$ref" : "#/components/schemas/PropertyDataObjectString"
+          },
+          "swimmingPoolLadder" : {
+            "$ref" : "#/components/schemas/PropertyDataObjectBoolean"
+          },
+          "wiringRemodeledYear" : {
+            "$ref" : "#/components/schemas/PropertyDataObjectInteger"
+          },
+          "roofingImprovementYear" : {
+            "$ref" : "#/components/schemas/PropertyDataObjectInteger"
+          },
+          "swimmingPoolOnPremises" : {
+            "$ref" : "#/components/schemas/PropertyDataObjectBoolean"
+          },
+          "hurricaneResistantLaminatedGlass" : {
+            "$ref" : "#/components/schemas/PropertyDataObjectBoolean"
+          },
+          "hurricaneResistantStormShutter" : {
+            "$ref" : "#/components/schemas/PropertyDataObjectBoolean"
+          },
+          "woodCoalStoveIndicator" : {
+            "$ref" : "#/components/schemas/PropertyDataObjectBoolean"
+          },
+          "qualifiedMobileHome" : {
+            "$ref" : "#/components/schemas/PropertyDataObjectBoolean"
+          },
+          "windstormProtection" : {
+            "$ref" : "#/components/schemas/PropertyDataObjectString"
+          },
+          "waterLeakDetectionWithShutoff" : {
+            "$ref" : "#/components/schemas/PropertyDataObjectBoolean"
+          },
+          "marketValue" : {
+            "$ref" : "#/components/schemas/PropertyDataObjectInteger"
+          },
+          "divingboardOrSlide" : {
+            "$ref" : "#/components/schemas/PropertyDataObjectBoolean"
+          },
+          "numberOfRentalUnits" : {
+            "$ref" : "#/components/schemas/PropertyDataObjectInteger"
+          }
+        }
+      },
+      "Address" : {
+        "type" : "object",
+        "properties" : {
+          "addressLine1" : {
+            "type" : "string"
+          },
+          "addressLine2" : {
+            "type" : "string"
+          },
+          "addressType" : {
+            "type" : "string"
+          },
+          "city" : {
+            "type" : "string"
+          },
+          "keyTown" : {
+            "type" : "string"
+          },
+          "postalCode" : {
+            "type" : "string"
+          },
+          "postalCodeExt" : {
+            "type" : "string"
+          },
+          "stateCode" : {
+            "type" : "string"
+          },
+          "protectionCode" : {
+            "type" : "integer",
+            "format" : "int32"
+          },
+          "county" : {
+            "type" : "string"
+          }
+        }
+      },
+      "Basement" : {
+        "type" : "object",
+        "properties" : {
+          "foundationType" : {
+            "$ref" : "#/components/schemas/PropertyDataObjectString"
+          },
+          "finishedBasementPercentage" : {
+            "$ref" : "#/components/schemas/PropertyDataObjectInteger"
+          }
+        }
+      },
+      "EligibilityCoverageDataString" : {
+        "type" : "object",
+        "properties" : {
+          "value" : {
+            "type" : "string"
+          }
+        }
+      },
+      "EligibilityCoverages" : {
+        "type" : "object",
+        "properties" : {
+          "coverageAAmount" : {
+            "$ref" : "#/components/schemas/EligibilityCoverageDataString"
+          }
+        }
+      },
+      "EligibilityMatrixRequest" : {
+        "type" : "object",
+        "properties" : {
+          "address" : {
+            "$ref" : "#/components/schemas/Address"
+          },
+          "coverages" : {
+            "$ref" : "#/components/schemas/EligibilityCoverages"
+          },
+          "partnerInfo" : {
+            "$ref" : "#/components/schemas/PartnerInfo"
+          },
+          "propertyData" : {
+            "$ref" : "#/components/schemas/PropertyData"
+          },
+          "quoteAttributes" : {
+            "$ref" : "#/components/schemas/QuoteAttributes"
+          },
+          "additionalPropertyData" : {
+            "$ref" : "#/components/schemas/AdditionalPropertyData"
+          }
+        }
+      },
+      "FirePlaceDetailValues" : {
+        "type" : "object",
+        "properties" : {
+          "required" : {
+            "type" : "object"
+          },
+          "dataSource" : {
+            "type" : "string",
+            "enum" : [ "CarrierUserEntered", "ThirdPartyPrefill", "PartnerUserEntered", "CarrierRawData" ]
+          },
+          "message" : {
+            "type" : "string"
+          },
+          "options" : {
+            "type" : "array",
+            "items" : {
+              "type" : "string"
+            }
+          },
+          "values" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/FirePlaceDetails"
+            }
+          }
+        }
+      },
+      "FirePlaceDetails" : {
+        "type" : "object",
+        "properties" : {
+          "type" : {
+            "type" : "string"
+          },
+          "count" : {
+            "type" : "integer",
+            "format" : "int32"
+          }
+        }
+      },
+      "Garages" : {
+        "type" : "object",
+        "properties" : {
+          "type" : {
+            "$ref" : "#/components/schemas/PropertyDataObjectString"
+          },
+          "count" : {
+            "$ref" : "#/components/schemas/PropertyDataObjectString"
+          }
+        }
+      },
+      "JsonNode" : {
+        "type" : "object"
+      },
+      "PartnerInfo" : {
+        "required" : [ "amfAccountNumber", "level1Number", "level2Number", "level3Number", "partnerId" ],
+        "type" : "object",
+        "properties" : {
+          "partnerId" : {
+            "minimum" : 1,
+            "type" : "integer",
+            "format" : "int32"
+          },
+          "amfAccountNumber" : {
+            "minimum" : 1,
+            "type" : "integer",
+            "format" : "int32"
+          },
+          "affinityGroupCode" : {
+            "type" : "string"
+          },
+          "marketKeyCode" : {
+            "type" : "string"
+          },
+          "level1Number" : {
+            "type" : "integer",
+            "format" : "int32"
+          },
+          "level2Number" : {
+            "type" : "integer",
+            "format" : "int32"
+          },
+          "level3Number" : {
+            "type" : "integer",
+            "format" : "int32"
+          }
+        }
+      },
+      "PropertyData" : {
+        "type" : "object",
+        "properties" : {
+          "ceilingHeight" : {
+            "$ref" : "#/components/schemas/PropertyDataObjectString"
+          },
+          "coolingType" : {
+            "$ref" : "#/components/schemas/PropertyDataObjectBoolean"
+          },
+          "dwellingStyle" : {
+            "$ref" : "#/components/schemas/PropertyDataObjectString"
+          },
+          "exteriorSidingType" : {
+            "$ref" : "#/components/schemas/PropertyDataObjectString"
+          },
+          "fireplaces" : {
+            "$ref" : "#/components/schemas/FirePlaceDetailValues"
+          },
+          "floorTypes" : {
+            "$ref" : "#/components/schemas/StructureDetailValues"
+          },
+          "garages" : {
+            "$ref" : "#/components/schemas/Garages"
+          },
+          "heatingSystem" : {
+            "$ref" : "#/components/schemas/PropertyDataObjectString"
+          },
+          "interiorWalls" : {
+            "$ref" : "#/components/schemas/StructureDetailValues"
+          },
+          "kitchenCountertopMaterial" : {
+            "$ref" : "#/components/schemas/PropertyDataObjectString"
+          },
+          "numberOfFullBath" : {
+            "$ref" : "#/components/schemas/PropertyDataObjectString"
+          },
+          "numberOfHalfBath" : {
+            "$ref" : "#/components/schemas/PropertyDataObjectString"
+          },
+          "numberOfStories" : {
+            "$ref" : "#/components/schemas/PropertyDataObjectString"
+          },
+          "propertySlope" : {
+            "$ref" : "#/components/schemas/PropertyDataObjectBoolean"
+          },
+          "propertyType" : {
+            "$ref" : "#/components/schemas/PropertyDataObjectString"
+          },
+          "roofMaterial" : {
+            "$ref" : "#/components/schemas/PropertyDataObjectString"
+          },
+          "roofShape" : {
+            "$ref" : "#/components/schemas/PropertyDataObjectString"
+          },
+          "roomsWithCathedralCeilings" : {
+            "$ref" : "#/components/schemas/PropertyDataObjectString"
+          },
+          "roomsWithCrownMolding" : {
+            "$ref" : "#/components/schemas/PropertyDataObjectString"
+          },
+          "squareFootage" : {
+            "$ref" : "#/components/schemas/PropertyDataObjectInteger"
+          },
+          "yearBuilt" : {
+            "$ref" : "#/components/schemas/PropertyDataObjectInteger"
+          },
+          "basement" : {
+            "$ref" : "#/components/schemas/Basement"
+          },
+          "electricWiringType" : {
+            "$ref" : "#/components/schemas/PropertyDataObjectString"
+          },
+          "everHeatedByOil" : {
+            "$ref" : "#/components/schemas/PropertyDataObjectBoolean"
+          },
+          "finishedBasementSquareFootage" : {
+            "$ref" : "#/components/schemas/PropertyDataObjectInteger"
+          },
+          "oilTankLocation" : {
+            "$ref" : "#/components/schemas/PropertyDataObjectInteger"
+          },
+          "oilTankLocationV2" : {
+            "$ref" : "#/components/schemas/PropertyDataObjectString"
+          },
+          "numberOfUnits" : {
+            "$ref" : "#/components/schemas/PropertyDataObjectString"
+          },
+          "bcegCode" : {
+            "$ref" : "#/components/schemas/PropertyDataObjectInteger"
+          }
+        }
+      },
+      "QuoteAttributes" : {
+        "type" : "object",
+        "properties" : {
+          "apexFlag" : {
+            "type" : "boolean"
+          },
+          "dnqGamingHit" : {
+            "type" : "integer",
+            "format" : "int32"
+          },
+          "effectiveDateState" : {
+            "type" : "boolean"
+          },
+          "eandSState" : {
+            "type" : "boolean"
+          },
+          "formNumber" : {
+            "type" : "integer",
+            "format" : "int32"
+          },
+          "initialQuoteRequestDate" : {
+            "type" : "string",
+            "format" : "date"
+          },
+          "leadPolicyEffectiveDays" : {
+            "type" : "integer",
+            "format" : "int32"
+          },
+          "marketValueFlow" : {
+            "type" : "boolean"
+          },
+          "originalQuotationDate" : {
+            "type" : "string",
+            "format" : "date"
+          },
+          "policyEffectiveDate" : {
+            "type" : "string"
+          },
+          "productType" : {
+            "type" : "string",
+            "enum" : [ "homeowners", "renters", "condo", "secondHome", "Bookroll.condo", "Bookroll.homeowners", "Bookroll.renters", "Bookroll.homeowners.hartford", "Bookroll.homeowners.qbe" ]
+          },
+          "quoteEffectiveDate" : {
+            "type" : "string"
+          },
+          "quoteNumber" : {
+            "type" : "integer",
+            "format" : "int32"
+          },
+          "ratingCriteriaFlag" : {
+            "type" : "boolean"
+          },
+          "ratingDate" : {
+            "type" : "string"
+          },
+          "ratingVersion" : {
+            "type" : "integer",
+            "format" : "int32"
+          },
+          "sessionId" : {
+            "type" : "integer",
+            "format" : "int32"
+          },
+          "uwCompanyNumber" : {
+            "type" : "integer",
+            "format" : "int32"
+          },
+          "uwTier" : {
+            "type" : "integer",
+            "format" : "int32"
+          },
+          "secondHome" : {
+            "type" : "boolean"
+          }
+        }
+      },
+      "QuoteDataObjectInteger" : {
+        "type" : "object",
+        "properties" : {
+          "dataSource" : {
+            "type" : "string"
+          },
+          "message" : {
+            "type" : "string"
+          },
+          "options" : {
+            "type" : "array",
+            "items" : {
+              "type" : "object"
+            }
+          },
+          "value" : {
+            "type" : "integer",
+            "format" : "int32"
+          },
+          "required" : {
+            "$ref" : "#/components/schemas/JsonNode"
+          }
+        }
+      },
+      "QuoteDataObjectString" : {
+        "type" : "object",
+        "properties" : {
+          "dataSource" : {
+            "type" : "string"
+          },
+          "message" : {
+            "type" : "string"
+          },
+          "options" : {
+            "type" : "array",
+            "items" : {
+              "type" : "object"
+            }
+          },
+          "value" : {
+            "type" : "string"
+          },
+          "required" : {
+            "$ref" : "#/components/schemas/JsonNode"
+          }
+        }
+      },
+      "StructureDetailValues" : {
+        "type" : "object",
+        "properties" : {
+          "required" : {
+            "type" : "object"
+          },
+          "dataSource" : {
+            "type" : "string",
+            "enum" : [ "CarrierUserEntered", "ThirdPartyPrefill", "PartnerUserEntered", "CarrierRawData" ]
+          },
+          "message" : {
+            "type" : "string"
+          },
+          "options" : {
+            "type" : "array",
+            "items" : {
+              "type" : "string"
+            }
+          },
+          "values" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/StructureDetails"
+            }
+          }
+        }
+      },
+      "StructureDetails" : {
+        "type" : "object",
+        "properties" : {
+          "type" : {
+            "type" : "string"
+          },
+          "percentage" : {
+            "type" : "integer",
+            "format" : "int32"
+          }
+        }
+      },
+      "Eligibility" : {
+        "type" : "object",
+        "properties" : {
+          "statusCode" : {
+            "type" : "string"
+          },
+          "message" : {
+            "type" : "string"
+          }
+        }
+      },
+      "AdditionalInsured" : {
+        "type" : "object",
+        "properties" : {
+          "name" : {
+            "type" : "string"
+          },
+          "addressLine1" : {
+            "maxLength" : 30,
+            "minLength" : 0,
+            "type" : "string"
+          },
+          "addressLine2" : {
+            "type" : "string"
+          },
+          "city" : {
+            "type" : "string"
+          },
+          "stateCode" : {
+            "type" : "string"
+          },
+          "zip" : {
+            "type" : "string"
+          }
+        }
+      },
+      "AdditionalInterests" : {
+        "type" : "object",
+        "properties" : {
+          "name" : {
+            "type" : "string"
+          },
+          "addressLine1" : {
+            "maxLength" : 30,
+            "minLength" : 0,
+            "type" : "string"
+          },
+          "addressLine2" : {
+            "type" : "string"
+          },
+          "city" : {
+            "type" : "string"
+          },
+          "stateCode" : {
+            "type" : "string"
+          },
+          "zip" : {
+            "type" : "string"
+          }
+        }
+      },
+      "Advisor" : {
+        "required" : [ "advisorNumber" ],
+        "type" : "object",
+        "properties" : {
+          "advisorNumber" : {
+            "maxLength" : 10,
+            "minLength" : 0,
+            "type" : "string"
+          }
+        }
+      },
+      "AgencyInfo" : {
+        "type" : "object",
+        "properties" : {
+          "agencyNumber" : {
+            "type" : "string"
+          },
+          "producerId" : {
+            "type" : "integer",
+            "format" : "int32"
+          },
+          "agencyName" : {
+            "type" : "string"
+          },
+          "agencyAddress" : {
+            "$ref" : "#/components/schemas/Address"
+          },
+          "phoneNumber" : {
+            "pattern" : "^(\\d{3})(\\d{3})(\\d{4})(?:(\\d{4}))?",
+            "type" : "string"
+          }
+        }
+      },
+      "Animals" : {
+        "type" : "object",
+        "properties" : {
+          "exoticAnimal" : {
+            "$ref" : "#/components/schemas/PropertyDataObjectBoolean"
+          },
+          "dogsOrPetsInProperty" : {
+            "$ref" : "#/components/schemas/PropertyDataObjectBoolean"
+          },
+          "dogType" : {
+            "$ref" : "#/components/schemas/PropertyDataObjectString"
+          },
+          "dogBitingHistory" : {
+            "$ref" : "#/components/schemas/PropertyDataObjectBoolean"
+          },
+          "animalBitingClaim" : {
+            "$ref" : "#/components/schemas/PropertyDataObjectBoolean"
+          },
+          "animalAggressive" : {
+            "$ref" : "#/components/schemas/PropertyDataObjectBoolean"
+          },
+          "numberOfDogs" : {
+            "$ref" : "#/components/schemas/PropertyDataObjectInteger"
+          }
+        }
+      },
+      "ApiData" : {
+        "type" : "object",
+        "properties" : {
+          "variants" : {
+            "type" : "array",
+            "items" : {
+              "type" : "string"
+            }
+          },
+          "emailUuid" : {
+            "type" : "string"
+          },
+          "choiceId" : {
+            "type" : "string"
+          },
+          "prefillFlow" : {
+            "type" : "string"
+          }
+        }
+      },
+      "BindAcknowledgements" : {
+        "type" : "object",
+        "properties" : {
+          "autoWithdrawAgree" : {
+            "type" : "boolean"
+          },
+          "electronicSignature" : {
+            "maxLength" : 250,
+            "minLength" : 1,
+            "type" : "string"
+          },
+          "wildFireAcknowledgement" : {
+            "type" : "boolean"
+          }
+        }
+      },
+      "BookRollPolicyInfo" : {
+        "type" : "object",
+        "properties" : {
+          "brollGroupFlag" : {
+            "maxLength" : 256,
+            "minLength" : 0,
+            "type" : "string"
+          },
+          "expiringPolicyPremiumAmount" : {
+            "minimum" : 0,
+            "exclusiveMinimum" : false,
+            "type" : "number"
+          },
+          "previousInsuranceCompany" : {
+            "maxLength" : 30,
+            "minLength" : 0,
+            "type" : "string"
+          }
+        }
+      },
+      "Bundled" : {
+        "type" : "object",
+        "properties" : {
+          "autoPolicyNumber" : {
+            "type" : "string"
+          },
+          "partnerAutoPolicy" : {
+            "type" : "boolean"
+          }
+        }
+      },
+      "Business" : {
+        "type" : "object",
+        "properties" : {
+          "businessOnPremises" : {
+            "$ref" : "#/components/schemas/PropertyDataObjectBoolean"
+          },
+          "landLeasedToThirdParty" : {
+            "$ref" : "#/components/schemas/PropertyDataObjectBoolean"
+          },
+          "businessVisitors" : {
+            "$ref" : "#/components/schemas/PropertyDataObjectInteger"
+          },
+          "homeDayCareBusiness" : {
+            "$ref" : "#/components/schemas/PropertyDataObjectBoolean"
+          },
+          "numberOfChildrenInDayCare" : {
+            "$ref" : "#/components/schemas/PropertyDataObjectInteger"
+          },
+          "registeredDayCareBusiness" : {
+            "$ref" : "#/components/schemas/PropertyDataObjectBoolean"
+          },
+          "businessCoverageLiabilityDayCare" : {
+            "$ref" : "#/components/schemas/PropertyDataObjectBoolean"
+          },
+          "dayCareCertificateNumber" : {
+            "$ref" : "#/components/schemas/PropertyDataObjectString"
+          },
+          "dayCareCertificateExpirationDate" : {
+            "$ref" : "#/components/schemas/PropertyDataObjectString"
+          },
+          "dayCareProvidersOnLicense" : {
+            "$ref" : "#/components/schemas/PropertyDataObjectInteger"
+          },
+          "numberOfChildrenInDayCareUnderTwo" : {
+            "$ref" : "#/components/schemas/PropertyDataObjectInteger"
+          },
+          "dayCareCoverage" : {
+            "$ref" : "#/components/schemas/PropertyDataObjectBoolean"
+          },
+          "separateBuildingDayCare" : {
+            "$ref" : "#/components/schemas/PropertyDataObjectBoolean"
+          },
+          "dayCareBuildingDescription" : {
+            "$ref" : "#/components/schemas/PropertyDataObjectString"
+          },
+          "dayCareBuildingValue" : {
+            "$ref" : "#/components/schemas/PropertyDataObjectString"
+          },
+          "commercialFarming" : {
+            "$ref" : "#/components/schemas/PropertyDataObjectBoolean"
+          }
+        }
+      },
+      "CallServiceNodeListString" : {
+        "type" : "object",
+        "properties" : {
+          "required" : {
+            "type" : "boolean"
+          },
+          "dataSource" : {
+            "type" : "array",
+            "items" : {
+              "type" : "string"
+            }
+          }
+        }
+      },
+      "CallServiceNodeString" : {
+        "type" : "object",
+        "properties" : {
+          "required" : {
+            "type" : "boolean"
+          },
+          "dataSource" : {
+            "type" : "string"
+          }
+        }
+      },
+      "CardinalityValidationAttributes" : {
+        "type" : "object",
+        "properties" : {
+          "action" : {
+            "type" : "string"
+          },
+          "type" : {
+            "type" : "string"
+          },
+          "globalOperator" : {
+            "type" : "string"
+          },
+          "evaluation" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/Evaluation"
+            }
+          }
+        }
+      },
+      "CoverageDetailsBoolean" : {
+        "type" : "object",
+        "properties" : {
+          "label" : {
+            "type" : "string"
+          },
+          "detailed" : {
+            "type" : "boolean"
+          },
+          "detailType" : {
+            "type" : "string"
+          },
+          "readOnly" : {
+            "type" : "boolean"
+          },
+          "value" : {
+            "type" : "boolean"
+          },
+          "options" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/Options"
+            }
+          },
+          "cardinality" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/CardinalityValidationAttributes"
+            }
+          },
+          "validation" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/CardinalityValidationAttributes"
+            }
+          },
+          "criteria" : {
+            "$ref" : "#/components/schemas/JsonNode"
+          },
+          "required" : {
+            "type" : "object",
+            "additionalProperties" : {
+              "type" : "object",
+              "additionalProperties" : {
+                "type" : "object"
+              }
+            }
+          }
+        }
+      },
+      "CoverageDetailsInteger" : {
+        "type" : "object",
+        "properties" : {
+          "label" : {
+            "type" : "string"
+          },
+          "detailed" : {
+            "type" : "boolean"
+          },
+          "detailType" : {
+            "type" : "string"
+          },
+          "readOnly" : {
+            "type" : "boolean"
+          },
+          "value" : {
+            "type" : "integer",
+            "format" : "int32"
+          },
+          "options" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/Options"
+            }
+          },
+          "cardinality" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/CardinalityValidationAttributes"
+            }
+          },
+          "validation" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/CardinalityValidationAttributes"
+            }
+          },
+          "criteria" : {
+            "$ref" : "#/components/schemas/JsonNode"
+          },
+          "required" : {
+            "type" : "object",
+            "additionalProperties" : {
+              "type" : "object",
+              "additionalProperties" : {
+                "type" : "object"
+              }
+            }
+          }
+        }
+      },
+      "CoverageDetailsString" : {
+        "type" : "object",
+        "properties" : {
+          "label" : {
+            "type" : "string"
+          },
+          "detailed" : {
+            "type" : "boolean"
+          },
+          "detailType" : {
+            "type" : "string"
+          },
+          "readOnly" : {
+            "type" : "boolean"
+          },
+          "value" : {
+            "type" : "string"
+          },
+          "options" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/Options"
+            }
+          },
+          "cardinality" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/CardinalityValidationAttributes"
+            }
+          },
+          "validation" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/CardinalityValidationAttributes"
+            }
+          },
+          "criteria" : {
+            "$ref" : "#/components/schemas/JsonNode"
+          },
+          "required" : {
+            "type" : "object",
+            "additionalProperties" : {
+              "type" : "object",
+              "additionalProperties" : {
+                "type" : "object"
+              }
+            }
+          }
+        }
+      },
+      "Coverages" : {
+        "type" : "object",
+        "properties" : {
+          "otherStructureIncreaseLimit" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/OtherStructures"
+            }
+          },
+          "userRequestedCoverageAFlag" : {
+            "$ref" : "#/components/schemas/CoverageDetailsBoolean"
+          },
+          "userRequestedCoverageA" : {
+            "$ref" : "#/components/schemas/CoverageDetailsString"
+          },
+          "acvRoofCoverage" : {
+            "$ref" : "#/components/schemas/CoverageDetailsBoolean"
+          },
+          "otherStructures" : {
+            "$ref" : "#/components/schemas/CoverageDetailsString"
+          },
+          "coverageResidenceEmployees" : {
+            "$ref" : "#/components/schemas/CoverageDetailsString"
+          },
+          "deductible" : {
+            "$ref" : "#/components/schemas/CoverageDetailsString"
+          },
+          "endorsementPackageTypes" : {
+            "$ref" : "#/components/schemas/CoverageDetailsString"
+          },
+          "extendedReplacementCost" : {
+            "$ref" : "#/components/schemas/CoverageDetailsString"
+          },
+          "includeEarthquake" : {
+            "$ref" : "#/components/schemas/CoverageDetailsBoolean"
+          },
+          "includeIdentityFraudExpenseCoverage" : {
+            "$ref" : "#/components/schemas/CoverageDetailsString"
+          },
+          "includeWaterBackup" : {
+            "$ref" : "#/components/schemas/CoverageDetailsString"
+          },
+          "increasedCoverageC" : {
+            "$ref" : "#/components/schemas/IncreasedPersonalPropertyCoverage"
+          },
+          "libel" : {
+            "$ref" : "#/components/schemas/CoverageDetailsBoolean"
+          },
+          "personalLiability" : {
+            "$ref" : "#/components/schemas/CoverageDetailsString"
+          },
+          "medicalPaymentsToOthers" : {
+            "$ref" : "#/components/schemas/CoverageDetailsString"
+          },
+          "lostOfUse" : {
+            "$ref" : "#/components/schemas/CoverageDetailsString"
+          },
+          "personalPropertyPerilsNew" : {
+            "$ref" : "#/components/schemas/CoverageDetailsString"
+          },
+          "replacementCostOnPersonalProperty" : {
+            "$ref" : "#/components/schemas/CoverageDetailsBoolean"
+          },
+          "windStorm" : {
+            "$ref" : "#/components/schemas/CoverageDetailsString"
+          },
+          "includeComputers" : {
+            "$ref" : "#/components/schemas/CoverageDetailsString"
+          },
+          "personalProperty" : {
+            "$ref" : "#/components/schemas/CoverageDetailsString"
+          },
+          "mineSubsidence" : {
+            "$ref" : "#/components/schemas/CoverageDetailsString"
+          },
+          "mineSubALECoverage" : {
+            "$ref" : "#/components/schemas/CoverageDetailsBoolean"
+          },
+          "includePoolLiability" : {
+            "$ref" : "#/components/schemas/CoverageDetailsBoolean"
+          },
+          "hurricaneOnly" : {
+            "$ref" : "#/components/schemas/CoverageDetailsString"
+          },
+          "timePeriodForCovD" : {
+            "$ref" : "#/components/schemas/CoverageDetailsInteger"
+          },
+          "includeServiceLine" : {
+            "$ref" : "#/components/schemas/CoverageDetailsBoolean"
+          },
+          "includeEquipmentBreakdown" : {
+            "$ref" : "#/components/schemas/CoverageDetailsBoolean"
+          },
+          "glassBreakageCoverage" : {
+            "$ref" : "#/components/schemas/CoverageDetailsString"
+          },
+          "refrigeratedCoverageFlag" : {
+            "$ref" : "#/components/schemas/CoverageDetailsBoolean"
+          },
+          "refrigeratedCoverage" : {
+            "$ref" : "#/components/schemas/CoverageDetailsString"
+          },
+          "hurricane" : {
+            "$ref" : "#/components/schemas/CoverageDetailsString"
+          },
+          "leadPoisoningCov" : {
+            "$ref" : "#/components/schemas/CoverageDetailsBoolean"
+          },
+          "includeAnimalLiabilityCoverage" : {
+            "$ref" : "#/components/schemas/CoverageDetailsString"
+          },
+          "includeOrdinanceOfLaw" : {
+            "$ref" : "#/components/schemas/CoverageDetailsBoolean"
+          },
+          "screenedEnclosureCoverageFlag" : {
+            "$ref" : "#/components/schemas/CoverageDetailsBoolean"
+          },
+          "screenedEnclosureCoverage" : {
+            "$ref" : "#/components/schemas/CoverageDetailsString"
+          },
+          "wildfireDeductible" : {
+            "$ref" : "#/components/schemas/CoverageDetailsString"
+          },
+          "limitedWaterDamageCoverage" : {
+            "$ref" : "#/components/schemas/CoverageDetailsString"
+          },
+          "limitedWaterDamageCoverageLimit" : {
+            "$ref" : "#/components/schemas/CoverageDetailsString"
+          },
+          "waterDamageExclusion" : {
+            "$ref" : "#/components/schemas/CoverageDetailsString"
+          },
+          "sppItems" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/ScheduledPersonalProperty"
+            }
+          },
+          "moldPropertyProtection" : {
+            "$ref" : "#/components/schemas/CoverageDetailsString"
+          },
+          "moldLiabilityProtection" : {
+            "$ref" : "#/components/schemas/CoverageDetailsString"
+          },
+          "additionalMoldPropertyProtection" : {
+            "$ref" : "#/components/schemas/CoverageDetailsString"
+          },
+          "includeLimitedAnimalLiability" : {
+            "$ref" : "#/components/schemas/CoverageDetailsString"
+          },
+          "WindstormDed_FL_HurricaneLoss" : {
+            "$ref" : "#/components/schemas/CoverageDetailsString"
+          },
+          "WindstormDed_FL_Hurricane" : {
+            "$ref" : "#/components/schemas/CoverageDetailsString"
+          },
+          "WindstormDed_FL_WindHail" : {
+            "$ref" : "#/components/schemas/CoverageDetailsString"
+          },
+          "WindstormDed_NJ_Hurricane" : {
+            "$ref" : "#/components/schemas/CoverageDetailsString"
+          },
+          "WindstormDed_NJ_WindHail" : {
+            "$ref" : "#/components/schemas/CoverageDetailsString"
+          },
+          "WindstormDed_NY_Hurricane" : {
+            "$ref" : "#/components/schemas/CoverageDetailsString"
+          },
+          "WindstormDed_SC_Hurricane" : {
+            "$ref" : "#/components/schemas/CoverageDetailsString"
+          },
+          "WindstormDed_SC_WindHail" : {
+            "$ref" : "#/components/schemas/CoverageDetailsString"
+          },
+          "WindstormDed_TX_Hurricane" : {
+            "$ref" : "#/components/schemas/CoverageDetailsString"
+          },
+          "WindstormDed_AL_WindHail" : {
+            "$ref" : "#/components/schemas/CoverageDetailsString"
+          },
+          "WindstormDed_AL_Hurricane" : {
+            "$ref" : "#/components/schemas/CoverageDetailsString"
+          },
+          "WindstormDed_CT_Hurricane" : {
+            "$ref" : "#/components/schemas/CoverageDetailsString"
+          }
+        }
+      },
+      "CreditCard" : {
+        "type" : "object",
+        "properties" : {
+          "cardType" : {
+            "pattern" : "AmericanExpress|Discover|MasterCard|VISA",
+            "type" : "string",
+            "enum" : [ "AmericanExpress", "Discover", "MasterCard", "VISA" ]
+          },
+          "expirationMonth" : {
+            "maximum" : 12,
+            "minimum" : 1,
+            "type" : "integer",
+            "format" : "int32"
+          },
+          "expirationYear" : {
+            "type" : "integer",
+            "format" : "int32"
+          },
+          "firstName" : {
+            "pattern" : "^[A-Za-z-.][A-Za-z-.'\\s]{0,19}$",
+            "type" : "string"
+          },
+          "lastName" : {
+            "pattern" : "^[A-Za-z-.][A-Za-z-.'\\s]{0,19}$",
+            "type" : "string"
+          },
+          "middleInitial" : {
+            "pattern" : "^[A-Za-z]{1}$",
+            "type" : "string"
+          },
+          "transactionArmorToken" : {
+            "type" : "string"
+          }
+        }
+      },
+      "CustomerAcknowledgements" : {
+        "type" : "object",
+        "properties" : {
+          "creditDisclosureFlag" : {
+            "type" : "boolean"
+          },
+          "creditDisclosureInitials" : {
+            "type" : "string"
+          }
+        }
+      },
+      "ElectronicFundsTransfer" : {
+        "type" : "object",
+        "properties" : {
+          "accountNumber" : {
+            "pattern" : "^\\d{1,15}$",
+            "type" : "string"
+          },
+          "routingNumber" : {
+            "pattern" : "^\\d{9}$",
+            "type" : "string"
+          },
+          "customerAcknowledgement" : {
+            "type" : "boolean"
+          }
+        }
+      },
+      "Evaluation" : {
+        "type" : "object",
+        "properties" : {
+          "dataPoint" : {
+            "type" : "string"
+          },
+          "operator" : {
+            "type" : "string"
+          },
+          "message" : {
+            "type" : "string"
+          },
+          "value" : {
+            "type" : "object"
+          }
+        }
+      },
+      "IncreasedPersonalPropertyCoverage" : {
+        "description" : "Covers personal property owned or used by an insured while it is anywhere in the world.",
+        "type" : "object",
+        "properties" : {
+          "options" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/Option"
+            }
+          },
+          "value" : {
+            "type" : "string"
+          }
+        }
+      },
+      "IndicativeQuoteDetails" : {
+        "type" : "object",
+        "properties" : {
+          "sessionHash" : {
+            "type" : "string"
+          }
+        }
+      },
+      "Inspection" : {
+        "type" : "object"
+      },
+      "ItemBreakDown" : {
+        "type" : "object",
+        "properties" : {
+          "type" : {
+            "type" : "string"
+          },
+          "value" : {
+            "type" : "string"
+          }
+        }
+      },
+      "ItemBreakDownValues" : {
+        "type" : "object",
+        "properties" : {
+          "dataSource" : {
+            "type" : "string"
+          },
+          "message" : {
+            "type" : "string"
+          },
+          "options" : {
+            "type" : "array",
+            "items" : {
+              "type" : "object"
+            }
+          },
+          "values" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/ItemBreakDown"
+            }
+          }
+        }
+      },
+      "Manifest" : {
+        "type" : "object",
+        "properties" : {
+          "multiRateOptions" : {
+            "$ref" : "#/components/schemas/MultiRateOptions"
+          }
+        }
+      },
+      "ManifestV2" : {
+        "type" : "object",
+        "properties" : {
+          "multiRatePackages" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/MultiRatePackages"
+            }
+          },
+          "multiRateReset" : {
+            "type" : "boolean"
+          }
+        }
+      },
+      "Mortgagee" : {
+        "type" : "object",
+        "properties" : {
+          "loanNumber" : {
+            "type" : "string"
+          },
+          "mortgageeName" : {
+            "type" : "string"
+          },
+          "billTo" : {
+            "type" : "integer",
+            "format" : "int32"
+          },
+          "mortgageeOrder" : {
+            "type" : "integer",
+            "format" : "int32"
+          },
+          "mortgageeAddress" : {
+            "$ref" : "#/components/schemas/Address"
+          }
+        }
+      },
+      "MultiRateOptions" : {
+        "type" : "object",
+        "properties" : {
+          "bundled" : {
+            "$ref" : "#/components/schemas/Bundled"
+          },
+          "unbundled" : {
+            "$ref" : "#/components/schemas/Unbundled"
+          }
+        }
+      },
+      "MultiRatePackages" : {
+        "type" : "object",
+        "properties" : {
+          "acvRoofCoverage" : {
+            "type" : "boolean"
+          },
+          "autoPolicyNumber" : {
+            "type" : "string"
+          },
+          "deductible" : {
+            "type" : "string"
+          },
+          "dwellingCoverage" : {
+            "type" : "string"
+          },
+          "extendedReplacementCost" : {
+            "type" : "string"
+          },
+          "includeComputers" : {
+            "type" : "string"
+          },
+          "includeEarthquake" : {
+            "type" : "boolean"
+          },
+          "includeIdentityFraudExpenseCoverage" : {
+            "type" : "string"
+          },
+          "includeEquipmentBreakdown" : {
+            "type" : "boolean"
+          },
+          "includeServiceLine" : {
+            "type" : "boolean"
+          },
+          "includeWaterBackup" : {
+            "type" : "string"
+          },
+          "waterBackup" : {
+            "type" : "boolean"
+          },
+          "increasedCovCAmt" : {
+            "type" : "number"
+          },
+          "increasedCoverageC" : {
+            "type" : "string"
+          },
+          "libel" : {
+            "type" : "boolean"
+          },
+          "lossAssessmentCoverage" : {
+            "type" : "string"
+          },
+          "lostOfUse" : {
+            "type" : "string"
+          },
+          "medicalPaymentsToOthers" : {
+            "type" : "string"
+          },
+          "mineSubALECoverage" : {
+            "type" : "boolean"
+          },
+          "mineSubsidence" : {
+            "type" : "string"
+          },
+          "moldLiabilityProtection" : {
+            "type" : "string"
+          },
+          "moldPropertyProtection" : {
+            "type" : "string"
+          },
+          "packageSelected" : {
+            "type" : "boolean"
+          },
+          "packageType" : {
+            "type" : "string"
+          },
+          "partnerAutoPolicy" : {
+            "type" : "boolean"
+          },
+          "personalLiability" : {
+            "type" : "string"
+          },
+          "personalProperty" : {
+            "type" : "string"
+          },
+          "personalPropertyPerilsNew" : {
+            "type" : "string"
+          },
+          "replacementCostOnPersonalProperty" : {
+            "type" : "boolean"
+          },
+          "sppItems" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/ScheduledPersonalProperty"
+            }
+          },
+          "sumpPumpFailureSewerBackupLoss" : {
+            "type" : "string"
+          },
+          "timePeriodForCovD" : {
+            "type" : "string"
+          },
+          "windStorm" : {
+            "type" : "string"
+          },
+          "coverageResidenceEmployees" : {
+            "type" : "string"
+          },
+          "userRequestedCoverageA" : {
+            "type" : "string"
+          },
+          "userRequestedCoverageAFlag" : {
+            "type" : "boolean"
+          },
+          "includeOrdinanceOfLaw" : {
+            "type" : "boolean"
+          },
+          "otherStructures" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/OtherStructures"
+            }
+          },
+          "hurricaneOnly" : {
+            "type" : "string"
+          },
+          "buildingAdditionsAlterations" : {
+            "type" : "string"
+          }
+        }
+      },
+      "Node" : {
+        "type" : "object",
+        "properties" : {
+          "required" : {
+            "type" : "boolean"
+          }
+        }
+      },
+      "Option" : {
+        "type" : "object",
+        "properties" : {
+          "name" : {
+            "type" : "string"
+          },
+          "value" : {
+            "type" : "string"
+          }
+        }
+      },
+      "Options" : {
+        "type" : "object",
+        "properties" : {
+          "key" : {
+            "type" : "string"
+          },
+          "name" : {
+            "type" : "string"
+          },
+          "value" : {
+            "type" : "string"
+          }
+        }
+      },
+      "OtherStructures" : {
+        "description" : "Covers any “other structures” located on the premises, set apart from the dwelling by a clear space.",
+        "type" : "object",
+        "properties" : {
+          "amount" : {
+            "type" : "number"
+          },
+          "description" : {
+            "type" : "string"
+          }
+        }
+      },
+      "PaymentDetails" : {
+        "type" : "object",
+        "properties" : {
+          "billingOption" : {
+            "pattern" : "^(100|70|40|25|16\\.6|8\\.3)$",
+            "type" : "string",
+            "enum" : [ "100", "70", "40", "25", "16.6", "8.3" ]
+          },
+          "paymentMethod" : {
+            "pattern" : "^(CreditCard|AutoCheck|Mortgagee|WalletPay|DirectPay)$",
+            "type" : "string",
+            "enum" : [ "CreditCard", "AutoCheck", "Mortgagee", "WalletPay", "DirectPay" ]
+          },
+          "creditCard" : {
+            "$ref" : "#/components/schemas/CreditCard"
+          },
+          "electronicFundsTransfer" : {
+            "$ref" : "#/components/schemas/ElectronicFundsTransfer"
+          },
+          "mortgagee" : {
+            "$ref" : "#/components/schemas/Mortgagee"
+          },
+          "mortgagees" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/Mortgagee"
+            }
+          },
+          "walletPay" : {
+            "$ref" : "#/components/schemas/WalletPay"
+          }
+        }
+      },
+      "Person" : {
+        "type" : "object",
+        "properties" : {
+          "firstName" : {
+            "maxLength" : 40,
+            "minLength" : 0,
+            "type" : "string"
+          },
+          "lastName" : {
+            "maxLength" : 40,
+            "minLength" : 0,
+            "type" : "string"
+          },
+          "dob" : {
+            "pattern" : "^[12]\\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\\d|3[01])$",
+            "type" : "string"
+          },
+          "emailAddress" : {
+            "type" : "string"
+          },
+          "phoneNumber" : {
+            "pattern" : "^\\d{10}$",
+            "type" : "string"
+          },
+          "customerDataHubId" : {
+            "type" : "string"
+          },
+          "transUnionRequestId" : {
+            "type" : "integer",
+            "format" : "int32"
+          },
+          "autoClaimsRequestId" : {
+            "type" : "integer",
+            "format" : "int32"
+          },
+          "propertyClaimsRequestId" : {
+            "type" : "integer",
+            "format" : "int32"
+          },
+          "customerType" : {
+            "type" : "string"
+          }
+        }
+      },
+      "PrefillReplacementCostData" : {
+        "type" : "object",
+        "properties" : {
+          "calculatedValue" : {
+            "$ref" : "#/components/schemas/QuoteDataObjectString"
+          },
+          "costBreakdown" : {
+            "$ref" : "#/components/schemas/ItemBreakDownValues"
+          },
+          "rangeHigh" : {
+            "$ref" : "#/components/schemas/QuoteDataObjectString"
+          },
+          "rangeLow" : {
+            "$ref" : "#/components/schemas/QuoteDataObjectString"
+          }
+        }
+      },
+      "PriceData" : {
+        "type" : "object",
+        "properties" : {
+          "salePrice" : {
+            "$ref" : "#/components/schemas/QuoteDataObjectInteger"
+          },
+          "priorSalePrice" : {
+            "$ref" : "#/components/schemas/QuoteDataObjectInteger"
+          },
+          "saleType" : {
+            "$ref" : "#/components/schemas/QuoteDataObjectString"
+          },
+          "saleDate" : {
+            "$ref" : "#/components/schemas/QuoteDataObjectString"
+          }
+        }
+      },
+      "PrimaryPerson" : {
+        "type" : "object",
+        "properties" : {
+          "firstName" : {
+            "maxLength" : 40,
+            "minLength" : 0,
+            "type" : "string"
+          },
+          "lastName" : {
+            "maxLength" : 40,
+            "minLength" : 0,
+            "type" : "string"
+          },
+          "dob" : {
+            "pattern" : "^[12]\\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\\d|3[01])$",
+            "type" : "string"
+          },
+          "emailAddress" : {
+            "type" : "string"
+          },
+          "phoneNumber" : {
+            "pattern" : "^\\d{10}$",
+            "type" : "string"
+          },
+          "customerDataHubId" : {
+            "type" : "string"
+          },
+          "partnerAutoPolicy" : {
+            "type" : "boolean"
+          },
+          "autoPolicyNumber" : {
+            "maxLength" : 20,
+            "minLength" : 0,
+            "type" : "string"
+          },
+          "costcoMembershipNumber" : {
+            "maxLength" : 20,
+            "minLength" : 0,
+            "type" : "string"
+          },
+          "costcoMembershipLevel" : {
+            "pattern" : "Gold Star|Executive|None",
+            "type" : "string",
+            "enum" : [ "Gold Star", "Executive", "None" ]
+          },
+          "costcoMembershipValidationFlag" : {
+            "type" : "boolean"
+          },
+          "transUnionRequestId" : {
+            "type" : "integer",
+            "format" : "int32"
+          },
+          "autoClaimsRequestId" : {
+            "type" : "integer",
+            "format" : "int32"
+          },
+          "propertyClaimsRequestId" : {
+            "type" : "integer",
+            "format" : "int32"
+          },
+          "customerType" : {
+            "type" : "string"
+          },
+          "existingPolicy" : {
+            "type" : "boolean"
+          },
+          "existingPolicyNumber" : {
+            "maxLength" : 8,
+            "minLength" : 0,
+            "type" : "string"
+          }
+        }
+      },
+      "PropertyDataObjectBoolean" : {
+        "type" : "object",
+        "properties" : {
+          "required" : {
+            "type" : "object"
+          },
+          "dataSource" : {
+            "type" : "string",
+            "enum" : [ "CarrierUserEntered", "ThirdPartyPrefill", "PartnerUserEntered", "CarrierRawData" ]
+          },
+          "message" : {
+            "type" : "string"
+          },
+          "options" : {
+            "type" : "array",
+            "items" : {
+              "type" : "string"
+            }
+          },
+          "value" : {
+            "type" : "boolean"
+          }
+        }
+      },
+      "PropertyDataObjectInteger" : {
+        "type" : "object",
+        "properties" : {
+          "required" : {
+            "type" : "object"
+          },
+          "dataSource" : {
+            "type" : "string",
+            "enum" : [ "CarrierUserEntered", "ThirdPartyPrefill", "PartnerUserEntered", "CarrierRawData" ]
+          },
+          "message" : {
+            "type" : "string"
+          },
+          "options" : {
+            "type" : "array",
+            "items" : {
+              "type" : "string"
+            }
+          },
+          "value" : {
+            "type" : "integer",
+            "format" : "int32"
+          }
+        }
+      },
+      "PropertyDataObjectLocalDate" : {
+        "type" : "object",
+        "properties" : {
+          "required" : {
+            "type" : "object"
+          },
+          "dataSource" : {
+            "type" : "string",
+            "enum" : [ "CarrierUserEntered", "ThirdPartyPrefill", "PartnerUserEntered", "CarrierRawData" ]
+          },
+          "message" : {
+            "type" : "string"
+          },
+          "options" : {
+            "type" : "array",
+            "items" : {
+              "type" : "string"
+            }
+          },
+          "value" : {
+            "type" : "string",
+            "format" : "date"
+          }
+        }
+      },
+      "PropertyDataObjectString" : {
+        "type" : "object",
+        "properties" : {
+          "required" : {
+            "type" : "object"
+          },
+          "dataSource" : {
+            "type" : "string",
+            "enum" : [ "CarrierUserEntered", "ThirdPartyPrefill", "PartnerUserEntered", "CarrierRawData" ]
+          },
+          "message" : {
+            "type" : "string"
+          },
+          "options" : {
+            "type" : "array",
+            "items" : {
+              "type" : "string"
+            }
+          },
+          "value" : {
+            "type" : "string"
+          }
+        }
+      },
+      "PropertyDataPrefill" : {
+        "type" : "object",
+        "properties" : {
+          "fdsId" : {
+            "maxLength" : 50,
+            "minLength" : 0,
+            "type" : "string"
+          },
+          "valuationId" : {
+            "maxLength" : 10,
+            "minLength" : 0,
+            "type" : "string"
+          }
+        }
+      },
+      "QuoteRequest" : {
+        "type" : "object",
+        "properties" : {
+          "animals" : {
+            "$ref" : "#/components/schemas/Animals"
+          },
+          "apiData" : {
+            "$ref" : "#/components/schemas/ApiData"
+          },
+          "advisorDetails" : {
+            "$ref" : "#/components/schemas/Advisor"
+          },
+          "agencyInfo" : {
+            "$ref" : "#/components/schemas/AgencyInfo"
+          },
+          "quoteAttributes" : {
+            "$ref" : "#/components/schemas/QuoteAttributes"
+          },
+          "customerAcknowledgements" : {
+            "$ref" : "#/components/schemas/CustomerAcknowledgements"
+          },
+          "propertyAddress" : {
+            "$ref" : "#/components/schemas/Address"
+          },
+          "mailingAddress" : {
+            "$ref" : "#/components/schemas/Address"
+          },
+          "priorAddress" : {
+            "$ref" : "#/components/schemas/Address"
+          },
+          "propertyDataPrefill" : {
+            "$ref" : "#/components/schemas/PropertyDataPrefill"
+          },
+          "propertyData" : {
+            "$ref" : "#/components/schemas/PropertyData"
+          },
+          "prefillReplacementCostData" : {
+            "$ref" : "#/components/schemas/PrefillReplacementCostData"
+          },
+          "additionalPropertyData" : {
+            "$ref" : "#/components/schemas/AdditionalPropertyData"
+          },
+          "residentData" : {
+            "$ref" : "#/components/schemas/ResidentData"
+          },
+          "business" : {
+            "$ref" : "#/components/schemas/Business"
+          },
+          "partnerInfo" : {
+            "$ref" : "#/components/schemas/PartnerInfo"
+          },
+          "primaryPerson" : {
+            "$ref" : "#/components/schemas/PrimaryPerson"
+          },
+          "secondaryPerson" : {
+            "$ref" : "#/components/schemas/Person"
+          },
+          "additionalInterests" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/AdditionalInterests"
+            }
+          },
+          "additionalInsured" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/AdditionalInsured"
+            }
+          },
+          "coverages" : {
+            "$ref" : "#/components/schemas/Coverages"
+          },
+          "manifest" : {
+            "$ref" : "#/components/schemas/Manifest"
+          },
+          "paymentDetails" : {
+            "$ref" : "#/components/schemas/PaymentDetails"
+          },
+          "bindAcknowledgements" : {
+            "$ref" : "#/components/schemas/BindAcknowledgements"
+          },
+          "manifestV2" : {
+            "$ref" : "#/components/schemas/ManifestV2"
+          },
+          "bookRollPolicyInfo" : {
+            "$ref" : "#/components/schemas/BookRollPolicyInfo"
+          },
+          "priceData" : {
+            "$ref" : "#/components/schemas/PriceData"
+          },
+          "inspection" : {
+            "$ref" : "#/components/schemas/Inspection"
+          },
+          "serviceManifest" : {
+            "$ref" : "#/components/schemas/ServiceManifest"
+          },
+          "indicativeQuoteDetails" : {
+            "$ref" : "#/components/schemas/IndicativeQuoteDetails"
+          }
+        }
+      },
+      "ResidentData" : {
+        "type" : "object",
+        "properties" : {
+          "fullTimeResidenceEmployees" : {
+            "$ref" : "#/components/schemas/PropertyDataObjectInteger"
+          },
+          "moveWithinSixtyDays" : {
+            "$ref" : "#/components/schemas/PropertyDataObjectBoolean"
+          },
+          "newHomePurchase" : {
+            "$ref" : "#/components/schemas/PropertyDataObjectBoolean"
+          },
+          "occupancyType" : {
+            "$ref" : "#/components/schemas/PropertyDataObjectString"
+          },
+          "personalInfoProtectionFlag" : {
+            "$ref" : "#/components/schemas/PropertyDataObjectBoolean"
+          },
+          "lengthOfResidence" : {
+            "$ref" : "#/components/schemas/PropertyDataObjectInteger"
+          },
+          "numberOfResidentsInHousehold" : {
+            "$ref" : "#/components/schemas/PropertyDataObjectInteger"
+          },
+          "cancelledForNonPayment" : {
+            "$ref" : "#/components/schemas/PropertyDataObjectString"
+          },
+          "retiredPolicyHolder" : {
+            "$ref" : "#/components/schemas/PropertyDataObjectBoolean"
+          },
+          "namedInsuredType" : {
+            "$ref" : "#/components/schemas/PropertyDataObjectString"
+          },
+          "trusteeOnDeed" : {
+            "$ref" : "#/components/schemas/PropertyDataObjectBoolean"
+          },
+          "workersCompensation" : {
+            "$ref" : "#/components/schemas/PropertyDataObjectBoolean"
+          },
+          "currentPolicyExpirationDate" : {
+            "$ref" : "#/components/schemas/PropertyDataObjectLocalDate"
+          },
+          "lastPolicyExpirationDate" : {
+            "$ref" : "#/components/schemas/PropertyDataObjectLocalDate"
+          },
+          "lapseOfInsurance" : {
+            "$ref" : "#/components/schemas/PropertyDataObjectBoolean"
+          },
+          "homeRentedOrVacant" : {
+            "$ref" : "#/components/schemas/PropertyDataObjectBoolean"
+          },
+          "residentsBeyondImmediateFamily" : {
+            "$ref" : "#/components/schemas/PropertyDataObjectBoolean"
+          },
+          "numberOfFamilies" : {
+            "$ref" : "#/components/schemas/PropertyDataObjectInteger"
+          },
+          "numberOfRoomersOrBoarders" : {
+            "$ref" : "#/components/schemas/PropertyDataObjectInteger"
+          },
+          "employeeAssociateNumber" : {
+            "$ref" : "#/components/schemas/PropertyDataObjectString"
+          },
+          "rentalPeriod" : {
+            "$ref" : "#/components/schemas/PropertyDataObjectString"
+          }
+        }
+      },
+      "ScheduledPersonalProperty" : {
+        "description" : "coverage for specific individual items. e.g. Jewelry, Furs, Cameras, Music, Silverware, Golf, Fine arts, Coins, Bicycles, Fine Arts(Breakage), Other",
+        "required" : [ "amount", "article", "description", "type" ],
+        "type" : "object",
+        "properties" : {
+          "typeId" : {
+            "type" : "string"
+          },
+          "type" : {
+            "type" : "string"
+          },
+          "article" : {
+            "maxLength" : 20,
+            "minLength" : 0,
+            "type" : "string"
+          },
+          "description" : {
+            "maxLength" : 80,
+            "minLength" : 0,
+            "type" : "string"
+          },
+          "amount" : {
+            "type" : "number"
+          }
+        }
+      },
+      "ServiceManifest" : {
+        "type" : "object",
+        "properties" : {
+          "callPropertyPrefillService" : {
+            "$ref" : "#/components/schemas/CallServiceNodeListString"
+          },
+          "callCreditScoreService" : {
+            "$ref" : "#/components/schemas/CallServiceNodeString"
+          },
+          "callReplacementCostService" : {
+            "$ref" : "#/components/schemas/CallServiceNodeString"
+          },
+          "callVendorService" : {
+            "$ref" : "#/components/schemas/CallServiceNodeListString"
+          },
+          "callPropertyClaimsService" : {
+            "$ref" : "#/components/schemas/CallServiceNodeString"
+          },
+          "callAutoClaimsService" : {
+            "$ref" : "#/components/schemas/CallServiceNodeString"
+          },
+          "callUWRiskDNQ" : {
+            "$ref" : "#/components/schemas/CallServiceNodeString"
+          },
+          "secondHomeEvaluation" : {
+            "$ref" : "#/components/schemas/Node"
+          }
+        }
+      },
+      "Unbundled" : {
+        "type" : "object",
+        "properties" : {
+          "partnerAutoPolicy" : {
+            "type" : "boolean"
+          }
+        }
+      },
+      "WalletPay" : {
+        "type" : "object",
+        "properties" : {
+          "type" : {
+            "pattern" : "Apple_Pay|Google_Pay",
+            "type" : "string",
+            "enum" : [ "Apple_Pay", "Google_Pay" ]
+          },
+          "authCode" : {
+            "type" : "string"
+          },
+          "transactionTag" : {
+            "type" : "string"
+          },
+          "firstName" : {
+            "pattern" : "^[A-Za-z-.][A-Za-z-.'\\s]{0,19}$",
+            "type" : "string"
+          },
+          "lastName" : {
+            "pattern" : "^[A-Za-z-.][A-Za-z-.'\\s]{0,19}$",
+            "type" : "string"
+          },
+          "middleInitial" : {
+            "pattern" : "^[A-Za-z]{1}$",
+            "type" : "string"
+          }
+        }
+      },
+      "QuoteHeader" : {
+        "type" : "object",
+        "properties" : {
+          "quoteNumber" : {
+            "type" : "string"
+          },
+          "sessionHash" : {
+            "type" : "string"
+          }
+        }
+      },
+      "QuoteResponse" : {
+        "type" : "object",
+        "properties" : {
+          "quoteHeader" : {
+            "$ref" : "#/components/schemas/QuoteHeader"
+          },
+          "eligibility" : {
+            "$ref" : "#/components/schemas/Eligibility"
+          }
+        }
+      },
+      "EvaluatePropertyResponse" : {
+        "type" : "object",
+        "properties" : {
+          "animals" : {
+            "$ref" : "#/components/schemas/Animals"
+          },
+          "business" : {
+            "$ref" : "#/components/schemas/Business"
+          },
+          "propertyDataPrefill" : {
+            "$ref" : "#/components/schemas/PropertyDataPrefill"
+          },
+          "replacementCostData" : {
+            "$ref" : "#/components/schemas/ReplacementCostData"
+          },
+          "propertyData" : {
+            "$ref" : "#/components/schemas/PropertyData"
+          },
+          "additionalPropertyData" : {
+            "$ref" : "#/components/schemas/AdditionalPropertyData"
+          },
+          "residentData" : {
+            "$ref" : "#/components/schemas/ResidentData"
+          },
+          "status" : {
+            "type" : "string"
+          },
+          "message" : {
+            "type" : "string"
+          },
+          "propertyPrefillStatus" : {
+            "type" : "string"
+          },
+          "roofScoreVersion" : {
+            "type" : "integer",
+            "format" : "int32"
+          },
+          "capeResponse" : {
+            "type" : "string"
+          }
+        }
+      },
+      "ReplacementCostData" : {
+        "type" : "object",
+        "properties" : {
+          "contractorOverheadProfit" : {
+            "type" : "number"
+          },
+          "costOfLaborMaterials" : {
+            "type" : "number"
+          },
+          "costOfPermitsArchitects" : {
+            "type" : "number"
+          },
+          "estimatedReplacementCost" : {
+            "type" : "number"
+          },
+          "marketValue" : {
+            "type" : "number"
+          },
+          "increasedEstimatedReplacementCost" : {
+            "type" : "number"
+          },
+          "userRequestedCoverageAFlag" : {
+            "type" : "boolean"
+          }
+        }
+      },
+      "BindPremium" : {
+        "required" : [ "downPayment", "totalPremium" ],
+        "type" : "object",
+        "properties" : {
+          "downPayment" : {
+            "pattern" : "^\\d+(\\.\\d+)?$",
+            "type" : "string"
+          },
+          "totalPremium" : {
+            "pattern" : "^\\d+(\\.\\d+)?$",
+            "type" : "string"
+          }
+        }
+      },
+      "BindRequest" : {
+        "required" : [ "premium" ],
+        "type" : "object",
+        "properties" : {
+          "premium" : {
+            "$ref" : "#/components/schemas/BindPremium"
+          }
+        }
+      },
+      "BindEligibility" : {
+        "type" : "object",
+        "properties" : {
+          "statusCode" : {
+            "type" : "string"
+          },
+          "reason" : {
+            "type" : "string"
+          }
+        }
+      },
+      "BindPaymentDetails" : {
+        "type" : "object",
+        "properties" : {
+          "payment" : {
+            "type" : "string"
+          },
+          "annualPremium" : {
+            "type" : "string"
+          },
+          "policyEffectiveDate" : {
+            "type" : "string"
+          }
+        }
+      },
+      "BindQuoteHeader" : {
+        "type" : "object",
+        "properties" : {
+          "sessionHash" : {
+            "type" : "string"
+          },
+          "policyEffectiveDateRange" : {
+            "type" : "string"
+          },
+          "quoteStatus" : {
+            "type" : "string"
+          },
+          "message" : {
+            "type" : "string"
+          }
+        }
+      },
+      "BindResponse" : {
+        "type" : "object",
+        "properties" : {
+          "quoteHeader" : {
+            "$ref" : "#/components/schemas/BindQuoteHeader"
+          },
+          "eligibility" : {
+            "$ref" : "#/components/schemas/BindEligibility"
+          },
+          "policyNumber" : {
+            "type" : "string"
+          },
+          "paymentDetails" : {
+            "$ref" : "#/components/schemas/BindPaymentDetails"
+          },
+          "inspectionModelStatus" : {
+            "type" : "string"
+          },
+          "keepCostcoMembershipUpdated" : {
+            "type" : "boolean"
+          },
+          "contactForAdditionalInfo" : {
+            "type" : "boolean"
+          },
+          "isBatchRunning" : {
+            "type" : "integer",
+            "format" : "int32"
+          }
+        }
+      },
+      "BaseGeoSpatialData" : {
+        "type" : "object",
+        "properties" : {
+          "streetDirectionPost" : {
+            "type" : "string"
+          },
+          "streetDirectionPre" : {
+            "type" : "string"
+          },
+          "streetName" : {
+            "type" : "string"
+          },
+          "streetType" : {
+            "type" : "string"
+          },
+          "houseNumber" : {
+            "type" : "string"
+          },
+          "unitNumber" : {
+            "type" : "string"
+          }
+        }
+      },
+      "BillingDetails" : {
+        "type" : "object",
+        "properties" : {
+          "billingOption" : {
+            "type" : "string"
+          },
+          "name" : {
+            "type" : "string"
+          },
+          "numInstallments" : {
+            "type" : "string"
+          },
+          "downPayment" : {
+            "type" : "string"
+          },
+          "monthlyPayPlan" : {
+            "type" : "string"
+          },
+          "totalPremium" : {
+            "type" : "string"
+          },
+          "installmentFee" : {
+            "type" : "string"
+          },
+          "paymentTypes" : {
+            "type" : "array",
+            "items" : {
+              "type" : "string"
+            }
+          },
+          "eftFee" : {
+            "type" : "string"
+          }
+        }
+      },
+      "CoverageResponse" : {
+        "type" : "object",
+        "properties" : {
+          "replacementCost" : {
+            "$ref" : "#/components/schemas/CoverageDetailsString"
+          },
+          "creditScoreFlag" : {
+            "$ref" : "#/components/schemas/CoverageDetailsBoolean"
+          },
+          "partnerEmployeeDiscountFlag" : {
+            "$ref" : "#/components/schemas/CoverageDetailsBoolean"
+          },
+          "partnerCustomerDiscountFlag" : {
+            "$ref" : "#/components/schemas/CoverageDetailsBoolean"
+          },
+          "partnerAffilateDiscountFlag" : {
+            "$ref" : "#/components/schemas/CoverageDetailsBoolean"
+          },
+          "acvRoofCoverage" : {
+            "$ref" : "#/components/schemas/CoverageDetailsBoolean"
+          },
+          "includeFoundationCoverage" : {
+            "$ref" : "#/components/schemas/CoverageDetailsBoolean"
+          },
+          "personalProperty" : {
+            "$ref" : "#/components/schemas/CoverageDetailsString"
+          },
+          "otherStructures" : {
+            "$ref" : "#/components/schemas/CoverageDetailsString"
+          },
+          "endorsementPackageTypes" : {
+            "$ref" : "#/components/schemas/CoverageDetailsInteger"
+          },
+          "dwelling" : {
+            "$ref" : "#/components/schemas/CoverageDetailsString"
+          },
+          "extendedReplacementCost" : {
+            "$ref" : "#/components/schemas/CoverageDetailsString"
+          },
+          "protectDwellingAgainst" : {
+            "$ref" : "#/components/schemas/CoverageDetailsString"
+          },
+          "lostOfUse" : {
+            "$ref" : "#/components/schemas/CoverageDetailsString"
+          },
+          "timePeriodForCovD" : {
+            "$ref" : "#/components/schemas/CoverageDetailsInteger"
+          },
+          "roofCoverage" : {
+            "$ref" : "#/components/schemas/CoverageDetailsString"
+          },
+          "increasedCoverageC" : {
+            "$ref" : "#/components/schemas/CoverageDetailsString"
+          },
+          "replacementCostOnPersonalProperty" : {
+            "$ref" : "#/components/schemas/CoverageDetailsBoolean"
+          },
+          "includeComputers" : {
+            "$ref" : "#/components/schemas/CoverageDetailsString"
+          },
+          "includeEarthquake" : {
+            "$ref" : "#/components/schemas/CoverageDetailsBoolean"
+          },
+          "includeOrdinanceOfLaw" : {
+            "$ref" : "#/components/schemas/CoverageDetailsBoolean"
+          },
+          "includeIdentityFraudExpenseCoverage" : {
+            "$ref" : "#/components/schemas/CoverageDetailsString"
+          },
+          "otherStructureIncreaseLimit" : {
+            "$ref" : "#/components/schemas/OtherStructureIncreaseLimit"
+          },
+          "deductible" : {
+            "$ref" : "#/components/schemas/CoverageDetailsString"
+          },
+          "sumpPumpFailureSewerBackupLoss" : {
+            "$ref" : "#/components/schemas/CoverageDetailsString"
+          },
+          "identityTheftExpenseLoss" : {
+            "$ref" : "#/components/schemas/CoverageDetailsString"
+          },
+          "refrigeratedCoverage" : {
+            "$ref" : "#/components/schemas/CoverageDetailsString"
+          },
+          "jewelryCoverage" : {
+            "$ref" : "#/components/schemas/CoverageDetailsString"
+          },
+          "refrigeratedProperty" : {
+            "$ref" : "#/components/schemas/CoverageDetailsString"
+          },
+          "workerCompAndEmpLiability" : {
+            "$ref" : "#/components/schemas/CoverageDetailsString"
+          },
+          "dayCareCoverage" : {
+            "$ref" : "#/components/schemas/CoverageDetailsBoolean"
+          },
+          "homeBusinessEndorsementYesNo" : {
+            "$ref" : "#/components/schemas/CoverageDetailsBoolean"
+          },
+          "homeBusinessEndorsementMandatory" : {
+            "$ref" : "#/components/schemas/CoverageDetailsString"
+          },
+          "personalLiability" : {
+            "$ref" : "#/components/schemas/CoverageDetailsString"
+          },
+          "leadPoisoningCov" : {
+            "$ref" : "#/components/schemas/CoverageDetailsBoolean"
+          },
+          "medicalPaymentsToOthers" : {
+            "$ref" : "#/components/schemas/CoverageDetailsString"
+          },
+          "coverageResidenceEmployees" : {
+            "$ref" : "#/components/schemas/CoverageDetailsString"
+          },
+          "coverageResidenceEmployees2" : {
+            "$ref" : "#/components/schemas/CoverageDetailsString"
+          },
+          "libel" : {
+            "$ref" : "#/components/schemas/CoverageDetailsBoolean"
+          },
+          "includePoolLiability" : {
+            "$ref" : "#/components/schemas/CoverageDetailsBoolean"
+          },
+          "includeAnimalLiability" : {
+            "$ref" : "#/components/schemas/CoverageDetailsBoolean"
+          },
+          "includeAnimalLiabilityCoverage" : {
+            "$ref" : "#/components/schemas/CoverageDetailsString"
+          },
+          "includeServiceLine" : {
+            "$ref" : "#/components/schemas/CoverageDetailsBoolean"
+          },
+          "includeEquipmentBreakdown" : {
+            "$ref" : "#/components/schemas/CoverageDetailsBoolean"
+          },
+          "includeLimitedWaterDamage" : {
+            "$ref" : "#/components/schemas/CoverageDetailsString"
+          },
+          "includeWaterDamageExclusion" : {
+            "$ref" : "#/components/schemas/CoverageDetailsString"
+          },
+          "offPremiseTheftExclusion" : {
+            "$ref" : "#/components/schemas/CoverageDetailsString"
+          },
+          "allOtherLosses" : {
+            "$ref" : "#/components/schemas/CoverageDetailsString"
+          },
+          "moldPropertyProtection" : {
+            "$ref" : "#/components/schemas/CoverageDetailsString"
+          },
+          "moldLiabilityProtection" : {
+            "$ref" : "#/components/schemas/CoverageDetailsString"
+          },
+          "earthquakeDamage" : {
+            "$ref" : "#/components/schemas/CoverageDetailsString"
+          },
+          "floodDamage" : {
+            "$ref" : "#/components/schemas/CoverageDetailsString"
+          },
+          "floodReferral" : {
+            "$ref" : "#/components/schemas/CoverageDetailsString"
+          },
+          "floodReferralPhoneNumber" : {
+            "$ref" : "#/components/schemas/CoverageDetailsString"
+          },
+          "floodReferralMessage" : {
+            "$ref" : "#/components/schemas/CoverageDetailsString"
+          },
+          "lossAssessmentCoverage" : {
+            "$ref" : "#/components/schemas/CoverageDetailsString"
+          },
+          "homeBusinessEndorsementRetrieveMsg" : {
+            "$ref" : "#/components/schemas/CoverageDetailsString"
+          },
+          "homeBusinessEndorsementNotAvailable" : {
+            "$ref" : "#/components/schemas/CoverageDetailsString"
+          },
+          "endorsementPackageMessage" : {
+            "$ref" : "#/components/schemas/CoverageDetailsString"
+          },
+          "dogsLiabilityLimit" : {
+            "$ref" : "#/components/schemas/CoverageDetailsString"
+          },
+          "walmartDiscountText" : {
+            "$ref" : "#/components/schemas/CoverageDetailsString"
+          },
+          "rateNotice" : {
+            "$ref" : "#/components/schemas/CoverageDetailsString"
+          },
+          "minnDisclaimerMsg" : {
+            "$ref" : "#/components/schemas/CoverageDetailsString"
+          },
+          "windStorm" : {
+            "$ref" : "#/components/schemas/CoverageDetailsString"
+          },
+          "hurricaneOnly" : {
+            "$ref" : "#/components/schemas/CoverageDetailsString"
+          },
+          "hurricane" : {
+            "$ref" : "#/components/schemas/CoverageDetailsString"
+          },
+          "mineSubsidence" : {
+            "$ref" : "#/components/schemas/CoverageDetailsString"
+          },
+          "mineSubsidence_ReadOnly" : {
+            "$ref" : "#/components/schemas/CoverageDetailsBoolean"
+          },
+          "mineSubALECoverage" : {
+            "$ref" : "#/components/schemas/CoverageDetailsBoolean"
+          },
+          "personalPropertyPerils" : {
+            "$ref" : "#/components/schemas/CoverageDetailsString"
+          },
+          "includeWaterBackup" : {
+            "$ref" : "#/components/schemas/CoverageDetailsString"
+          },
+          "includeWaterBackupYesNo" : {
+            "$ref" : "#/components/schemas/CoverageDetailsBoolean"
+          },
+          "personalPropertyPerilsNew" : {
+            "$ref" : "#/components/schemas/CoverageDetailsString"
+          },
+          "earthquakeLoss" : {
+            "$ref" : "#/components/schemas/CoverageDetailsString"
+          },
+          "leadLiabilityExclusion" : {
+            "$ref" : "#/components/schemas/CoverageDetailsString"
+          },
+          "electronicPaymentsForgeryCoverage" : {
+            "$ref" : "#/components/schemas/CoverageDetailsString"
+          },
+          "personalPropertySelfStorageCoverage" : {
+            "$ref" : "#/components/schemas/CoverageDetailsString"
+          },
+          "buildingAdditionsAlterationsCoverage" : {
+            "$ref" : "#/components/schemas/CoverageDetailsString"
+          },
+          "personalPropertyOtherResidenceCoverage" : {
+            "$ref" : "#/components/schemas/CoverageDetailsString"
+          },
+          "glassBreakageCoverage" : {
+            "$ref" : "#/components/schemas/CoverageDetailsString"
+          },
+          "homeLockoutCoverage" : {
+            "$ref" : "#/components/schemas/CoverageDetailsString"
+          },
+          "spp" : {
+            "$ref" : "#/components/schemas/SppCoverageDetails"
+          },
+          "userRequestedCoverageA" : {
+            "$ref" : "#/components/schemas/CoverageDetailsString"
+          },
+          "userRequestedCoverageAFlag" : {
+            "$ref" : "#/components/schemas/CoverageDetailsBoolean"
+          },
+          "screenedEnclosureCoverage" : {
+            "$ref" : "#/components/schemas/CoverageDetailsString"
+          },
+          "waterDeductible" : {
+            "$ref" : "#/components/schemas/CoverageDetailsString"
+          },
+          "wildfireDeductible" : {
+            "$ref" : "#/components/schemas/CoverageDetailsString"
+          }
+        }
+      },
+      "CustomerAcknowledgementResponse" : {
+        "type" : "object",
+        "properties" : {
+          "hasAnimalLiabilityDefaultCoverage" : {
+            "type" : "boolean"
+          },
+          "hasBusinessOnPremises" : {
+            "type" : "boolean"
+          },
+          "hasBusinessVisitors" : {
+            "type" : "boolean"
+          },
+          "hasDangerousDogBreed" : {
+            "type" : "boolean"
+          },
+          "hasDangerousDogs" : {
+            "type" : "boolean"
+          },
+          "hasDayCare" : {
+            "type" : "boolean"
+          },
+          "hasDogBiteHistory" : {
+            "type" : "boolean"
+          },
+          "hasDogsDeclaredAggressiveByState" : {
+            "type" : "boolean"
+          },
+          "hasExoticAnimals" : {
+            "type" : "boolean"
+          },
+          "hasFullTimeResidentEmployee" : {
+            "type" : "boolean"
+          },
+          "hasMoreThanTwoFullTimeResidentEmployees" : {
+            "type" : "boolean"
+          },
+          "hasLengthOfResidence" : {
+            "type" : "boolean"
+          },
+          "hasMineSubsidenceDamagedStructures" : {
+            "type" : "boolean"
+          },
+          "hasPaidClaimForDogBiteHistory" : {
+            "type" : "boolean"
+          },
+          "hasPersonalPropertyLostOfUseCriteria" : {
+            "type" : "boolean"
+          },
+          "hasProfessionallyInstalledWindstormShutters" : {
+            "type" : "boolean"
+          },
+          "hasRetailFarming" : {
+            "type" : "boolean"
+          },
+          "hasSevereStormProtectFixture" : {
+            "type" : "boolean"
+          },
+          "hasWildfireExclusion" : {
+            "type" : "boolean"
+          },
+          "hasWoodStove" : {
+            "type" : "boolean"
+          },
+          "isAnimalLiabilityExclusion" : {
+            "type" : "boolean"
+          },
+          "isAnimalLiabilityCoverageNotRequired" : {
+            "type" : "boolean"
+          },
+          "isAnimalLiabilityCoverageRequired" : {
+            "type" : "boolean"
+          },
+          "isSwimmingPoolOnPremises" : {
+            "type" : "boolean"
+          },
+          "hasNoDangerousDogBreed" : {
+            "type" : "boolean"
+          },
+          "isNotRetired" : {
+            "type" : "boolean"
+          },
+          "isMobileOrManufactured" : {
+            "type" : "boolean"
+          },
+          "isOilTankOnPremises" : {
+            "type" : "boolean"
+          },
+          "isPrimaryOccupancy" : {
+            "type" : "boolean"
+          },
+          "isProtectedPerson" : {
+            "type" : "boolean"
+          }
+        }
+      },
+      "Disclosures" : {
+        "type" : "object",
+        "properties" : {
+          "coverageCancellationDisclaimer" : {
+            "type" : "string"
+          },
+          "fraudMessage" : {
+            "type" : "string"
+          },
+          "fortifiedRoofUpgradeCoverageFlag" : {
+            "type" : "boolean"
+          },
+          "leadLiabilityExclusionCoverage" : {
+            "type" : "boolean"
+          },
+          "consentToRate" : {
+            "type" : "boolean"
+          },
+          "creditDisclaimer" : {
+            "type" : "boolean"
+          },
+          "personalInformation" : {
+            "type" : "boolean"
+          },
+          "minimumEarnedPremium" : {
+            "type" : "boolean"
+          }
+        }
+      },
+      "EligibleDiscounts" : {
+        "type" : "object",
+        "properties" : {
+          "name" : {
+            "type" : "string"
+          },
+          "value" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/Options"
+            }
+          }
+        }
+      },
+      "Error" : {
+        "type" : "object",
+        "properties" : {
+          "field" : {
+            "type" : "string"
+          },
+          "message" : {
+            "type" : "string"
+          }
+        }
+      },
+      "InspectionDataUI" : {
+        "type" : "object",
+        "properties" : {
+          "selfInspectionEligibilityStatus" : {
+            "type" : "boolean"
+          },
+          "selfInspectionOptedStatus" : {
+            "type" : "boolean"
+          },
+          "inspectionResult" : {
+            "type" : "string"
+          }
+        }
+      },
+      "InstallmentData" : {
+        "type" : "object",
+        "properties" : {
+          "totalPremium" : {
+            "type" : "number"
+          },
+          "premium" : {
+            "type" : "number"
+          },
+          "downPercent" : {
+            "type" : "number",
+            "format" : "float"
+          },
+          "numberOfInstallments" : {
+            "type" : "integer",
+            "format" : "int32"
+          },
+          "installment" : {
+            "type" : "number"
+          },
+          "diffAdjustment" : {
+            "type" : "number"
+          },
+          "stateFee" : {
+            "type" : "number"
+          },
+          "newDownPayment" : {
+            "type" : "number"
+          }
+        }
+      },
+      "MembershipInfo" : {
+        "type" : "object",
+        "properties" : {
+          "membershipId" : {
+            "type" : "string"
+          },
+          "level" : {
+            "type" : "string"
+          },
+          "isValid" : {
+            "type" : "boolean"
+          }
+        }
+      },
+      "OtherStructureIncreaseLimit" : {
+        "type" : "object",
+        "properties" : {
+          "label" : {
+            "type" : "string"
+          },
+          "detailed" : {
+            "type" : "boolean"
+          },
+          "detailType" : {
+            "type" : "string"
+          },
+          "readOnly" : {
+            "type" : "boolean"
+          },
+          "value" : {
+            "type" : "array",
+            "items" : {
+              "type" : "object"
+            }
+          },
+          "options" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/Options"
+            }
+          },
+          "cardinality" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/CardinalityValidationAttributes"
+            }
+          },
+          "validation" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/CardinalityValidationAttributes"
+            }
+          },
+          "criteria" : {
+            "$ref" : "#/components/schemas/JsonNode"
+          },
+          "required" : {
+            "type" : "object",
+            "additionalProperties" : {
+              "type" : "object",
+              "additionalProperties" : {
+                "type" : "object"
+              }
+            }
+          },
+          "otherStructures" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/OtherStructures"
+            }
+          }
+        }
+      },
+      "PolicyEffectiveDateRange" : {
+        "type" : "object",
+        "properties" : {
+          "minPolicyEffectiveDate" : {
+            "type" : "string"
+          },
+          "maxPolicyEffectiveDate" : {
+            "type" : "string"
+          }
+        }
+      },
+      "PolicyHolder" : {
+        "type" : "object",
+        "properties" : {
+          "policyHolderType" : {
+            "type" : "string"
+          },
+          "person" : {
+            "$ref" : "#/components/schemas/Person"
+          },
+          "membershipInfo" : {
+            "$ref" : "#/components/schemas/MembershipInfo"
+          },
+          "partnerAutoPolicy" : {
+            "type" : "boolean"
+          },
+          "autoPolicyNumber" : {
+            "type" : "string"
+          },
+          "transUnionRequestId" : {
+            "type" : "integer",
+            "format" : "int32"
+          },
+          "autoClaimsRequestId" : {
+            "type" : "integer",
+            "format" : "int32"
+          },
+          "propertyClaimsRequestId" : {
+            "type" : "integer",
+            "format" : "int32"
+          }
+        }
+      },
+      "Premium" : {
+        "type" : "object",
+        "properties" : {
+          "name" : {
+            "type" : "string"
+          },
+          "billPlanName" : {
+            "type" : "string"
+          },
+          "totalPremium" : {
+            "type" : "string"
+          },
+          "ncrbPremium" : {
+            "type" : "string"
+          },
+          "percentageOfIncrease" : {
+            "type" : "string"
+          },
+          "policyEffectiveDate" : {
+            "type" : "string"
+          },
+          "discountTotal" : {
+            "type" : "string"
+          },
+          "surchargeTotal" : {
+            "type" : "string"
+          },
+          "eftStateFee" : {
+            "type" : "string"
+          },
+          "discounts" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/Options"
+            }
+          },
+          "surcharges" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/Options"
+            }
+          },
+          "additionalFees" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/Options"
+            }
+          },
+          "stateFeeItems" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/Options"
+            }
+          },
+          "packageSelected" : {
+            "type" : "boolean"
+          },
+          "monthlyPayPlan" : {
+            "type" : "string"
+          },
+          "downPayment" : {
+            "type" : "string"
+          },
+          "numInstallments" : {
+            "type" : "string"
+          },
+          "fullPayPremiumAmount" : {
+            "type" : "string"
+          },
+          "fourPayPremiumAmount" : {
+            "type" : "string"
+          },
+          "twoPayPremiumAmount" : {
+            "type" : "string"
+          },
+          "tenPayPremiumAmount" : {
+            "type" : "string"
+          },
+          "minimumEarnedPremium" : {
+            "type" : "number"
+          },
+          "installments" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/InstallmentData"
+            }
+          }
+        }
+      },
+      "QuoteCoverages" : {
+        "type" : "object",
+        "properties" : {
+          "quotes" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/Quotes"
+            }
+          },
+          "billPlans" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/BillingDetails"
+            }
+          }
+        }
+      },
+      "QuoteData" : {
+        "type" : "object",
+        "properties" : {
+          "policyHolders" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/PolicyHolder"
+            }
+          },
+          "addresses" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/Address"
+            }
+          },
+          "baseGeoSpatialData" : {
+            "$ref" : "#/components/schemas/BaseGeoSpatialData"
+          },
+          "partnerAutoPolicy" : {
+            "type" : "boolean"
+          },
+          "partnerAutoPolicyNumber" : {
+            "type" : "string"
+          },
+          "creditDisclousureFlag" : {
+            "type" : "boolean"
+          }
+        }
+      },
+      "QuoteHomeOwnersResponse" : {
+        "type" : "object",
+        "properties" : {
+          "timestamp" : {
+            "type" : "string"
+          },
+          "status" : {
+            "type" : "string"
+          },
+          "error" : {
+            "type" : "string"
+          },
+          "message" : {
+            "type" : "string"
+          },
+          "path" : {
+            "type" : "string"
+          },
+          "additionalPropertyData" : {
+            "$ref" : "#/components/schemas/AdditionalPropertyData"
+          },
+          "advisorDetails" : {
+            "$ref" : "#/components/schemas/Advisor"
+          },
+          "animals" : {
+            "$ref" : "#/components/schemas/Animals"
+          },
+          "bookRollPolicyInfo" : {
+            "$ref" : "#/components/schemas/BookRollPolicyInfo"
+          },
+          "business" : {
+            "$ref" : "#/components/schemas/Business"
+          },
+          "customerAcknowledgementCriteria" : {
+            "$ref" : "#/components/schemas/CustomerAcknowledgementResponse"
+          },
+          "customerAcknowledgements" : {
+            "$ref" : "#/components/schemas/CustomerAcknowledgements"
+          },
+          "disclosures" : {
+            "$ref" : "#/components/schemas/Disclosures"
+          },
+          "eligibility" : {
+            "$ref" : "#/components/schemas/Eligibility"
+          },
+          "errors" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/Error"
+            }
+          },
+          "manifestV2" : {
+            "$ref" : "#/components/schemas/ManifestV2"
+          },
+          "propertyData" : {
+            "$ref" : "#/components/schemas/PropertyData"
+          },
+          "propertyDataPrefill" : {
+            "$ref" : "#/components/schemas/PropertyDataPrefill"
+          },
+          "priceData" : {
+            "$ref" : "#/components/schemas/PriceData"
+          },
+          "quoteCoverages" : {
+            "$ref" : "#/components/schemas/QuoteCoverages"
+          },
+          "quoteData" : {
+            "$ref" : "#/components/schemas/QuoteData"
+          },
+          "quoteHeader" : {
+            "$ref" : "#/components/schemas/QuoteHeader"
+          },
+          "residentData" : {
+            "$ref" : "#/components/schemas/ResidentData"
+          },
+          "replacementCostData" : {
+            "$ref" : "#/components/schemas/ReplacementCostData"
+          },
+          "session" : {
+            "$ref" : "#/components/schemas/SessionDetails"
+          },
+          "signature" : {
+            "$ref" : "#/components/schemas/Signature"
+          },
+          "inspection" : {
+            "$ref" : "#/components/schemas/InspectionDataUI"
+          }
+        }
+      },
+      "Quotes" : {
+        "type" : "object",
+        "properties" : {
+          "premium" : {
+            "$ref" : "#/components/schemas/Premium"
+          },
+          "coverages" : {
+            "$ref" : "#/components/schemas/CoverageResponse"
+          }
+        }
+      },
+      "SessionDetails" : {
+        "type" : "object",
+        "properties" : {
+          "sessionId" : {
+            "type" : "integer",
+            "format" : "int32"
+          },
+          "email" : {
+            "type" : "string"
+          },
+          "lastName" : {
+            "type" : "string"
+          },
+          "sessionHash" : {
+            "type" : "string"
+          },
+          "riskCity" : {
+            "type" : "string"
+          },
+          "riskState" : {
+            "type" : "string"
+          },
+          "riskZip" : {
+            "type" : "string"
+          },
+          "marketingId" : {
+            "type" : "string"
+          },
+          "clientId" : {
+            "type" : "string"
+          },
+          "agentId" : {
+            "type" : "string"
+          },
+          "userName" : {
+            "type" : "string"
+          },
+          "partnerId" : {
+            "type" : "integer",
+            "format" : "int32"
+          },
+          "partnerKey" : {
+            "type" : "string"
+          },
+          "channel" : {
+            "type" : "string"
+          },
+          "onlineRetrieveUrl" : {
+            "type" : "string"
+          },
+          "partnerQuoteNumber" : {
+            "type" : "string"
+          },
+          "formCode" : {
+            "type" : "integer",
+            "format" : "int32"
+          },
+          "quoteNumber" : {
+            "type" : "string"
+          },
+          "policyNumber" : {
+            "type" : "string"
+          },
+          "policyEffectiveDate" : {
+            "type" : "string"
+          },
+          "paymentAmount" : {
+            "type" : "string"
+          },
+          "eligibleDiscounts" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/EligibleDiscounts"
+            }
+          },
+          "trsHit" : {
+            "type" : "boolean"
+          },
+          "sinkHoleMessage" : {
+            "type" : "string"
+          },
+          "wildFireExclusionFlag" : {
+            "type" : "boolean"
+          },
+          "platform" : {
+            "type" : "string"
+          },
+          "originalLeadSource" : {
+            "type" : "string"
+          },
+          "requestGuid" : {
+            "type" : "string"
+          },
+          "uwCompanyName" : {
+            "type" : "string"
+          },
+          "propertyDataPrefillStatus" : {
+            "type" : "string"
+          },
+          "olsPolicyNumber" : {
+            "type" : "string"
+          },
+          "dangerousDogFlag" : {
+            "type" : "boolean"
+          },
+          "clickID" : {
+            "type" : "string"
+          },
+          "campaignId" : {
+            "type" : "string"
+          },
+          "adId" : {
+            "type" : "string"
+          },
+          "publisherId" : {
+            "type" : "string"
+          },
+          "channelId" : {
+            "type" : "string"
+          },
+          "priorCoverage" : {
+            "type" : "string"
+          },
+          "productType" : {
+            "type" : "string"
+          },
+          "issueDate" : {
+            "type" : "string"
+          },
+          "expirationDate" : {
+            "type" : "string"
+          },
+          "ratingVersion" : {
+            "type" : "integer",
+            "format" : "int32"
+          },
+          "originalQuotationDate" : {
+            "type" : "string",
+            "format" : "date"
+          },
+          "uwCompanyNumber" : {
+            "type" : "integer",
+            "format" : "int32"
+          },
+          "uwTier" : {
+            "type" : "integer",
+            "format" : "int32"
+          },
+          "covAAmount" : {
+            "type" : "number"
+          },
+          "marketValueFlow" : {
+            "type" : "boolean"
+          },
+          "indicativeSessionHash" : {
+            "type" : "string"
+          },
+          "eandSState" : {
+            "type" : "boolean"
+          },
+          "dateofBirth" : {
+            "type" : "string"
+          },
+          "isApexState" : {
+            "type" : "boolean"
+          },
+          "isRetrieve" : {
+            "type" : "boolean"
+          }
+        }
+      },
+      "Signature" : {
+        "type" : "object",
+        "properties" : {
+          "hasWildfireExclusion" : {
+            "type" : "boolean"
+          }
+        }
+      },
+      "SppCoverageDetails" : {
+        "type" : "object",
+        "properties" : {
+          "premium" : {
+            "type" : "string"
+          },
+          "label" : {
+            "type" : "string"
+          },
+          "detailed" : {
+            "type" : "boolean"
+          },
+          "detailType" : {
+            "type" : "string"
+          },
+          "readOnly" : {
+            "type" : "boolean"
+          },
+          "values" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/ScheduledPersonalProperty"
+            }
+          },
+          "sppOptions" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/SppOptions"
+            }
+          },
+          "cardinality" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/CardinalityValidationAttributes"
+            }
+          },
+          "validation" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/CardinalityValidationAttributes"
+            }
+          },
+          "criteria" : {
+            "type" : "array",
+            "items" : {
+              "type" : "object",
+              "additionalProperties" : {
+                "type" : "object"
+              }
+            }
+          }
+        }
+      },
+      "SppOptions" : {
+        "type" : "object",
+        "properties" : {
+          "typeId" : {
+            "type" : "string"
+          },
+          "name" : {
+            "type" : "string"
+          },
+          "maxItemLimit" : {
+            "type" : "number"
+          },
+          "maxCategoryLimit" : {
+            "type" : "number"
+          },
+          "selectionCount" : {
+            "type" : "integer",
+            "format" : "int32"
+          }
+        }
+      },
+      "CountLookupOption" : {
+        "type" : "object",
+        "properties" : {
+          "count" : {
+            "type" : "integer",
+            "format" : "int32"
+          },
+          "name" : {
+            "type" : "string"
+          }
+        }
+      },
+      "LookupOption" : {
+        "type" : "object",
+        "properties" : {
+          "value" : {
+            "type" : "integer",
+            "format" : "int32"
+          },
+          "valueType" : {
+            "type" : "string"
+          },
+          "name" : {
+            "type" : "string"
+          }
+        }
+      },
+      "RatingCriteria" : {
+        "type" : "object",
+        "properties" : {
+          "partnerAutoPolicy" : {
+            "type" : "string"
+          },
+          "newHome" : {
+            "type" : "string"
+          },
+          "currentlyInsured" : {
+            "type" : "string"
+          },
+          "yearBuilt" : {
+            "type" : "integer",
+            "format" : "int32"
+          },
+          "squareFootage" : {
+            "type" : "integer",
+            "format" : "int32"
+          },
+          "livingUnits" : {
+            "type" : "integer",
+            "format" : "int32"
+          },
+          "propertyType" : {
+            "type" : "string"
+          },
+          "roofMaterial" : {
+            "type" : "string"
+          },
+          "roofYear" : {
+            "type" : "integer",
+            "format" : "int32"
+          },
+          "exteriorSiding" : {
+            "type" : "string"
+          },
+          "foundationType" : {
+            "type" : "string"
+          },
+          "finishedBasementSqFt" : {
+            "type" : "integer",
+            "format" : "int32"
+          },
+          "fullBath" : {
+            "type" : "integer",
+            "format" : "int32"
+          },
+          "halfBath" : {
+            "type" : "integer",
+            "format" : "int32"
+          },
+          "primaryHeatingType" : {
+            "type" : "string"
+          },
+          "occupancyType" : {
+            "type" : "string"
+          },
+          "numberOfPeopleInHousehold" : {
+            "type" : "integer",
+            "format" : "int32"
+          },
+          "sixtyFeetFence" : {
+            "type" : "string"
+          },
+          "dogs" : {
+            "type" : "string"
+          },
+          "swimmingPool" : {
+            "type" : "string"
+          },
+          "indoorSprinkler" : {
+            "type" : "string"
+          },
+          "fireAlarmType" : {
+            "type" : "string"
+          },
+          "burglarAlarmType" : {
+            "type" : "string"
+          },
+          "smokeDetectors" : {
+            "type" : "string"
+          },
+          "businessOnPremises" : {
+            "type" : "string"
+          },
+          "fullTimeResidents" : {
+            "type" : "integer",
+            "format" : "int32"
+          },
+          "numberOfStories" : {
+            "type" : "string"
+          },
+          "retiredPolicyHolders" : {
+            "type" : "string"
+          },
+          "dwellingStyle" : {
+            "type" : "string"
+          },
+          "wiringImprovementYear" : {
+            "type" : "integer",
+            "format" : "int32"
+          },
+          "propertySlope" : {
+            "type" : "string"
+          },
+          "roofShape" : {
+            "type" : "string"
+          },
+          "garageType" : {
+            "type" : "string"
+          },
+          "interiorWalls" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/LookupOption"
+            }
+          },
+          "floorTypes" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/LookupOption"
+            }
+          },
+          "ceilingHeight" : {
+            "type" : "string"
+          },
+          "roomsWithCathedralCeilings" : {
+            "type" : "string"
+          },
+          "roomsWithCrownMolding" : {
+            "type" : "string"
+          },
+          "fireplaceTypes" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/CountLookupOption"
+            }
+          },
+          "kitchenCountertopMaterial" : {
+            "type" : "string"
+          },
+          "lengthOfResidence" : {
+            "type" : "string"
+          }
+        }
+      },
+      "CheckoutResponse" : {
+        "type" : "object",
+        "properties" : {
+          "quoteHeader" : {
+            "$ref" : "#/components/schemas/QuoteHeader"
+          },
+          "eligibility" : {
+            "$ref" : "#/components/schemas/Eligibility"
+          },
+          "billPlans" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/BillingDetails"
+            }
+          },
+          "fraudMessage" : {
+            "type" : "string"
+          }
+        }
+      },
+      "PrimaryAddress" : {
+        "type" : "object",
+        "properties" : {
+          "addressLine1" : {
+            "type" : "string"
+          },
+          "addressLine2" : {
+            "type" : "string"
+          },
+          "city" : {
+            "type" : "string"
+          },
+          "stateCode" : {
+            "type" : "string"
+          },
+          "zip" : {
+            "type" : "string"
+          }
+        }
+      },
+      "BindPolicyData" : {
+        "type" : "object",
+        "properties" : {
+          "eoi" : {
+            "type" : "string"
+          },
+          "policyNumber" : {
+            "type" : "string"
+          }
+        }
+      },
+      "EOIResponse" : {
+        "type" : "object",
+        "properties" : {
+          "eligibility" : {
+            "$ref" : "#/components/schemas/BindEligibility"
+          },
+          "quoteHeader" : {
+            "$ref" : "#/components/schemas/BindQuoteHeader"
+          },
+          "policyData" : {
+            "$ref" : "#/components/schemas/BindPolicyData"
+          }
+        }
+      }
+    }
+  }
+}
